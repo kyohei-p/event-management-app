@@ -4,9 +4,10 @@ WORKDIR /event-management-app
 
 COPY Gemfile Gemfile.lock /event-management-app/
 
-RUN gem update --system \
-    && bundle update --bundler \
-    && bundle install
+RUN gem update --system
+RUN bundle update --bundler
+RUN bundle install
+RUN rm -rf /usr/local/bundle/cache
 
 COPY . /event-management-app
 
