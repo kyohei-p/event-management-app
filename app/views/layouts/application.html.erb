@@ -11,6 +11,11 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <p><%= current_user.name %>さん</p>
+    <% else %>
+      <p>ゲストさん</p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
