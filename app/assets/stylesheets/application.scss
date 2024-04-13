@@ -1,1 +1,121 @@
-@import "bootstrap";
+/*
+ * require_tree .
+ *= require_self
+ */
+ @import "bootstrap";
+
+ //共通カラー
+ $main_color: #FF9900;
+ $main_hover_color: #FF9966;
+
+//ログインユーザー名
+.login-user-name {
+  margin-right: 20px;
+  text-align: right;
+}
+
+//フラッシュメッセージ
+.flash-message-container {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flash-message {
+  border-radius: 5px;
+  padding: 16px 24px;
+  width: 500px;
+  margin: 200px auto 0;
+}
+
+.flash-message.notice {
+  background-color: #bcdfff;
+  color: #0067C0;
+  border: solid 1px #0067C0;
+}
+ 
+.flash-message.alert {
+  background-color: #ffd4d1;
+  color: #930403;
+  border: solid 1px #930403;
+}
+
+//ログインページ
+.login-page-container {
+  display: table;
+  margin: 200px auto;
+}
+
+//入力フォーム
+.title {
+  font-size: 36px;
+  line-height: 48px;
+  text-align: center;
+}
+
+.form-container {
+  display: inline-block;
+}
+
+.field {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.label-tag {
+  color: #000000;
+  font-size: 12px;
+}
+
+.text-field {
+  width: 400px;
+  height: 40px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  background-color: #ffffff;
+  text-align: left;
+}
+
+.actions {
+  margin-top: 10px;
+  text-align: center;
+}
+
+
+.submit-button {
+  width: 200px;
+  height: 40px;
+  margin-top: 30px;
+  border: none;
+  border-radius: 4px;
+  background-color: $main_color;
+  color: #ffffff;
+  font-size: 18px;
+  white-space: nowrap;
+}
+
+.submit-button:hover {
+  background-color: $main_hover_color;
+}
+
+.back-button-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.back-button {
+  color: #ccc;
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  text-decoration: underline;
+}
+
+//イベント一覧
+.event-list-container {
+  margin: 200px auto;
+  text-align: center;
+}
