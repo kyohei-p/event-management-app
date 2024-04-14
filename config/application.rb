@@ -23,5 +23,11 @@ module EventManagementApp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    #sorceryインストール時のみ追加
+    # class ActiveRecord::Base
+    #   singleton_class.attr_accessor :timestamped_migrations
+    #   self.timestamped_migrations = true
+    # end
   end
 end

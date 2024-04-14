@@ -8,9 +8,16 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
 
   <body>
+    <% if logged_in? %>
+      <p class="login-user-name"><%= current_user.name %>さん</p>
+    <% else %>
+      <p class="login-user-name">ゲストさん</p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
