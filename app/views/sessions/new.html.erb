@@ -14,10 +14,9 @@
       <%= f.password_field :password, class:"text-field p-2", autocomplete:"off" %>
     </div>
     <div class="actions mt-5">
-      <%= f.submit "ログイン", class: "submit-button", data: { turbo: false } %>
-    </div>
-    <div class="back-button-container mt-3">
-      <%= link_to 'イベント一覧に戻る', root_path, class:"back-button", data: { turbo: false } %>
+      <%= f.submit "ログイン", class: "submit-button mb-2 p-2", data: { turbo: false } %><br />
+      <%= link_to "新規登録", new_user_path, class: "signup-link-button mt-2 mb-2 p-2", data: { turbo: false } %><br />
+      <%= link_to 'イベント一覧に戻る', root_path, class:"back-button mt-2 mb-2", data: { turbo: false } %>
     </div>
   <% end %>
 </div>

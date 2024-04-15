@@ -1,0 +1,29 @@
+@import 'bootstrap';
+
+//共通カラー
+$theme_color: #FF9900;
+$theme_hover_color: #FF9966;
+
+/* ログインページ */
+.login-page-container {
+  display: table;
+  margin: 200px auto;
+}
+
+.signup-link-button {
+  display: inline-block;
+  width: 200px;
+  height: 40px;
+  color: $theme_color;
+  background-color: #ffffff;
+  border: 1px solid $theme_color;
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.signup-link-button:hover {
+  color: #ffffff;
+  background-color: $theme_color;
+}
+

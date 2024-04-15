@@ -16,18 +16,20 @@ $theme_hover_color: #FF9966;
   text-align: right;
 }
 
-//入力フォーム
+//ページタイトル
 .title {
   font-size: 36px;
   line-height: 48px;
   text-align: center;
 }
 
+//項目名
 .label-tag {
   color: #000000;
   font-size: 12px;
 }
 
+//テキストボックス
 .text-field {
   width: 400px;
   height: 40px;
@@ -37,10 +39,24 @@ $theme_hover_color: #FF9966;
   text-align: left;
 }
 
+//テキストエリア
+.text-area {
+  white-space: normal;
+  resize: none;
+}
+
+//文字制限
+.character-limit {
+  font-size: 12px;
+  color: #ccc;
+  text-align: left;
+}
+
 .actions {
   text-align: center;
 }
 
+//送信ボタン
 .submit-button {
   width: 200px;
   height: 40px;
@@ -49,13 +65,13 @@ $theme_hover_color: #FF9966;
   background-color: $theme_color;
   color: #ffffff;
   font-size: 18px;
-  white-space: nowrap;
 }
 
 .submit-button:hover {
   background-color: $theme_hover_color;
 }
 
+//戻るボタン
 .back-button-container {
   text-align: center;
 }
