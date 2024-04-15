@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  has_one_attached :image
+
   #名前のバリデーション
   validates :name, presence: true, length: { maximum: 60 }
 
