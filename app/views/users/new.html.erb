@@ -26,6 +26,15 @@
       <%= f.label "パスワード", class:"label-tag fw-bold" %><br />
       <%= f.password_field :password, placeholder:"パスワードを入力してください", class:"text-field p-2", autocomplete:"off" %>
     </div>
+    <div class="image-field mt-4 mb-5" data-turbo="false">
+      <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
+      <% if @user.image.attached? %>
+        <%= image_tag @user.image, class:"profile-image mt-4 mb-4", width: 300, height: 300 %><br />
+      <% else %>
+        <div class="profile-image default-avatar mt-4 mb-4"></div><br />
+      <% end %>
+      <%= f.file_field :image, class: "upload-button px-4 py-1" %><br />
+    </div>
     <div class="actions mt-5">
       <%= f.submit "新規登録", class: "submit-button", data: { turbo: false } %>
     </div>
