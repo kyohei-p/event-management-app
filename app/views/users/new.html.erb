@@ -9,7 +9,7 @@
       <%= f.label "名前", class:"label-tag fw-bold" %><br />
       <%= f.text_field :name, placeholder:"例）山田 太郎", class:"name-field p-2" %>
       <% if @user.errors[:name].any? %>
-        <div class="error-message mt-2 mb-1">
+        <div class="error-message mt-1">
           <%= raw(@user.errors[:name].join("<br>")) %>
         </div>
       <% end %>
@@ -18,7 +18,7 @@
       <%= f.label "自己紹介", class:"label-tag fw-bold" %><br />
       <%= f.text_area :self_introduction, placeholder:"自己紹介文を入力", rows: 5, class: "text-area w-100 p-2" %>
       <% if @user.errors[:self_introduction].any? %>
-        <div class="error-message">
+        <div class="error-message mt-1">
           <%= raw(@user.errors[:self_introduction].join("<br>")) %>
         </div>
       <% end %>
@@ -27,7 +27,7 @@
       <%= f.label "メールアドレス", class:"label-tag fw-bold" %><br />
       <%= f.text_field :email, placeholder:"例）taro.yamada@example.com", class:"text-field p-2" %>
       <% if @user.errors[:email].any? %>
-        <div class="error-message">
+        <div class="error-message mt-1">
           <%= raw(@user.errors[:email].join("<br>")) %>
         </div>
       <% end %>
@@ -36,7 +36,7 @@
       <%= f.label "電話番号", class:"label-tag fw-bold" %><br />
       <%= f.text_field :phone_number, placeholder:"例）0120224568", class:"text-field p-2" %>
       <% if @user.errors[:phone_number].any? %>
-        <div class="error-message">
+        <div class="error-message mt-1">
           <%= raw(@user.errors[:phone_number].join("<br>")) %>
         </div>
       <% end %>
@@ -45,7 +45,7 @@
       <%= f.label "パスワード", class:"label-tag fw-bold" %><br />
       <%= f.password_field :password, placeholder:"パスワードを入力してください", class:"text-field p-2", autocomplete:"off" %>
       <% if @user.errors[:password].any? %>
-        <div class="error-message">
+        <div class="error-message mt-1">
           <%= raw(@user.errors[:password].join("<br>")) %>
         </div>
       <% end %>

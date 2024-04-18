@@ -2,7 +2,33 @@
 @import "bootstrap";
 @import url(common.css);
 @import url(colors.css);
-@import url(flash.scss);
 @import url(login.css);
 @import url(events/index.css);
 @import url(error.css);
+
+/* フラッシュメッセージ */
+.flash-message-container {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.flash-message {
+  border-radius: 5px;
+  padding: 16px 24px;
+  width: 500px;
+  margin: 200px auto 0;
+}
+
+.flash-message.notice {
+  background-color: $cyan-300;
+  color: #ffffff;
+  border: solid 1px $cyan-300;
+}
+
+.flash-message.alert {
+  background-color:  $red-500;
+  color: #ffffff;
+  border: solid 1px $red-500;
+}
