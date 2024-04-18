@@ -21,7 +21,7 @@ class User < ApplicationRecord
   validate :validate_password
 
   #電話番号のバリデーション
-  VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
+  VALID_PHONE_NUMBER_REGEX = /\A[0-9]{10,11}+\z/
   VALID_PHONE_NUMBER_MESSAGE_HAIFUN = "電話番号はハイフン無しで入力してください"
   VALID_PHONE_NUMBER_MESSAGE_HANKAKU = "電話番号は半角数字で入力してください"
   VALID_PHONE_NUMBER_MESSAGE_LENGTH = "電話番号は10桁か11桁で入力してください"
@@ -29,7 +29,7 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
 
   #自己紹介文のバリデーション
-  validates :self_introduction, length: { maximum: 256 }
+  validates :self_introduction, length: { maximum: 255 }
 
   private
 

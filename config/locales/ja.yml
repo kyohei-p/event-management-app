@@ -1,0 +1,35 @@
+ja:
+  activerecord:
+    models:
+        user: ユーザー
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        self_introduction: "自己紹介"
+        phone_number: 電話番号
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "名前を入力してください。"
+              too_long: "名前は60文字以内で入力してください"
+            email:
+              blank: "メールアドレスを入力してください。"
+              taken: "メールアドレスはすでに存在します"
+              invalid: "正しいメールアドレスの形式で入力してください。"
+              too_long: "255文字以内で入力してください"
+            password:
+              blank: "パスワードを入力してください。"
+            self_introduction:
+              too_long: "255文字以内で入力してください"
+            phone_number:
+              blank: "電話番号を入力してください。"
+      messages:
+        required: "は必須項目です。"
+        record_invalid: "バリデーションに失敗しました: %{errors}"
+      attributes:
+        user:
+          required: "は必須項目です。"
+
