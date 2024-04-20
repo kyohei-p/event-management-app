@@ -1,10 +1,11 @@
 /* 外部のcssファイルを読み込む */
 @import "bootstrap";
-@import url(common.css);
-@import url(colors.css);
+@import url(shared/common.css);
+@import url(shared/colors.css);
+@import url(shared/error.css);
+@import url(shared/header.css);
 @import url(login.css);
 @import url(events/index.css);
-@import url(error.css);
 
 /* フラッシュメッセージ */
 .flash-message-container {

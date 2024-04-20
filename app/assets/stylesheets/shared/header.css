@@ -1,0 +1,29 @@
+/* ナビゲーションバー */
+nav.navbar {
+  background-color: var(--theme_color);
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  width: max-content;
+  cursor: pointer;
+}
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+/* ログインユーザー名 */
+.login-user-name {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 8px;
+  text-align: right;
+  color: var(--white);
+}

@@ -10,14 +10,11 @@
     <%= javascript_importmap_tags %>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/eea364082e.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
-    <% if logged_in? %>
-      <p class="login-user-name"><%= current_user.name %>さん</p>
-    <% else %>
-      <p class="login-user-name">ゲストさん</p>
-    <% end %>
+    <%= render 'shared/header' %>
     <%= yield %>
   </body>
 </html>

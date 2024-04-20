@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_one_attached :image
 
   #名前のバリデーション
-  validates :name, presence: true, length: { maximum: 60 }
+  validates :name, presence: true, length: { maximum: 100 }
 
   #メールアドレスのバリデーション
   before_save { self.email = email.downcase }
