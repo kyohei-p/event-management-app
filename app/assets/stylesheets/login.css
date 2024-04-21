@@ -1,6 +1,25 @@
+@import 'bootstrap';
+
 /* ログインページ */
-.login-page-container {
+.login-form-container {
   display: table;
   margin: 200px auto;
+}
+
+.signup-link-button {
+  display: inline-block;
+  width: 200px;
+  height: 40px;
+  color: var(--theme_color);
+  background-color: #ffffff;
+  border: 1px solid var(--theme_color);
+  border-radius: 4px;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.signup-link-button:hover {
+  color: #ffffff;
+  background-color: var(--theme_color);
 }
 

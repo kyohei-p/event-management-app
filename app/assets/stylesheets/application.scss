@@ -1,71 +1,34 @@
-//外部のcssファイルを読み込む
+/* 外部のcssファイルを読み込む */
 @import "bootstrap";
-@import url(flash.css);
+@import url(common.css);
+@import url(colors.css);
 @import url(login.css);
 @import url(events/index.css);
+@import url(error.css);
 
-//共通カラー
-$theme_color: #FF9900;
-$theme_hover_color: #FF9966;
-
-// 以下は共通のスタイルです
-
-//ログインユーザー名
-.login-user-name {
-  margin-right: 20px;
-  text-align: right;
+/* フラッシュメッセージ */
+.flash-message-container {
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-//入力フォーム
-.title {
-  font-size: 36px;
-  line-height: 48px;
-  text-align: center;
+.flash-message {
+  border-radius: 5px;
+  padding: 16px 24px;
+  width: 500px;
+  margin: 200px auto 0;
 }
 
-.label-tag {
-  color: #000000;
-  font-size: 12px;
-}
-
-.text-field {
-  width: 400px;
-  height: 40px;
-  font-size: 16px;
-  border: 1.5px solid #ccc;
-  background-color: #ffffff;
-  text-align: left;
-}
-
-.actions {
-  text-align: center;
-}
-
-.submit-button {
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  background-color: $theme_color;
+.flash-message.notice {
+  background-color: $cyan-300;
   color: #ffffff;
-  font-size: 18px;
-  white-space: nowrap;
+  border: solid 1px $cyan-300;
 }
 
-.submit-button:hover {
-  background-color: $theme_hover_color;
-}
-
-.back-button-container {
-  text-align: center;
-}
-
-.back-button {
-  color: #ccc;
-  font-size: 0.75rem;
-  text-decoration: none;
-}
-
-.back-button:hover {
-  text-decoration: underline;
+.flash-message.alert {
+  background-color:  $red-500;
+  color: #ffffff;
+  border: solid 1px $red-500;
 }

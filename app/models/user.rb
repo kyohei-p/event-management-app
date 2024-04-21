@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  has_one_attached :image
+
   #名前のバリデーション
   validates :name, presence: true, length: { maximum: 60 }
 
@@ -27,7 +29,7 @@ class User < ApplicationRecord
   validates :phone_number, presence: true
 
   #自己紹介文のバリデーション
-  validates :self_introduction, length: { maximum: 256 }
+  validates :self_introduction, length: { maximum: 255 }
 
   private
 

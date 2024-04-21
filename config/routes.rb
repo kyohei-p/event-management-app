@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   post 'login' => "sessions#create"
   delete 'logout' => 'sessions#destroy', as: :logout
 
+  resources :users, except: [:index]
   resources :events
 end

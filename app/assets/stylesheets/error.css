@@ -1,0 +1,6 @@
+/* エラーメッセージ */
+.error-message {
+  width: max-content;
+  font-size: 0.8rem;
+  color: var(--red);
+}

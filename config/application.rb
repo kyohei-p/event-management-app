@@ -29,5 +29,7 @@ module EventManagementApp
     #   singleton_class.attr_accessor :timestamped_migrations
     #   self.timestamped_migrations = true
     # end
+
+    config.i18n.default_locale = :ja
   end
 end

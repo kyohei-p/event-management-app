@@ -1,0 +1,101 @@
+<div class="flash-message-container">
+  <%= render 'shared/flash_message' %>
+</div>
+
+<div class="form-container">
+  <h1 class="title">ユーザー新規登録</h1>
+  <%= form_with model: @user, method: :post do |f| %>
+    <div class="mt-4 mb-4">
+      <%= f.label "名前", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :name, placeholder:"例）山田 太郎", class:"name-field p-2" %>
+      <% if @user.errors[:name].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:name].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "自己紹介", class:"label-tag fw-bold" %><br />
+      <%= f.text_area :self_introduction, placeholder:"自己紹介文を入力", rows: 5, class: "text-area w-100 p-2" %>
+      <% if @user.errors[:self_introduction].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:self_introduction].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "メールアドレス", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :email, placeholder:"例）taro.yamada@example.com", class:"text-field p-2" %>
+      <% if @user.errors[:email].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:email].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "電話番号", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :phone_number, placeholder:"例）0120224568", class:"text-field p-2" %>
+      <% if @user.errors[:phone_number].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:phone_number].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "パスワード", class:"label-tag fw-bold" %><br />
+      <%= f.password_field :password, placeholder:"パスワードを入力してください", class:"text-field p-2", autocomplete:"off" %>
+      <% if @user.errors[:password].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:password].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="image-field mt-4 mb-5" data-turbo="false">
+      <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
+      <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
+      <%= f.file_field :image, class: "upload-button px-4 py-1", id: "image-upload" %><br />
+    </div>
+    <div class="actions mt-5">
+      <%= f.submit "新規登録", class: "submit-button", data: { turbo: false } %>
+    </div>
+    <div class="back-button-container mt-3">
+      <%= link_to 'ログインに戻る', login_path, class:"back-button", data: { turbo: false } %>
+    </div>
+  <% end %>
+</div>
+
+<script>
+//HTMLドキュメントに対するイベントリスナー
+document.addEventListener('DOMContentLoaded', () => {
+
+  const fileInput = document.getElementById('image-upload');
+  const imagePreview = document.getElementById('image-preview');
+
+  //ブラウザのウインドウ全体に対してのイベントリスナー
+  window.addEventListener('DOMContentLoaded', () => {
+    const imagePreview = document.getElementById('image-preview');
+    //ページが読み込まれた時に、src属性にデフォルトの画像を設定して表示する
+    imagePreview.src = '<%= asset_path("default_avatar.png") %>';
+  });
+
+
+  //ファイル選択時に変更イベントを検出する
+  fileInput.addEventListener('change', (e) => {
+    //リストの1番目のファイルの中身を取得する
+    const file = e.target.files[0];
+
+    if (file) {
+      //FileReaderオブジェクトの作成
+      const reader = new FileReader();
+      //読み込みが完了したらイベント発生する
+      reader.onload = (e) => {
+        imagePreview.src = e.target.result;
+      };
+      //ファイルをデータURLとして読み込む
+      reader.readAsDataURL(file);
+    } else {
+      imagePreview.src = 'app/assets/images/default_avatar.png';
+    }
+  });
+});
+</script>
