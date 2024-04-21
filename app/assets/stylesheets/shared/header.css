@@ -2,6 +2,7 @@
 nav.navbar {
   position: fixed;
   top: 0%;
+  width: 100%;
   z-index: 999;
   background-color: var(--theme_color);
 }
@@ -17,6 +18,15 @@ nav.navbar {
 }
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.navbar-toggler {
+  border: none !important;
+}
+
+.navbar-toggler:hover {
+  border: none !important;
+  background-color: #ffffff45;
 }
 
 /* ログインユーザー名 */
