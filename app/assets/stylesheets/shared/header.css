@@ -1,5 +1,8 @@
 /* ナビゲーションバー */
 nav.navbar {
+  position: fixed;
+  top: 0%;
+  z-index: 999;
   background-color: var(--theme_color);
 }
 
