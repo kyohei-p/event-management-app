@@ -74,3 +74,11 @@
   font-size: 14px;
   line-height: 17px;
 }
+
+/* プレビュー画像のサイズ */
+#image-preview {
+  width: 300px;
+  height: 300px;
+  border: 0.5px solid #ccc;
+  border-radius: 50%;
+}

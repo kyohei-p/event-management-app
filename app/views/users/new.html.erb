@@ -76,10 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const imagePreview = document.getElementById('image-preview');
     //ページが読み込まれた時に、src属性にデフォルトの画像を設定して表示する
     imagePreview.src = '<%= asset_path("default_avatar.png") %>';
-    imagePreview.style.width = '300px';
-    imagePreview.style.height = '300px';
-    imagePreview.style.border = '0.5px solid #ccc';
-    imagePreview.style.borderRadius = '50%';
   });
 
 
