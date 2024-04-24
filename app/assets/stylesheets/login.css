@@ -2,7 +2,8 @@
 
 /* ログインページ */
 .login-form-container {
-  display: table;
+  display: grid;
+  justify-content: center;
   margin: 200px auto;
 }
 
