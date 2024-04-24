@@ -3,3 +3,28 @@
     <p class="text-white">@ 2024 Kyohei Yoshida</p>
   </div>
 </footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const footer = document.querySelector('.footer');
+  footer.style.display = 'none';
+  //スクロールのしきい値
+  const scrollThreshold = 100;
+
+  window.addEventListener('scroll', () => {
+    //body要素のコンテンツの高さ
+    const scrollHeight = document.body.scrollHeight;
+    //ビューポートの高さ
+    const windowHeight = window.innerHeight;
+    //垂直方向へのスクロール量
+    const scrollPosition = window.scrollY;
+
+    //コンテンツの高さが、しきい値以下になったら最下部に到達する前にフッターを表示する
+    if (scrollHeight - windowHeight - scrollPosition < scrollThreshold) {
+      footer.style.display = 'block';
+    } else {
+      footer.style.display = 'none';
+    }
+  });
+});
+</script>
