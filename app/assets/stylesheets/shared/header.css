@@ -1,0 +1,75 @@
+/* ナビゲーションバー */
+nav.navbar {
+  position: fixed;
+  top: 0%;
+  width: 100%;
+  z-index: 999;
+  background-color: var(--theme_color);
+}
+
+.navbar > .container {
+  margin-left: 20px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  width: max-content;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+.navbar-toggler {
+  border: none !important;
+}
+
+.navbar-toggler:hover {
+  border: none !important;
+  background-color: #ffffff45;
+}
+
+/* ログインユーザー名 */
+.login-user-name {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin-top: 15px;
+  margin-right: 10px;
+  padding: 8px;
+  text-align: right;
+  color: var(--white);
+}
+
+/* プロフィール画像 */
+.header-profile-image {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 0.5px solid var(--gray);
+  border-radius: 50%;
+}
+
+/* レスポンシブ対応（PC版） */
+@media screen and (min-width: 992px){
+  .header-profile-image {
+    display:none;
+  }
+}
+
+/* レスポンシブ対応（スマホ版） */
+@media screen and (max-width: 991px){
+  .navbar > .container {
+    width: max-content;
+    margin-left: 10px;
+  }
+
+  .login-user-name {
+    display: none;
+  }
+}

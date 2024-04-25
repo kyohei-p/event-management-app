@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-dark">
+  <div class="container">
+    <a class="navbar-brand" href="/">イベント管理アプリ</a>
+  </div>
+  <div class="user-info">
+    <% if logged_in? %>
+      <% if current_user.image.attached? %>
+        <%= image_tag current_user.image, class:"header-profile-image" %>
+      <% end %>
+      <p class="login-user-name"><%= current_user.name.truncate(13) %>さん</p>
+    <% else %>
+      <%= image_tag 'default_avatar.png', class:"header-profile-image" %>
+      <p class="login-user-name">ゲストさん</p>
+    <% end %>
+  </div>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    <% if logged_in? %>
+      <li>
+        <%= link_to "#", class: 'nav-link text-light' do %>
+          <i class="fa fa-calendar-plus-o"></i> イベント作成
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "#", class: 'nav-link text-light' do %>
+          <i class="fa fa-user-circle"></i>マイページ
+        <% end %>
+      </li>
+      <li>
+        <%= link_to logout_path, data: { method: :delete, turbo: false }, class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-out-alt"></i>ログアウト
+        <% end %>
+      </li>
+    <% else %>
+      <li>
+        <%= link_to login_path, class: 'nav-link text-light' do %>
+          <i class="fas fa-sign-in-alt"></i>ログイン
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+</nav>

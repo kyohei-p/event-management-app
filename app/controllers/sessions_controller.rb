@@ -17,8 +17,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    remember_me!
-    forget_me!
     logout
     redirect_to(login_path, notice: 'ログアウトしました')
   end

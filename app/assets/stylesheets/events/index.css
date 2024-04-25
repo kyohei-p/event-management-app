@@ -1,5 +1,6 @@
 /* イベント一覧 */
 .event-list-container {
   margin: 200px auto;
+  height: auto;
   text-align: center;
 }
