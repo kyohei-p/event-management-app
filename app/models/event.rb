@@ -4,7 +4,7 @@ class Event < ApplicationRecord
 
   has_one_attached :image
 
-  enum public_status: { 非公開: 0, 公開: 1 }, _prefix: true
+  enum public_status: { closed: 0, open: 1 }, _prefix: true
 
   #イベント名のバリデーション
   validates :name, presence: true, length: { maximum: 50 }

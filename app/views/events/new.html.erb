@@ -1,0 +1,56 @@
+<div class="flash-message-container">
+  <%= render 'shared/flash_message' %>
+</div>
+
+<% if logged_in? %>
+  <div class="form-container">
+    <h1 class="title">イベント作成</h1>
+    <%= form_with model: @event, method: :post do |f| %>
+      <div class="mt-4 mb-4">
+        <%= f.label "イベント名", class:"label-tag fw-bold" %><br />
+        <%= f.text_field :name, placeholder:"例）○○交流会", class:"name-field p-2" %>
+        <% if @event.errors[:name].any? %>
+          <div class="error-message mt-1">
+            <%= safe_join(@event.errors[:name], tag.br) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="mt-4 mb-4">
+        <%= f.label "イベントの説明", class:"label-tag fw-bold" %><br />
+        <%= f.text_area :event_description, placeholder:"イベントの説明文を入力", rows: 5, class: "text-area w-100 p-2" %>
+        <% if @event.errors[:event_discription].any? %>
+          <div class="error-message mt-1">
+            <%= safe_join(@event.errors[:event_description], tag.br) %>
+          </div>
+        <% end %>
+      </div>
+      <div class="mt-4 mb-4">
+        <%= f.label "カテゴリ", class:"label-tag fw-bold" %><br />
+        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください", class:"form-calendar" %>
+      </div>
+      <div class="mt-4 mb-4">
+        <%= f.label "開催日", class:"label-tag fw-bold" %><br />
+          <%= f.date_field :event_day, class:"calendar" %>
+      </div>
+      <div class="mt-4 mb-4">
+        <div class="radio-button-container">
+          <%= f.label "公開", class:"label-tag fw-bold" %><br />
+          <%= f.radio_button :public_status, :open, class:"radio-button", checked: true %><br />
+          <%= f.label "非公開", class:"label-tag fw-bold" %><br />
+          <%= f.radio_button :public_status, :closed, class:"radio-button" %>
+        </div>
+      </div>
+      <div class="image-field mt-4 mb-5" data-turbo="false">
+        <%= f.label "イベント画像", class: "label-tag fw-bold" %><br />
+        <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
+        <%= f.file_field :image, class: "upload-button px-4 py-1", id: "image-upload" %><br />
+      </div>
+      <div class="actions mt-5">
+        <%= f.submit "イベント作成", class: "submit-button", data: { turbo: false } %>
+      </div>
+      <div class="back-button-container mt-3">
+        <%= link_to 'イベント一覧に戻る', root_path, class:"back-button", data: { turbo: false } %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -15,7 +15,7 @@ ja:
         name: "カテゴリー名"
       event:
         name: "イベント名"
-        event_discription: "イベントの説明文"
+        event_description: "イベントの説明文"
         event_day: "開催日"
         public_status: "公開状態"
     errors:
@@ -45,7 +45,7 @@ ja:
             name:
               blank: "イベント名を入力してください。"
               too_long: "名前は50文字以内で入力してください"
-            event_discription:
+            event_description:
               too_long: "255文字以内で入力してください"
             every_day:
               blank: "開催日を選択してください"
