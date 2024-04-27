@@ -1,4 +1,41 @@
+#ユーザー
 10.times do |n|
   user = User.create!(name: "test#{n+1}", email: "test#{n+1}@example.com", password: "password#{n+1}", phone_number: "031234000#{n+1}", self_introduction: "テストユーザー#{n+1}です")
   user.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default_avatar.png')), filename: 'default_avatar.png')
 end
+
+#カテゴリー
+Category.create!(name: "交流会")
+Category.create!(name: "勉強会")
+Category.create!(name: "セミナー")
+Category.create!(name: "芸術")
+Category.create!(name: "営業・販売")
+Category.create!(name: "コーチング")
+Category.create!(name: "カウンセリング")
+Category.create!(name: "経営・起業")
+Category.create!(name: "ワークショップ")
+Category.create!(name: "ファイナンス")
+Category.create!(name: "サークル")
+Category.create!(name: "就活")
+Category.create!(name: "転職活動")
+Category.create!(name: "副業・キャリア")
+Category.create!(name: "趣味・ライフスタイル")
+Category.create!(name: "福祉・医療")
+Category.create!(name: "スポーツ")
+Category.create!(name: "ヨガ・フィットネス")
+Category.create!(name: "ファッション")
+Category.create!(name: "美容・健康")
+Category.create!(name: "音楽")
+Category.create!(name: "ゲーム")
+Category.create!(name: "料理・グルメ")
+Category.create!(name: "心理学・スピリチュアル")
+Category.create!(name: "プログラミング")
+Category.create!(name: "語学学習")
+Category.create!(name: "資格取得")
+Category.create!(name: "旅行")
+Category.create!(name: "婚活・恋活")
+Category.create!(name: "ボランティア")
+
+#イベント
+event1 = Event.create!(user_id:1, category_id: 1, name: "エンジニア交流会", event_description: "エンジニア交流会のイベントです。", event_day: "2024-05-03", public_status: 1)
+event1.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'events', 'engineer_event.png')), filename: 'engineer_event.png')

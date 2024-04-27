@@ -48,8 +48,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_215313) do
   create_table "events", charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "event_description"
-    t.string "event_day"
-    t.string "public_status"
+    t.date "event_day"
+    t.integer "public_status"
     t.datetime "discard_at"
     t.bigint "category_id"
     t.bigint "user_id"

@@ -2,19 +2,29 @@ ja:
   activerecord:
     models:
         user: ユーザー
+        category: カテゴリー
+        event: イベント
     attributes:
       user:
+        name: "名前"
         email: "メールアドレス"
         password: "パスワード"
         self_introduction: "自己紹介"
         phone_number: 電話番号
+      category:
+        name: "カテゴリー名"
+      event:
+        name: "イベント名"
+        event_discription: "イベントの説明文"
+        event_day: "開催日"
+        public_status: "公開状態"
     errors:
       models:
         user:
           attributes:
             name:
               blank: "名前を入力してください。"
-              too_long: "名前は60文字以内で入力してください"
+              too_long: "名前は100文字以内で入力してください"
             email:
               blank: "メールアドレスを入力してください。"
               taken: "メールアドレスはすでに存在します"
@@ -26,6 +36,21 @@ ja:
               too_long: "255文字以内で入力してください"
             phone_number:
               blank: "電話番号を入力してください。"
+        category:
+          attributes:
+            name:
+              blank: "カテゴリー名を選択してください。"
+        event:
+          attributes:
+            name:
+              blank: "イベント名を入力してください。"
+              too_long: "名前は50文字以内で入力してください"
+            event_discription:
+              too_long: "255文字以内で入力してください"
+            every_day:
+              blank: "開催日を選択してください"
+            public_status:
+              blank: "公開状態を選択してください"
       messages:
         required: "は必須項目です。"
         record_invalid: "バリデーションに失敗しました: %{errors}"
