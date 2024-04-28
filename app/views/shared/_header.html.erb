@@ -20,12 +20,12 @@
     <ul class="navbar-nav ml-auto">
     <% if logged_in? %>
       <li>
-        <%= link_to "#", class: 'nav-link text-light' do %>
+        <%= link_to "/events/new", class: 'nav-link text-light', data: { turbo: false } do %>
           <i class="fa fa-calendar-plus-o"></i> イベント作成
         <% end %>
       </li>
       <li>
-        <%= link_to "#", class: 'nav-link text-light' do %>
+        <%= link_to "#", class: 'nav-link text-light', data: { turbo: false } do %>
           <i class="fa fa-user-circle"></i>マイページ
         <% end %>
       </li>
@@ -36,7 +36,7 @@
       </li>
     <% else %>
       <li>
-        <%= link_to login_path, class: 'nav-link text-light' do %>
+        <%= link_to login_path, class: 'nav-link text-light', data: { turbo: false } do %>
           <i class="fas fa-sign-in-alt"></i>ログイン
         <% end %>
       </li>
