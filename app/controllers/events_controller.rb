@@ -13,7 +13,6 @@ class EventsController < ApplicationController
       if @event.save
         redirect_to(root_path, notice: 'イベントを作成しました')
       else
-        logger.debug @event.errors.full_messages
         render action: 'new', status:400
       end
     else
