@@ -12,10 +12,18 @@ class Event < ApplicationRecord
   #説明文のバリデーション
   validates :event_description, length: { maximum: 255 }
 
+  #カテゴリー名のバリデーション
+  validates_associated :category
+  validate :category_presence
+
   #開催日のバリデーション
   validates :event_day, presence: true
 
   #公開状態のバリデーション
   validates :public_status, presence: true
+
+  def category_presence
+    errors.add(:category_id, "カテゴリーを選択してください。") if category_id.nil?
+  end
 
 end

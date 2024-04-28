@@ -39,20 +39,20 @@ ja:
         category:
           attributes:
             name:
-              blank: "カテゴリー名を選択してください。"
+              blank: "カテゴリーを選択してください。"
         event:
           attributes:
             name:
               blank: "イベント名を入力してください。"
-              too_long: "名前は50文字以内で入力してください"
+              too_long: "イベント名は50文字以内で入力してください。"
             event_description:
-              too_long: "255文字以内で入力してください"
-            every_day:
-              blank: "開催日を選択してください"
+              too_long: "イベントの説明は255文字以内で入力してください。"
+            event_day:
+              blank: "開催日を選択してください。"
             public_status:
-              blank: "公開状態を選択してください"
+              blank: "公開状態を選択してください。"
       messages:
-        required: "は必須項目です。"
+        required: "%{attribute}は必須項目です。"
         record_invalid: "バリデーションに失敗しました: %{errors}"
       attributes:
         user:

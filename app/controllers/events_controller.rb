@@ -8,12 +8,13 @@ class EventsController < ApplicationController
   def create
     if logged_in?
       @event = Event.new(event_params)
-      @event.category_id = params[:event][:category_id]
+      @event.category = Category.find_by(id: params[:event][:category_id])
       @event.user = current_user
       if @event.save
         redirect_to(root_path, notice: 'イベントを作成しました')
       else
-        render action: 'new'
+        logger.debug @event.errors.full_messages
+        render action: 'new', status:400
       end
     else
       redirect_to new_user_path
