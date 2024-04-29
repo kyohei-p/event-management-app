@@ -52,10 +52,13 @@
     </div>
     <div class="image-field mt-4 mb-5" data-turbo="false">
       <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
-      <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
-      <%= f.file_field :image, class: "upload-button px-4 py-1", id: "image-upload" %><br />
+      <div class="speech-bubble-area">
+        <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
+        <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
+      </div>
     </div>
-    <div class="actions mt-5">
+    <%= f.file_field :image, class: "upload-button invisible", id: "image-upload" %><br />
+    <div class="actions">
       <%= f.submit "新規登録", class: "submit-button", data: { turbo: false } %>
     </div>
     <div class="back-button-container mt-3">
@@ -78,6 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
     imagePreview.src = '<%= asset_path("default_avatar.png") %>';
   });
 
+  //画像をクリックしたらファイルアップロードボタンのクリック操作を実行する
+  imagePreview.addEventListener('click', () => {
+    fileInput.click();
+  });
 
   //ファイル選択時に変更イベントを検出する
   fileInput.addEventListener('change', (e) => {
