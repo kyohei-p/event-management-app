@@ -57,12 +57,13 @@
       </div>
       <div class="image-field mt-4 mb-5" data-turbo="false">
         <%= f.label "イベント画像", class: "label-tag fw-bold" %><br />
-        <img id="event-image-preview" src="#" class="mt-2 mb-2" /><br />
-        <div class="text-center">
-          <%= f.file_field :image, class: "event-upload-button px-4 py-1", id: "image-upload" %><br />
+        <div class="speech-bubble-area">
+          <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
+          <img id="event-image-preview" src="#" class="mt-2 mb-2" /><br />
         </div>
       </div>
-      <div class="actions mt-5">
+      <%= f.file_field :image, class: "event-upload-button invisible", id: "image-upload" %>
+      <div class="actions">
         <%= f.submit "イベント作成", class: "submit-button", data: { turbo: false } %>
       </div>
       <div class="back-button-container mt-3">
@@ -78,6 +79,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const fileInput = document.getElementById('image-upload');
   const imagePreview = document.getElementById('event-image-preview');
+
+  //画像をクリックしたらファイルアップロードボタンのクリック操作を実行する
+  imagePreview.addEventListener('click', () => {
+    fileInput.click();
+  });
 
   //ブラウザのウインドウ全体に対してのイベントリスナー
   window.addEventListener('DOMContentLoaded', () => {
