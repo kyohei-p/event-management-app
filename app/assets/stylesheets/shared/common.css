@@ -34,11 +34,21 @@
   resize: none;
 }
 
+/* ラジオボタン */
+.radio-label-tag {
+  margin-right: 10px;
+  font-size: 0.8rem;
+}
+
+.radio-button {
+  margin-right: 20px;
+}
+
+/* 送信ボタン */
 .actions {
   text-align: center;
 }
 
-/* 送信ボタン */
 .submit-button {
   width: 200px;
   height: 40px;

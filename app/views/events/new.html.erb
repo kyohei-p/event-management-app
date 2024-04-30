@@ -43,10 +43,11 @@
         <% end %>
       </div>
       <div class="mt-4 mb-4">
-        <div class="radio-button-container">
-          <%= f.label "公開", class:"label-tag fw-bold" %><br />
+        <%= f.label "イベントの公開設定", class:"label-tag fw-bold mr-2" %><br />
+        <div class="radio-button-items d-flex align-items-center">
+          <%= f.label "公開", class:"radio-label-tag" %><br />
           <%= f.radio_button :public_status, :open, class:"radio-button", checked: true %><br />
-          <%= f.label "非公開", class:"label-tag fw-bold" %><br />
+          <%= f.label "非公開", class:"radio-label-tag" %><br />
           <%= f.radio_button :public_status, :closed, class:"radio-button" %>
         </div>
         <% if @event.errors[:public_status].any? %>
