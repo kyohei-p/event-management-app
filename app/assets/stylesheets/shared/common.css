@@ -34,6 +34,18 @@
   resize: none;
 }
 
+/* プルダウン */
+select {
+  height: 30px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+/* カレンダー */
+.form-control-sm {
+  border: 1px solid light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+}
+
 /* ラジオボタン */
 .radio-label-tag {
   margin-right: 10px;

@@ -26,7 +26,7 @@
       </div>
       <div class="mt-4 mb-4">
         <%= f.label "カテゴリー", class:"label-tag fw-bold" %><br />
-        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください", class:"form-select" %>
+        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください", class:"form-control" %>
         <% if @event.errors[:category_id].any? %>
           <div class="error-message mt-1">
             <%= safe_join(@event.errors[:category_id]) %>
