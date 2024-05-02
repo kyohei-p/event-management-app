@@ -68,13 +68,11 @@
 </div>
 
 <script>
-//HTMLドキュメントに対するイベントリスナー
 document.addEventListener('DOMContentLoaded', () => {
 
   const fileInput = document.getElementById('image-upload');
   const imagePreview = document.getElementById('image-preview');
 
-  //ブラウザのウインドウ全体に対してのイベントリスナー
   window.addEventListener('DOMContentLoaded', () => {
     const imagePreview = document.getElementById('image-preview');
     //ページが読み込まれた時に、src属性にデフォルトの画像を設定して表示する
@@ -86,19 +84,14 @@ document.addEventListener('DOMContentLoaded', () => {
     fileInput.click();
   });
 
-  //ファイル選択時に変更イベントを検出する
   fileInput.addEventListener('change', (e) => {
-    //リストの1番目のファイルの中身を取得する
     const file = e.target.files[0];
 
     if (file) {
-      //FileReaderオブジェクトの作成
       const reader = new FileReader();
-      //読み込みが完了したらイベント発生する
       reader.onload = (e) => {
         imagePreview.src = e.target.result;
       };
-      //ファイルをデータURLとして読み込む
       reader.readAsDataURL(file);
     } else {
       imagePreview.src = 'app/assets/images/default_avatar.png';

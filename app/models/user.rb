@@ -3,16 +3,13 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
-  #名前のバリデーション
   validates :name, presence: true, length: { maximum: 100 }
 
-  #メールアドレスのバリデーション
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w\-\._]+@[\w\-\._]+\.[A-Za-z]+\z/
   validates :email, uniqueness: true, presence: true, length: { maximum: 255 },
   format: { with: VALID_EMAIL_REGEX, message: "メールアドレスが正しい形式ではありません" }
 
-  #パスワードのバリデーション
   VALID_PASSWORD_REGEX = /\A(?=.*[a-z])(?=.*?\d)[\w]+\z/
   VALID_PASSWORD_MESSAGE_HANKAKU = "パスワードは半角英数字で入力してください"
   VALID_PASSWORD_MESSAGE_MINLENGTH = "パスワードは8文字以上で入力してください"
@@ -20,7 +17,6 @@ class User < ApplicationRecord
   validates :password, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validate :validate_password
 
-  #電話番号のバリデーション
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   VALID_PHONE_NUMBER_MESSAGE_HAIFUN = "電話番号はハイフン無しで入力してください"
   VALID_PHONE_NUMBER_MESSAGE_HANKAKU = "電話番号は半角数字で入力してください"
@@ -28,7 +24,6 @@ class User < ApplicationRecord
   validate :validate_phone_number
   validates :phone_number, presence: true
 
-  #自己紹介文のバリデーション
   validates :self_introduction, length: { maximum: 255 }
 
   private
