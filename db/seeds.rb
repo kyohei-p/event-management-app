@@ -64,8 +64,8 @@ image_path = {
   19 => Rails.root.join('app', 'assets', 'images', 'events', 'fashion.png'),
   20 => Rails.root.join('app', 'assets', 'images', 'events', 'beauty.png'),
   21 => Rails.root.join('app', 'assets', 'images', 'events', 'music.png'),
-  22 => Rails.root.join('app', 'assets', 'images', 'events', 'cooking.png'),
-  23 => Rails.root.join('app', 'assets', 'images', 'events', 'game.png'),
+  22 => Rails.root.join('app', 'assets', 'images', 'events', 'game.png'),
+  23 => Rails.root.join('app', 'assets', 'images', 'events', 'cooking.png'),
   24 => Rails.root.join('app', 'assets', 'images', 'events', 'spiritual.png'),
   25 => Rails.root.join('app', 'assets', 'images', 'events', 'engineer.png'),
   26 => Rails.root.join('app', 'assets', 'images', 'events', 'language.png'),
@@ -79,6 +79,8 @@ image_path = {
   user_id = User.pluck(:id).sample
   category_id = Category.pluck(:id).sample
 
+  category_image = image_path[category_id]
+
   event = Event.create!(
     user_id: user_id,
     category_id: category_id,
@@ -87,8 +89,6 @@ image_path = {
     event_day: rand(start_day..last_day),
     public_status: 1
   )
-
-  category_image = image_path[category_id]
 
   begin
     event.image.attach(io: File.open(category_image), filename: "event_image#{n+1}.png")

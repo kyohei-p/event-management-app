@@ -4,10 +4,14 @@
 
 <div class="event-list-container">
   <h1 class="title">イベント一覧</h1>
-  <%= for event in @events do %>
+  <% for event in @events do %>
     <%= image_tag event.image, size:'200x200' %>
     <%= event.name %>
-    <%= event.category.name %>
-    <%= event.event_day.strftime("%-m月%-d日") %>
+    <%= link_to category_events_path(category_id: event.category.id), data: { turbo:false } do %>
+      <%= event.category.name %>
+    <% end %>
+    <%= link_to date_events_path(event_day: event.event_day), data: { turbo:false } do %>
+      <%= event.event_day.strftime("%-m月%-d日") %>
+    <% end %>
   <% end %>
 </div>

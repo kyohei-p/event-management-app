@@ -6,5 +6,13 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', as: :logout
 
   resources :users, except: [:index]
+
   resources :events
+
+  resources :categories do
+    resources :events, only: [:index]
+  end
+
+  get 'events/:event_day/events', to: 'events#index', as: 'date_events'
+
 end

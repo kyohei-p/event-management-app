@@ -3,7 +3,14 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:create, :new]
 
   def index
-    @events = Event.includes(:category).order(updated_at: "DESC")
+    if params[:category_id]
+      category_id = Category.find_by(id: params[:category_id])
+      @events = Event.where(category_id: category_id).order(updated_at: "DESC")
+    elsif params[:event_day]
+      @events = Event.where(event_day: params[:event_day]).order(updated_at: "DESC")
+    else
+      @events = Event.includes(:category).order(updated_at: "DESC")
+    end
   end
 
   def create
