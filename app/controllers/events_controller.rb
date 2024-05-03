@@ -3,7 +3,7 @@ class EventsController < ApplicationController
   before_action :require_login, only: [:create, :new]
 
   def index
-    @message = "イベントの一覧情報を表示します"
+    @events = Event.includes(:category).order(updated_at: "DESC")
   end
 
   def create
