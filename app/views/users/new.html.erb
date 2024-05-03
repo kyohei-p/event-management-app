@@ -52,10 +52,13 @@
     </div>
     <div class="image-field mt-4 mb-5" data-turbo="false">
       <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
-      <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
-      <%= f.file_field :image, class: "upload-button px-4 py-1", id: "image-upload" %><br />
+      <div class="speech-bubble-area">
+        <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
+        <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
+      </div>
     </div>
-    <div class="actions mt-5">
+    <%= f.file_field :image, class: "upload-button invisible", id: "image-upload" %><br />
+    <div class="actions">
       <%= f.submit "新規登録", class: "submit-button", data: { turbo: false } %>
     </div>
     <div class="back-button-container mt-3">
@@ -65,33 +68,30 @@
 </div>
 
 <script>
-//HTMLドキュメントに対するイベントリスナー
 document.addEventListener('DOMContentLoaded', () => {
 
   const fileInput = document.getElementById('image-upload');
   const imagePreview = document.getElementById('image-preview');
 
-  //ブラウザのウインドウ全体に対してのイベントリスナー
   window.addEventListener('DOMContentLoaded', () => {
     const imagePreview = document.getElementById('image-preview');
     //ページが読み込まれた時に、src属性にデフォルトの画像を設定して表示する
     imagePreview.src = '<%= asset_path("default_avatar.png") %>';
   });
 
+  //画像をクリックしたらファイルアップロードボタンのクリック操作を実行する
+  imagePreview.addEventListener('click', () => {
+    fileInput.click();
+  });
 
-  //ファイル選択時に変更イベントを検出する
   fileInput.addEventListener('change', (e) => {
-    //リストの1番目のファイルの中身を取得する
     const file = e.target.files[0];
 
     if (file) {
-      //FileReaderオブジェクトの作成
       const reader = new FileReader();
-      //読み込みが完了したらイベント発生する
       reader.onload = (e) => {
         imagePreview.src = e.target.result;
       };
-      //ファイルをデータURLとして読み込む
       reader.readAsDataURL(file);
     } else {
       imagePreview.src = 'app/assets/images/default_avatar.png';

@@ -34,11 +34,33 @@
   resize: none;
 }
 
+/* プルダウン */
+select {
+  height: 30px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+/* カレンダー */
+.form-control-sm {
+  border: 1px solid light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+}
+
+/* ラジオボタン */
+.radio-label-tag {
+  margin-right: 10px;
+  font-size: 0.8rem;
+}
+
+.radio-button {
+  margin-right: 20px;
+}
+
+/* 送信ボタン */
 .actions {
   text-align: center;
 }
 
-/* 送信ボタン */
 .submit-button {
   width: 200px;
   height: 40px;
@@ -68,17 +90,89 @@
   text-decoration: underline;
 }
 
-/* ファイルアップロードボタン */
+/* ファイルアップロードボタン（ユーザー用） */
 .upload-button{
   width: 140px;
   font-size: 14px;
   line-height: 17px;
 }
 
-/* プレビュー画像のサイズ */
+/* ファイルアップロードボタン（イベント用） */
+.event-upload-button{
+  width: 140px;
+  margin-right: 20px;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+/* プレビュー画像（ユーザー用） */
 #image-preview {
+  position: relative;
+  left: 14%;
   width: 300px;
   height: 300px;
   border: 0.5px solid #ccc;
   border-radius: 50%;
+}
+
+/* プレビュー画像（イベント用） */
+#event-image-preview {
+  width: 400px;
+  height: 300px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* 吹き出しのホバー範囲 */
+.speech-bubble-area {
+  position: relative;
+}
+
+/* 吹き出しの角丸 */
+.speech-bubble{
+  position: relative;
+  width: max-content;
+  padding: 10px;
+  background-color: var(--theme_color);
+  border-radius: 5px;
+  color: white;
+  font-size: 0.5rem;
+  text-align: center;
+  margin-left: 27%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+/* 吹き出しの三角形 */
+.speech-bubble::before{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 82px;
+  top: 30px;
+  border-right: 15px solid transparent;
+  border-top: 15px solid var(--theme_color);
+  border-left: 15px solid transparent;
+}
+
+/* レスポンシブ対応（PC版） */
+@media screen and (min-width: 992px){
+
+  /* ホバーしたら吹き出しを表示する */
+  .speech-bubble-area:hover .speech-bubble {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* レスポンシブ対応（スマホ版） */
+@media screen and (max-width: 991px){
+
+  /* タップしたら吹き出しを表示する */
+  .speech-bubble-area:active .speech-bubble {
+    opacity: 1;
+    visibility: visible;
+  }
 }
