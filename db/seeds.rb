@@ -38,42 +38,43 @@ Category.create!(name: "旅行")
 Category.create!(name: "婚活・恋活")
 Category.create!(name: "ボランティア")
 
+# カテゴリに関連づける画像
+image_path = {
+  1 => Rails.root.join('app', 'assets', 'images', 'categories', 'seminar.png'),
+  2 => Rails.root.join('app', 'assets', 'images', 'categories', 'engineer.png'),
+  3 => Rails.root.join('app', 'assets', 'images', 'categories', 'seminar.png'),
+  4 => Rails.root.join('app', 'assets', 'images', 'categories', 'art.png'),
+  5 => Rails.root.join('app', 'assets', 'images', 'categories', 'sales.png'),
+  6 => Rails.root.join('app', 'assets', 'images', 'categories', 'consultation.png'),
+  7 => Rails.root.join('app', 'assets', 'images', 'categories', 'consultation.png'),
+  8 => Rails.root.join('app', 'assets', 'images', 'categories', 'startup.png'),
+  9 => Rails.root.join('app', 'assets', 'images', 'categories', 'seminar.png'),
+  10 => Rails.root.join('app', 'assets', 'images', 'categories', 'finance.png'),
+  11 => Rails.root.join('app', 'assets', 'images', 'categories', 'circle.png'),
+  12 => Rails.root.join('app', 'assets', 'images', 'categories', 'recruit.png'),
+  13 => Rails.root.join('app', 'assets', 'images', 'categories', 'recruit.png'),
+  14 => Rails.root.join('app', 'assets', 'images', 'categories', 'seminar.png'),
+  15 => Rails.root.join('app', 'assets', 'images', 'categories', 'lifestyle.png'),
+  16 => Rails.root.join('app', 'assets', 'images', 'categories', 'medical_care.png'),
+  17 => Rails.root.join('app', 'assets', 'images', 'categories', 'sport.png'),
+  18 => Rails.root.join('app', 'assets', 'images', 'categories', 'yoga.png'),
+  19 => Rails.root.join('app', 'assets', 'images', 'categories', 'fashion.png'),
+  20 => Rails.root.join('app', 'assets', 'images', 'categories', 'beauty.png'),
+  21 => Rails.root.join('app', 'assets', 'images', 'categories', 'music.png'),
+  22 => Rails.root.join('app', 'assets', 'images', 'categories', 'game.png'),
+  23 => Rails.root.join('app', 'assets', 'images', 'categories', 'cooking.png'),
+  24 => Rails.root.join('app', 'assets', 'images', 'categories', 'spiritual.png'),
+  25 => Rails.root.join('app', 'assets', 'images', 'categories', 'engineer.png'),
+  26 => Rails.root.join('app', 'assets', 'images', 'categories', 'language.png'),
+  27 => Rails.root.join('app', 'assets', 'images', 'categories', 'qualification.png'),
+  28 => Rails.root.join('app', 'assets', 'images', 'categories', 'travel.png'),
+  29 => Rails.root.join('app', 'assets', 'images', 'categories', 'love.png'),
+  30 => Rails.root.join('app', 'assets', 'images', 'categories', 'volunteer.png'),
+}
+
 #イベント
 start_day = Date.parse("2024-06-01")
 last_day = Date.parse("2024-12-31")
-
-image_path = {
-  1 => Rails.root.join('app', 'assets', 'images', 'events', 'seminar.png'),
-  2 => Rails.root.join('app', 'assets', 'images', 'events', 'engineer.png'),
-  3 => Rails.root.join('app', 'assets', 'images', 'events', 'seminar.png'),
-  4 => Rails.root.join('app', 'assets', 'images', 'events', 'art.png'),
-  5 => Rails.root.join('app', 'assets', 'images', 'events', 'sales.png'),
-  6 => Rails.root.join('app', 'assets', 'images', 'events', 'consultation.png'),
-  7 => Rails.root.join('app', 'assets', 'images', 'events', 'consultation.png'),
-  8 => Rails.root.join('app', 'assets', 'images', 'events', 'startup.png'),
-  9 => Rails.root.join('app', 'assets', 'images', 'events', 'seminar.png'),
-  10 => Rails.root.join('app', 'assets', 'images', 'events', 'finance.png'),
-  11 => Rails.root.join('app', 'assets', 'images', 'events', 'circle.png'),
-  12 => Rails.root.join('app', 'assets', 'images', 'events', 'recruit.png'),
-  13 => Rails.root.join('app', 'assets', 'images', 'events', 'recruit.png'),
-  14 => Rails.root.join('app', 'assets', 'images', 'events', 'seminar.png'),
-  15 => Rails.root.join('app', 'assets', 'images', 'events', 'lifestyle.png'),
-  16 => Rails.root.join('app', 'assets', 'images', 'events', 'medical_care.png'),
-  17 => Rails.root.join('app', 'assets', 'images', 'events', 'sport.png'),
-  18 => Rails.root.join('app', 'assets', 'images', 'events', 'yoga.png'),
-  19 => Rails.root.join('app', 'assets', 'images', 'events', 'fashion.png'),
-  20 => Rails.root.join('app', 'assets', 'images', 'events', 'beauty.png'),
-  21 => Rails.root.join('app', 'assets', 'images', 'events', 'music.png'),
-  22 => Rails.root.join('app', 'assets', 'images', 'events', 'game.png'),
-  23 => Rails.root.join('app', 'assets', 'images', 'events', 'cooking.png'),
-  24 => Rails.root.join('app', 'assets', 'images', 'events', 'spiritual.png'),
-  25 => Rails.root.join('app', 'assets', 'images', 'events', 'engineer.png'),
-  26 => Rails.root.join('app', 'assets', 'images', 'events', 'language.png'),
-  27 => Rails.root.join('app', 'assets', 'images', 'events', 'qualification.png'),
-  28 => Rails.root.join('app', 'assets', 'images', 'events', 'travel.png'),
-  29 => Rails.root.join('app', 'assets', 'images', 'events', 'love.png'),
-  30 => Rails.root.join('app', 'assets', 'images', 'events', 'volunteer.png'),
-}
 
 100.times do |n|
   user_id = User.pluck(:id).sample

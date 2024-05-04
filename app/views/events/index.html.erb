@@ -2,6 +2,33 @@
   <%= render 'shared/flash_message' %>
 </div>
 
+<% unless logged_in? %>
+  <section class="summary-container text-center">
+    <div class="summary-items">
+      <dl class="summary-text-container">
+        <dt class="h1">イベント管理アプリ</dt>
+        <dd class="summary-description fs-4">イベントを手軽に作成できるアプリです</dd>
+      </dl>
+      <div class="comp-image-container">
+        <%= image_tag 'smartphone_comp.png', class: 'comp-image', alt: 'アプリのデザインイメージ' %>
+      </div>
+    </div>
+    <div class="feature-container">
+      <h2 class="symmetry-line"><span class="feature-title">特徴</span></h2>
+      <ol class="feature-list">
+        <li class="list-item">イベントが手軽に作れる</li>
+        <li class="list-item">操作がシンプルで簡単!</li>
+        <li class="list-item">数十種類の多種多様なイベントを掲載しています</li>
+      </ol>
+    </div>
+    <div class="transition-button-container">
+      <a href="/login" class="transition-login-button text-decoration-none" data-turbo="false">
+        <span class="button-text">ログインする</span>
+      </a>
+    </div>
+  </section>
+<% end %>
+
 <div class="event-list-container">
   <h1 class="title">イベント一覧</h1>
   <% for event in @events do %>

@@ -4,3 +4,102 @@
   height: auto;
   text-align: center;
 }
+
+/* アプリの概要 */
+.summary-container {
+  padding-top: 200px;
+  padding-bottom: 100px;
+  color: var(--theme_color);
+  background-color: #fff8dc;
+}
+
+.summary-items {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.summary-text-container {
+  display: inline-block;
+  align-self: center;
+}
+
+.summary-description {
+  color: black!important;
+}
+
+.comp-image {
+  width: 300px;
+}
+
+.feature-container {
+  display: inline-block;
+  margin: 150px auto 50px;
+}
+
+.feature-title {
+  color: black!important;
+}
+
+.feature-list {
+  display: grid;
+  justify-content: center;
+  margin: 20px auto;
+  width: 500px;
+  text-align: left;
+}
+
+.list-item {
+  color: black!important;
+}
+
+.list-item-text {
+  color: var(--theme_color);
+}
+
+.symmetry-line {
+  font-weight: bold;
+  padding: 0 3em;
+  width: fit-content;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.symmetry-line::before, .symmetry-line::after {
+  content: '';
+  background: var(--theme_color);
+  width: 2em;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+}
+.symmetry-line::before {
+  left: 0;
+}
+.symmetry-line::after {
+  right: 0;
+}
+
+/* ログインへの遷移ボタン */
+.transition-login-button {
+  display: inline-block;
+}
+
+.button-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--theme_color);
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.button-text:hover {
+  background-color: var(--theme_hover_color);
+}
