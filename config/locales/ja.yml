@@ -57,4 +57,11 @@ ja:
       attributes:
         user:
           required: "は必須項目です。"
+  views:
+    pagination:
+      first: '<<'
+      last: '>>'
+      previous: '<'
+      next: '>'
+      truncate: '...'
 

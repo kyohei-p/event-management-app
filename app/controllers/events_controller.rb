@@ -5,11 +5,11 @@ class EventsController < ApplicationController
   def index
     if params[:category_id]
       category_id = Category.find_by(id: params[:category_id])
-      @events = Event.where(category_id: category_id).order(updated_at: "DESC")
+      @events = Event.where(category_id: category_id).order(updated_at: "DESC").page(params[:page])
     elsif params[:event_day]
-      @events = Event.where(event_day: params[:event_day]).order(updated_at: "DESC")
+      @events = Event.where(event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
     else
-      @events = Event.includes(:category).order(updated_at: "DESC")
+      @events = Event.includes(:category).order(updated_at: "DESC").page(params[:page])
     end
   end
 
