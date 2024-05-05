@@ -29,18 +29,29 @@
   </section>
 <% end %>
 
-<div class="event-list-container">
+<div class="title-container <%= logged_in? ? 'loggedin-title-container' : '' %>">
   <h1 class="title">イベント一覧</h1>
+</div>
+
+<div class="event-list-container <%= @events.size == 1 ? 'card-one' : '' %>">
   <% for event in @events do %>
-    <div class="event-card">
-      <%= image_tag event.image, size:'200x200' %>
-      <%= event.name %>
-      <%= link_to category_events_path(category_id: event.category.id), data: { turbo:false } do %>
-        <%= event.category.name %>
-      <% end %>
-      <%= link_to date_events_path(event_day: event.event_day), data: { turbo:false } do %>
-        <%= event.event_day.strftime("%-m月%-d日") %>
-      <% end %>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card__inner">
+        <%= image_tag event.image, class:"card__image", size:'300x300' %>
+        <div class="card__textbox">
+          <div class="card__title">
+            <%= event.name %>
+          </div>
+          <div class="card__items">
+            <%= link_to category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
+              <%= event.category.name %>
+            <% end %>
+            <%= link_to date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
+              <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
   <%= paginate @events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>
