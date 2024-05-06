@@ -2,7 +2,7 @@
   <div class="container">
     <a class="navbar-brand" href="/">イベント管理アプリ</a>
   </div>
-  <div class="user-info">
+  <div class="user-info <%= logged_in? ? '': 'guest-info' %>">
     <% if logged_in? %>
       <% if current_user.image.attached? %>
         <%= image_tag current_user.image, class:"header-profile-image" %>

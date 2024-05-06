@@ -34,6 +34,11 @@ nav.navbar {
   background-color: #ffffff45;
 }
 
+/* ゲスト名 */
+.guest-info {
+  margin-left: 250px;
+}
+
 /* ログインユーザー名 */
 .login-user-name {
   display: flex;
