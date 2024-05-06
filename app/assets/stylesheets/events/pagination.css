@@ -1,0 +1,45 @@
+.pagination {
+  --bs-pagination-color: var(--theme_color) !important;
+  position: relative !important;
+  bottom: 50px !important;
+  margin: 100px auto !important;
+}
+
+ul.pagination li.page-link, li.active.page-link {
+  min-width: 31px;
+  border-radius: 50% !important;
+  font-size: 1rem;
+}
+
+.page-link {
+  margin: auto 10px;
+  min-width: 31px;
+  border-radius: 50% !important;
+  text-align: center;
+}
+
+.page-link.active, .active > .page-link {
+  border-radius: 50% !important;
+  color: var(--bs-pagination-active-color) !important;
+  background-color: var(--theme_color) !important;
+  border-color: var(--theme_color) !important;
+}
+
+.page-link:hover {
+  color: var(--white) !important;
+  background-color: var(--theme_color) !important;
+}
+
+/* レスポンシブ対応（スマホ版） */
+@media screen and (max-width: 991px){
+  .pagination {
+    width: 150%;
+  }
+}
+
+/* レスポンシブ対応（iPhoneSE） */
+@media screen and (max-width: 399px){
+  .pagination {
+    width: 160%;
+  }
+}
