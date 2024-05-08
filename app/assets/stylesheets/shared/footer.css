@@ -3,6 +3,7 @@ footer {
   bottom: 0;
   width: 100%;
   background-color: var(--theme_color);
+  z-index: 999;
 }
 
 .text-white {

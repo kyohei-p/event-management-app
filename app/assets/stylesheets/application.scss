@@ -7,6 +7,7 @@
 @import url(shared/footer.css);
 @import url(login.css);
 @import url(events/index.css);
+@import url(events/pagination.css);
 
 /* フラッシュメッセージ */
 .flash-message-container {
@@ -20,7 +21,7 @@
   border-radius: 5px;
   padding: 16px 24px;
   width: 500px;
-  margin: 200px auto 0;
+  margin: 150px auto 0;
 }
 
 .flash-message.notice {

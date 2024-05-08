@@ -2,7 +2,57 @@
   <%= render 'shared/flash_message' %>
 </div>
 
-<div class="event-list-container">
-  <h1>イベント一覧ページ</h1>
-  <p><%= @message %></p>
+<% unless logged_in? %>
+  <section class="summary-container text-center">
+    <div class="summary-items">
+      <dl class="summary-text-container">
+        <dt class="h1">イベント管理アプリ</dt>
+        <dd class="summary-description fs-4">イベントを手軽に作成できるアプリです</dd>
+      </dl>
+      <div class="comp-image-container">
+        <%= image_tag 'smartphone_comp.png', class: 'comp-image', alt: 'アプリのデザインイメージ' %>
+      </div>
+    </div>
+    <div class="feature-container">
+      <h2 class="symmetry-line"><span class="feature-title">特徴</span></h2>
+      <ol class="feature-list">
+        <li class="list-item">イベントが手軽に作れる</li>
+        <li class="list-item">操作がシンプルで簡単!</li>
+        <li class="list-item">数十種類の多種多様なイベントを掲載しています</li>
+      </ol>
+    </div>
+    <div class="transition-button-container">
+      <a href="/login" class="transition-login-button text-decoration-none" data-turbo="false">
+        <span class="button-text">ログインする</span>
+      </a>
+    </div>
+  </section>
+<% end %>
+
+<div class="title-container <%= logged_in? ? 'loggedin-title-container' : '' %>">
+  <h1 class="title">イベント一覧</h1>
 </div>
+
+<div class="event-list-container <%= @events.size == 1 ? 'card-one' : '' %>">
+  <% for event in @events do %>
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card__inner">
+        <%= image_tag event.image, class:"card__image", size:'300x300' %>
+        <div class="card__textbox">
+          <div class="card__title">
+            <%= event.name.truncate(33) %>
+          </div>
+          <div class="card__items">
+            <%= link_to category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
+              <%= event.category.name.truncate(18) %>
+            <% end %>
+            <%= link_to date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
+              <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= paginate @events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>

@@ -48,6 +48,8 @@ gem 'sassc-rails'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 5.3.2'
 gem 'mini_racer'
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
