@@ -177,7 +177,11 @@
 
 /* カテゴリ */
 .category-label {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
   width: max-content;
+  height: max-content;
+  align-self: center;
   min-width: 70px;
   margin-left: -5px;
   margin-bottom: 5px;
@@ -194,12 +198,15 @@
 
 .category-label:hover {
   background-color: var(--theme_hover_color);
+  opacity: 0.7;
 }
 
 /* 開催日 */
 .eventday-container {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
   width: max-content;
-  margin-top: 5px;
+  margin-top: 10px;
   text-decoration: none;
   color: var(--black);
 }
@@ -219,6 +226,30 @@
 
 .eventday-value:hover {
   color: var(--theme_hover_color);
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.edit-button {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.edit-button:hover {
+  opacity: 0.7;
+}
+
+.trash-button {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  margin-top: 10px;
+  margin-left: 50px;
+}
+
+.trash-button:hover {
+  opacity: 0.7;
 }
 
 /* レスポンシブ対応（スマホ版） */
@@ -313,7 +344,7 @@
     text-align: center;
     text-decoration: none;
   }
-  
+
   .category-label:hover {
     background-color: var(--theme_hover_color);
   }
