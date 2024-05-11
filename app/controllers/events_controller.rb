@@ -1,15 +1,16 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
+  include GetEvents
 
   def index
     if params[:category_id]
-      category_id = Category.find_by(id: params[:category_id])
-      @events = Event.where(category_id: category_id).order(updated_at: "DESC").page(params[:page])
+      find_by_category
+      @events = where_category_events
     elsif params[:event_day]
-      @events = Event.where(event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
+      @events = where_eventday_events
     else
-      @events = Event.includes(:category).order(updated_at: "DESC").page(params[:page])
+      @events = all_events
     end
   end
 
@@ -30,12 +31,12 @@ class EventsController < ApplicationController
 
   def manage_events
     if params[:category_id]
-      category_id = Category.find_by(id: params[:category_id])
-      @manage_events = Event.where(user_id: current_user).where(category_id: category_id).order(updated_at: "DESC").page(params[:page])
+      find_by_category
+      @manage_events = where_category_events.where(user_id: current_user)
     elsif params[:event_day]
-      @manage_events = Event.where(user_id: current_user).where(event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
+      @manage_events = where_eventday_events.where(user_id: current_user)
     else
-      @manage_events = Event.where(user_id: current_user).order(updated_at: "DESC").page(params[:page])
+      @manage_events = all_events.where(user_id: current_user)
     end
   end
 
