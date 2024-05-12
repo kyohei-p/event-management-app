@@ -105,6 +105,7 @@
 /* イベント一覧 */
 .title-container {
   margin-top: 100px;
+  width: 150%;
 }
 
 .loggedin-title-container {
@@ -279,14 +280,19 @@
     margin-bottom: 50px;
   }
 
+  .title-container {
+    margin-top: 100px;
+    width: 150%;
+  }
+
   .feature-container {
     display: inline-block;
     margin: 100px auto 50px;
     width: 400px;
   }
 
-  .title-container {
-    margin-top: 100px;
+  .loggedin-title-container {
+    margin-top: 200px;
     width: 150%;
   }
 
@@ -408,6 +414,11 @@
 
   .title-container {
     margin-top: 100px;
+    width: 160%;
+  }
+
+  .loggedin-title-container {
+    margin-top: 200px;
     width: 160%;
   }
 
