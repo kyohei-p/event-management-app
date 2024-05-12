@@ -5,9 +5,9 @@ class EventsController < ApplicationController
   def index
     if params[:category_id]
       category_id = Category.find_by(id: params[:category_id])
-      @events = Event.where(category_id: category_id).where(public_status: 1).order(updated_at: "DESC").page(params[:page])
+      @events = Event.where(category_id: category_id, public_status: 1).order(updated_at: "DESC").page(params[:page])
     elsif params[:event_day]
-      @events = Event.where(event_day: params[:event_day]).where(public_status: 1).order(updated_at: "DESC").page(params[:page])
+      @events = Event.where(event_day: params[:event_day], public_status: 1).order(updated_at: "DESC").page(params[:page])
     else
       @events = Event.includes(:category).where(public_status: 1).order(updated_at: "DESC").page(params[:page])
     end
@@ -20,6 +20,7 @@ class EventsController < ApplicationController
     if @event.save
       redirect_to(root_path, notice: 'イベントを作成しました')
     else
+      flash.now[:alert] = 'イベントの作成に失敗しました'
       render action: 'new', status:400
     end
   end
@@ -47,9 +48,9 @@ class EventsController < ApplicationController
   def manage_events
     if params[:category_id]
       category_id = Category.find_by(id: params[:category_id])
-      @manage_events = Event.where(user_id: current_user).where(category_id: category_id).order(updated_at: "DESC").page(params[:page])
+      @manage_events = Event.where(user_id: current_user, category_id: category_id).order(updated_at: "DESC").page(params[:page])
     elsif params[:event_day]
-      @manage_events = Event.where(user_id: current_user).where(event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
+      @manage_events = Event.where(user_id: current_user, event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
     else
       @manage_events = Event.where(user_id: current_user).order(updated_at: "DESC").page(params[:page])
     end

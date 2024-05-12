@@ -5,8 +5,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to(root_path, notice: 'ユーザーを作成しました')
+      redirect_to(root_path, notice: 'ユーザーを登録しました')
     else
+      flash.now[:alert] = 'ユーザーの登録に失敗しました'
       render action: 'new'
     end
   end
