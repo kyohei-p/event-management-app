@@ -60,7 +60,7 @@
         <%= f.label "イベント画像", class: "label-tag fw-bold" %><br />
         <div class="speech-bubble-area">
           <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
-          <img id="event-image-preview" src="<%= url_for(@event.image) %>" class="mt-2 mb-2" /><br />
+          <img id="event-image-preview" src="<%= url_for(@event.image) %> : <%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
         </div>
       </div>
       <%= f.file_field :image, class: "event-upload-button invisible", id: "image-upload" %>
@@ -73,29 +73,3 @@
     <% end %>
   </div>
 <% end %>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  const fileInput = document.getElementById('image-upload');
-  const imagePreview = document.getElementById('event-image-preview');
-
-  imagePreview.addEventListener('click', () => {
-    fileInput.click();
-  });
-
-  fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        imagePreview.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      imagePreview.src = 'app/assets/images/events/no_image.png';
-    }
-  });
-});
-</script>
