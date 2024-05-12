@@ -54,7 +54,7 @@
       <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
       <div class="speech-bubble-area">
         <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
-        <img id="image-preview" src="#" class="mt-4 mb-2" /><br />
+        <img id="image-preview" src="<%= asset_path("default_avatar.png") %>" class="mt-4 mb-2" /><br />
       </div>
     </div>
     <%= f.file_field :image, class: "upload-button invisible", id: "image-upload" %><br />
@@ -66,36 +66,3 @@
     </div>
   <% end %>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-
-  const fileInput = document.getElementById('image-upload');
-  const imagePreview = document.getElementById('image-preview');
-
-  window.addEventListener('DOMContentLoaded', () => {
-    const imagePreview = document.getElementById('image-preview');
-    //ページが読み込まれた時に、src属性にデフォルトの画像を設定して表示する
-    imagePreview.src = '<%= asset_path("default_avatar.png") %>';
-  });
-
-  //画像をクリックしたらファイルアップロードボタンのクリック操作を実行する
-  imagePreview.addEventListener('click', () => {
-    fileInput.click();
-  });
-
-  fileInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        imagePreview.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    } else {
-      imagePreview.src = 'app/assets/images/default_avatar.png';
-    }
-  });
-});
-</script>
