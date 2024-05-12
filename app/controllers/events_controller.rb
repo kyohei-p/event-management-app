@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
-  before_action :require_login, only: [:create, :new]
+  before_action :require_login, only: [:create, :new, :manage_events]
 
   def index
     if params[:category_id]
@@ -26,6 +26,17 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+  end
+
+  def manage_events
+    if params[:category_id]
+      category_id = Category.find_by(id: params[:category_id])
+      @manage_events = Event.where(user_id: current_user).where(category_id: category_id).order(updated_at: "DESC").page(params[:page])
+    elsif params[:event_day]
+      @manage_events = Event.where(user_id: current_user).where(event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
+    else
+      @manage_events = Event.where(user_id: current_user).order(updated_at: "DESC").page(params[:page])
+    end
   end
 
   private

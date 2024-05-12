@@ -25,6 +25,11 @@
         <% end %>
       </li>
       <li>
+        <%= link_to "/manage/events", class: 'nav-link text-light', data: { turbo: false } do %>
+          <i class="fa fa-calendar-check-o" aria-hidden="true"></i> イベント管理
+        <% end %>
+      </li>
+      <li>
         <%= link_to "#", class: 'nav-link text-light', data: { turbo: false } do %>
           <i class="fa fa-user-circle"></i>マイページ
         <% end %>

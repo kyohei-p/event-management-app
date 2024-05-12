@@ -11,11 +11,6 @@ nav.navbar {
   margin-left: 20px;
 }
 
-.navbar-nav {
-  display: flex;
-  align-items: center;
-}
-
 .nav-link {
   width: max-content;
   cursor: pointer;
@@ -23,6 +18,10 @@ nav.navbar {
 
 .nav-link:hover {
   text-decoration: underline;
+}
+
+.nav-link > .fa, .nav-link > .fas {
+  margin-right: 5px;
 }
 
 .navbar-toggler {
@@ -72,6 +71,11 @@ nav.navbar {
   .navbar > .container {
     width: max-content;
     margin-left: 10px;
+  }
+
+  .navbar-nav {
+    display: grid !important;
+    justify-content: center !important;
   }
 
   .login-user-name {
