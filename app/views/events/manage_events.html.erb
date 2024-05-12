@@ -11,7 +11,11 @@
     <% @manage_events.each do |event| %>
       <div class="card shadow p-3 mb-5 bg-white rounded">
         <div class="card__inner">
-          <%= image_tag event.image, class:"card__image", size:'300x300' %>
+          <% if event.image.attached? %>
+            <%= image_tag event.image, class:"card__image" %>
+          <% else %>
+            <%= image_tag 'events/no_image.png', class:"card__image" %>
+          <% end %>
           <div class="card__textbox">
             <div class="card__title">
               <%= event.name.truncate(33) %>

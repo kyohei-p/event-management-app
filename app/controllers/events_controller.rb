@@ -28,6 +28,22 @@ class EventsController < ApplicationController
     @event = Event.new
   end
 
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    @event.update(event_params)
+    if @event.save
+      redirect_to manage_events_path, notice: 'イベントを更新しました'
+    else
+      flash.now[:alert] = 'イベントの更新に失敗しました'
+      render action: 'edit', status: 400
+    end
+  end
+
+
   def manage_events
     if params[:category_id]
       category_id = Category.find_by(id: params[:category_id])
