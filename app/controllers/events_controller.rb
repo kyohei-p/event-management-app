@@ -35,12 +35,15 @@ class EventsController < ApplicationController
 
   def update
     @event = Event.find(params[:id])
-    @event.update(event_params)
-    if @event.save
-      redirect_to manage_events_path, notice: 'イベントを更新しました'
-    else
-      flash.now[:alert] = 'イベントの更新に失敗しました'
-      render action: 'edit', status: 400
+    ApplicationRecord.transaction do
+      delete_image
+      @event.update(event_params)
+      if @event.save
+        redirect_to manage_events_path, notice: 'イベントを更新しました'
+      else
+        flash.now[:alert] = 'イベントの更新に失敗しました'
+        render action: 'edit', status: 400
+      end
     end
   end
 
@@ -57,6 +60,10 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def delete_image
+    @event.image.purge
+  end
 
   def event_params
     params.require(:event).permit(:name, :event_description, :event_day, :public_status, :image, :category_id)

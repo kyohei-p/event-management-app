@@ -7,7 +7,11 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index]
 
-  resources :events
+  resources :events do
+    member do
+      delete 'delete_image'
+    end
+  end
 
   resources :categories do
     resources :events, only: [:index]
