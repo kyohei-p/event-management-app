@@ -60,10 +60,19 @@
         <%= f.label "イベント画像", class: "label-tag fw-bold" %><br />
         <div class="speech-bubble-area">
           <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
-          <img id="event-image-preview" src="<%= url_for(@event.image) %> : <%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
+          <% if @event.image.attached? %>
+            <img id="event-image-preview" src="<%= url_for(@event.image) %>", class="mt-2 mb-2" /><br />
+          <% else %>
+            <img id="event-image-preview" src="<%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
+          <% end %>
         </div>
       </div>
-      <%= f.file_field :image, class: "event-upload-button invisible", id: "image-upload" %>
+      <div class="image-button-container">
+        <%= f.file_field :image, class: "event-upload-button", id: "image-upload" %>
+        <%= link_to '画像を削除する', delete_image_event_path(@event), data: { turbo_method: :delete }, id: "image-delete-button",
+          class: "hover: text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow text-decoration-none"
+        %>
+      </div>
       <div class="actions">
         <%= f.submit "イベント更新", class: "submit-button", data: { turbo: false } %>
       </div>
@@ -73,3 +82,15 @@
     <% end %>
   </div>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+  const imageDeleteButton = document.getElementById('image-delete-button');
+  const imagePreview = document.getElementById('image-preview') || document.getElementById('event-image-preview');
+
+  imageDeleteButton.addEventListener('click', () => {
+    imagePreview.src = '<%= asset_path("events/no_image.png") %>';
+  });
+});
+</script>
