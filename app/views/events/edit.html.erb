@@ -3,6 +3,7 @@
 </div>
 
 <% if logged_in? %>
+  <%= render 'shared/modal' %>
   <div class="form-container">
     <h1 class="title">イベント編集</h1>
     <%= form_with model: @event, method: :patch do |f| %>
@@ -69,9 +70,10 @@
       </div>
       <div class="image-button-container">
         <%= f.file_field :image, class: "event-upload-button", id: "image-upload" %>
-        <%= link_to '画像を削除する', delete_image_event_path(@event), data: { turbo_method: :delete }, id: "image-delete-button",
-          class: "hover: text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow text-decoration-none"
-        %>
+        <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          画像を削除
+        </button>
+        <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>
       </div>
       <div class="actions">
         <%= f.submit "イベント更新", class: "submit-button", data: { turbo: false } %>
@@ -85,12 +87,19 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-
   const imageDeleteButton = document.getElementById('image-delete-button');
+  const imageDelete = document.getElementById('image-delete');
+  const deleteImageField = document.getElementById('delete_image_field');
   const imagePreview = document.getElementById('image-preview') || document.getElementById('event-image-preview');
 
-  imageDeleteButton.addEventListener('click', () => {
+  imageDelete.addEventListener('click', () => {
+
+    deleteImageField.checked = true;
+
     imagePreview.src = '<%= asset_path("events/no_image.png") %>';
-  });
+
+  })
 });
+
+
 </script>

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
+  before_action :set_event, only: [:update]
 
   def index
     if params[:category_id]
@@ -34,10 +35,13 @@ class EventsController < ApplicationController
   end
 
   def update
-    @event = Event.find(params[:id])
     ApplicationRecord.transaction do
-      delete_image
+      if params[:event][:delete_image] == 'true'
+        @event.image.purge
+      end
+
       @event.update(event_params)
+
       if @event.save
         redirect_to manage_events_path, notice: 'イベントを更新しました'
       else
@@ -61,11 +65,11 @@ class EventsController < ApplicationController
 
   private
 
-  def delete_image
-    @event.image.purge
+  def set_event
+    @event = Event.find(params[:id])
   end
 
   def event_params
-    params.require(:event).permit(:name, :event_description, :event_day, :public_status, :image, :category_id)
+    params.require(:event).permit(:name, :event_description, :event_day, :public_status, :image, :category_id, :delete_image)
   end
 end
