@@ -7,39 +7,51 @@
     <h1 class="title">イベント管理</h1>
   </div>
 
-  <div class="event-list-container <%= @manage_events.size == 1 ? 'card-one' : '' %>">
-    <% @manage_events.each do |event| %>
-      <div class="card shadow p-3 mb-5 bg-white rounded">
-        <div class="card__inner">
-          <% if event.image.attached? %>
-            <%= image_tag event.image, class:"card__image" %>
-          <% else %>
-            <%= image_tag 'events/no_image.png', class:"card__image" %>
-          <% end %>
-          <div class="card__textbox">
-            <div class="card__title">
-              <%= event.name.truncate(33) %>
-            </div>
-            <div class="card__items">
-              <%= link_to manage_category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
-                <%= event.category.name.truncate(18) %>
-              <% end %>
-              <%= link_to manage_date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
-                <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
-              <% end %>
-              <div class="card__button">
-                <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+  <% if @manage_events.present? %>
+    <div class="event-list-container <%= @manage_events.size == 1 ? 'card-one' : '' %>">
+      <% @manage_events.each do |event| %>
+        <div class="card shadow p-3 mb-5 bg-white rounded">
+          <div class="card__inner">
+            <% if event.image.attached? %>
+              <%= image_tag event.image, class:"card__image" %>
+            <% else %>
+              <%= image_tag 'events/no_image.png', class:"card__image" %>
+            <% end %>
+            <div class="card__textbox">
+              <div class="card__title">
+                <%= event.name.truncate(33) %>
+              </div>
+              <div class="card__items">
+                <%= link_to manage_category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
+                  <%= event.category.name.truncate(18) %>
                 <% end %>
-                <%= link_to "events/#{event.id}", class: 'trash-button text-dark', data: { turbo: false } do %>
-                  <i class="fa fa-trash" aria-hidden="true"></i>
+                <%= link_to manage_date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
+                  <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
                 <% end %>
+                <div class="card__button">
+                  <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  <% end %>
+                  <%= link_to "events/#{event.id}", class: 'trash-button text-dark', data: { turbo: false } do %>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                  <% end %>
+                </div>
               </div>
             </div>
           </div>
         </div>
+      <% end %>
+    </div>
+    <%= paginate @manage_events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>]
+  <% else %>
+    <div class="not-event-list-container">
+      <h1  class="not-manage-event-title">登録されたイベント情報がありません。</h1><br />
+      <div class="transition-event-create">
+        <h2 class="transition-guidance">イベントの作成はこちらのボタンから</h2><br />
+        <a href="/events/new" class="transition-event-create-button text-decoration-none" data-turbo="false">
+          <span class="button-text">イベント作成</span>
+        </a>
       </div>
-    <% end %>
-  </div>
-  <%= paginate @manage_events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>
+    </div>
+  <% end %>
 <% end %>

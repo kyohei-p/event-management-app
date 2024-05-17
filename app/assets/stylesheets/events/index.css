@@ -119,6 +119,7 @@
   justify-content: center;
   margin: 100px;
   height: auto;
+  width: 140%;
 }
 
 /* イベント情報が１つだけの場合 */
@@ -453,4 +454,13 @@
   .trash-button:hover {
     opacity: 0.7;
   }
+}
+
+/* イベント情報がない場合 */
+.not-event-title {
+  width: 150%;
+  height: 500px;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 1.5rem;
 }
