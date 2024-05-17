@@ -1,0 +1,31 @@
+.not-event-list-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  width: 150%;
+}
+
+.not-manage-event-title {
+  font-size: 1.5rem;
+}
+
+.transition-guidance {
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+
+.transition-event-create {
+  display: grid;
+  justify-content: center;
+  width: 150%;
+}
+
+.transition-event-create-button {
+  display: flex;
+  justify-content: center;
+}
+
+
+

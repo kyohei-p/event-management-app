@@ -3,6 +3,7 @@
   position: relative !important;
   bottom: 50px !important;
   margin: 100px auto !important;
+  width: 155%;
 }
 
 ul.pagination li.page-link, li.active.page-link {
