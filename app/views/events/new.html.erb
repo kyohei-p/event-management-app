@@ -3,6 +3,7 @@
 </div>
 
 <% if logged_in? %>
+  <%= render 'shared/modal' %>
   <div class="form-container">
     <h1 class="title">イベント作成</h1>
     <%= form_with model: @event, method: :post do |f| %>
@@ -63,7 +64,13 @@
           <img id="event-image-preview" src="<%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
         </div>
       </div>
-      <%= f.file_field :image, class: "event-upload-button invisible", id: "image-upload" %>
+      <div class="image-button-container">
+        <%= f.file_field :image, class: "event-upload-button", id: "image-upload" %>
+        <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          画像を削除
+        </button>
+        <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>
+      </div>
       <div class="actions">
         <%= f.submit "イベント作成", class: "submit-button", data: { turbo: false } %>
       </div>
@@ -73,3 +80,4 @@
     <% end %>
   </div>
 <% end %>
+<%= render 'shared/delete_image' %>

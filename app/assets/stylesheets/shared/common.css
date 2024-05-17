@@ -193,6 +193,7 @@ input[type='file'] {
   cursor: pointer;
   border: 1px solid rgb(191, 194, 199);
   border-radius: 0.38rem;
+  margin-left: 16px;
   padding-right: 0.5rem;
   width: 7rem;
 }

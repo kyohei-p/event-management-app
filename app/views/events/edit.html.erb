@@ -4,6 +4,7 @@
 
 <% if logged_in? %>
   <%= render 'shared/modal' %>
+  <%= render 'shared/delete_image' %>
   <div class="form-container">
     <h1 class="title">イベント編集</h1>
     <%= form_with model: @event, method: :patch do |f| %>
@@ -84,22 +85,3 @@
     <% end %>
   </div>
 <% end %>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const imageDeleteButton = document.getElementById('image-delete-button');
-  const imageDelete = document.getElementById('image-delete');
-  const deleteImageField = document.getElementById('delete_image_field');
-  const imagePreview = document.getElementById('image-preview') || document.getElementById('event-image-preview');
-
-  imageDelete.addEventListener('click', () => {
-
-    deleteImageField.checked = true;
-
-    imagePreview.src = '<%= asset_path("events/no_image.png") %>';
-
-  })
-});
-
-
-</script>
