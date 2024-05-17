@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
-  before_action :set_event, only: [:update]
+  before_action :set_event, only: [:edit, :update]
 
   def index
     if params[:category_id]
@@ -15,14 +15,25 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
-    @event.category = Category.find_by(id: event_params[:category_id])
-    @event.user = current_user
-    if @event.save
-      redirect_to(root_path, notice: 'イベントを作成しました')
-    else
-      flash.now[:alert] = 'イベントの作成に失敗しました'
-      render action: 'new', status:400
+    ApplicationRecord.transaction do
+      @event = Event.new(event_params)
+      @event.category = Category.find_by(id: event_params[:category_id])
+      @event.user = current_user
+
+      if params[:event][:delete_image] == 'true'
+        @event.image.purge
+      end
+
+      if @event.save
+        if params[:event][:public_status] == 'open'
+          redirect_to(root_path, notice: 'イベントを作成しました')
+        else
+          redirect_to(root_path, notice: '非公開イベントを作成しました')
+        end
+      else
+        flash.now[:alert] = 'イベントの作成に失敗しました'
+        render action: 'new', status:400
+      end
     end
   end
 
@@ -31,16 +42,16 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    set_event
   end
 
   def update
     ApplicationRecord.transaction do
+      @event.update(event_params)
+
       if params[:event][:delete_image] == 'true'
         @event.image.purge
       end
-
-      @event.update(event_params)
 
       if @event.save
         redirect_to manage_events_path, notice: 'イベントを更新しました'
