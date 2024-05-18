@@ -6,6 +6,8 @@
     <% if logged_in? %>
       <% if current_user.image.attached? %>
         <%= image_tag current_user.image, class:"header-profile-image" %>
+      <% else %>
+        <%= image_tag 'default_avatar.png', class:"header-profile-image" %>
       <% end %>
       <p class="login-user-name"><%= current_user.name.truncate(13) %>さん</p>
     <% else %>
