@@ -9,7 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   imageDelete.addEventListener('click', () => {
     deleteImageField.checked = true;
     fileInput.value = '';
-    imagePreview.src = '<%= asset_path("events/no_image.png") %>';
+    if(document.getElementById('event-image-preview')) {
+      imagePreview.src = '<%= asset_path("events/no_image.png") %>';
+    } else {
+      imagePreview.src = '<%= asset_path("default_avatar.png") %>';
+    }
   })
 });
 </script>

@@ -2,6 +2,8 @@
   <%= render 'shared/flash_message' %>
 </div>
 
+<%= render 'shared/modal' %>
+<%= render 'shared/delete_image' %>
 <div class="form-container">
   <h1 class="title">ユーザー新規登録</h1>
   <%= form_with model: @user, method: :post do |f| %>
@@ -57,7 +59,13 @@
         <img id="image-preview" src="<%= asset_path("default_avatar.png") %>" class="mt-4 mb-2" /><br />
       </div>
     </div>
-    <%= f.file_field :image, class: "upload-button invisible", id: "image-upload" %><br />
+    <div class="image-button-container">
+      <%= f.file_field :image, class: "upload-button", id: "image-upload" %>
+      <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        画像を削除
+      </button>
+      <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>
+    </div>
     <div class="actions">
       <%= f.submit "新規登録", class: "submit-button", data: { turbo: false } %>
     </div>

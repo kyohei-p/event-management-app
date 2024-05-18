@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_15_215925) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_18_105618) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_15_215925) do
     t.string "phone_number", null: false
     t.string "self_introduction"
     t.datetime "discard_at"
+    t.boolean "delete_image", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
