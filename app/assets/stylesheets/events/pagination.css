@@ -3,7 +3,6 @@
   position: relative !important;
   bottom: 50px !important;
   margin: 100px auto !important;
-  width: 155%;
 }
 
 ul.pagination li.page-link, li.active.page-link {
@@ -33,14 +32,14 @@ ul.pagination li.page-link, li.active.page-link {
 
 /* レスポンシブ対応（スマホ版） */
 @media screen and (max-width: 991px){
-  .pagination {
+  /* .pagination {
     width: 150%;
-  }
+  } */
 }
 
 /* レスポンシブ対応（iPhoneSE） */
 @media screen and (max-width: 399px){
-  .pagination {
+  /* .pagination {
     width: 160%;
-  }
+  } */
 }
