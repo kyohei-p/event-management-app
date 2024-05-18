@@ -96,6 +96,7 @@ select {
 /* ファイルアップロードボタン（ユーザー用） */
 .upload-button{
   width: 140px;
+  margin-right: 20px;
   font-size: 14px;
   line-height: 17px;
 }
