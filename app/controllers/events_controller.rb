@@ -54,7 +54,11 @@ class EventsController < ApplicationController
       end
 
       if @event.save
-        redirect_to manage_events_path, notice: 'イベントを更新しました'
+        if params[:event][:public_status] == 'open'
+          redirect_to(root_path, notice: 'イベントを更新しました')
+        else
+          redirect_to(root_path, notice: '非公開イベントを更新しました')
+        end
       else
         flash.now[:alert] = 'イベントの更新に失敗しました'
         render action: 'edit', status: 400
