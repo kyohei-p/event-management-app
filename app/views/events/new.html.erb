@@ -1,9 +1,10 @@
-<div class="form-flash-message-container">
+<div class="flash-message-container">
   <%= render 'shared/flash_message' %>
 </div>
 
 <% if logged_in? %>
   <%= render 'shared/modal' %>
+  <%= render 'shared/delete_image' %>
   <div class="form-container">
     <h1 class="title">イベント作成</h1>
     <%= form_with model: @event, method: :post do |f| %>
@@ -80,4 +81,3 @@
     <% end %>
   </div>
 <% end %>
-<%= render 'shared/delete_image' %>

@@ -29,17 +29,3 @@ ul.pagination li.page-link, li.active.page-link {
   color: var(--white) !important;
   background-color: var(--theme_color) !important;
 }
-
-/* レスポンシブ対応（スマホ版） */
-@media screen and (max-width: 991px){
-  /* .pagination {
-    width: 150%;
-  } */
-}
-
-/* レスポンシブ対応（iPhoneSE） */
-@media screen and (max-width: 399px){
-  /* .pagination {
-    width: 160%;
-  } */
-}
