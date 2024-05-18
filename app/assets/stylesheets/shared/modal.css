@@ -13,6 +13,8 @@
   --bs-btn-active-border-color: var(--red) !important;
   --bs-btn-disabled-bg: var(--red) !important;
   --bs-btn-disabled-border-color: var(--red) !important;
+  --bs-btn-hover-bg: var(--red) !important;
+  --bs-btn-hover-border-color: var(--red) !important;
 }
 
 .image-button-container > .btn-primary {
