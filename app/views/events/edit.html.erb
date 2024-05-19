@@ -5,6 +5,10 @@
 <% if logged_in? %>
   <%= render 'shared/modal' %>
   <%= render 'shared/delete_image' %>
+  <div class="form-breadcrumbs">
+    <%= render_breadcrumbs separator: ' > ' %>
+  </div>
+
   <div class="form-container">
     <h1 class="title">イベント編集</h1>
     <%= form_with model: @event, method: :patch do |f| %>

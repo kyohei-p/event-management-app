@@ -1,12 +1,6 @@
 @import 'bootstrap';
 
 /* ログインページ */
-.login-form-container {
-  display: grid;
-  justify-content: center;
-  margin: 200px auto;
-}
-
 .signup-link-button {
   display: inline-block;
   width: 200px;
