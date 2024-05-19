@@ -33,26 +33,34 @@
   <h1 class="title">イベント一覧</h1>
 </div>
 
-<div class="event-list-container <%= @events.size == 1 ? 'card-one' : '' %>">
-  <% for event in @events do %>
-    <div class="card shadow p-3 mb-5 bg-white rounded">
-      <div class="card__inner">
-        <%= image_tag event.image, class:"card__image", size:'300x300' %>
-        <div class="card__textbox">
-          <div class="card__title">
-            <%= event.name.truncate(33) %>
-          </div>
-          <div class="card__items">
-            <%= link_to category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
-              <%= event.category.name.truncate(18) %>
-            <% end %>
-            <%= link_to date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
-              <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
-            <% end %>
+<% if @events.present? %>
+  <div class="event-list-container <%= @events.size == 1 ? 'card-one' : '' %>">
+    <% for event in @events do %>
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card__inner">
+          <% if event.image.attached? %>
+            <%= image_tag event.image, class:"card__image" %>
+          <% else %>
+            <%= image_tag 'events/no_image.png', class:"card__image" %>
+          <% end %>
+          <div class="card__textbox">
+            <div class="card__title">
+              <%= event.name.truncate(33) %>
+            </div>
+            <div class="card__items">
+              <%= link_to category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>
+                <%= event.category.name.truncate(18) %>
+              <% end %>
+              <%= link_to date_events_path(event_day: event.event_day), class:"eventday-container", data: { turbo:false } do %>
+                <p class="eventday-label">開催日:<span class="eventday-value"><%= event.event_day.strftime("%-m月%-d日") %></span></p>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  <% end %>
-</div>
-<%= paginate @events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>
+    <% end %>
+  </div>
+  <%= paginate @events, theme: 'bootstrap-5', pagination_class: "mt-4 pagination-sm flex-wrap justify-content-center" %>
+<% else %>
+  <h1  class="not-event-title">登録されたイベント情報がありません。</h1>
+ <% end %>

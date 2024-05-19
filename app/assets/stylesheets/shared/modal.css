@@ -1,0 +1,38 @@
+.modal {
+  --bs-modal-header-border-width: none !important;
+  --bs-modal-footer-border-color: none !important;
+}
+
+/* 削除ボタン */
+.modal-footer > .btn-primary,
+.image-button-container > .btn-primary {
+  --bs-btn-color: var(--white) !important;
+  --bs-btn-bg: var(--red) !important;
+  --bs-btn-border-color: var(--red) !important;
+  --bs-btn-active-bg: var(--red) !important;
+  --bs-btn-active-border-color: var(--red) !important;
+  --bs-btn-disabled-bg: var(--red) !important;
+  --bs-btn-disabled-border-color: var(--red) !important;
+  --bs-btn-hover-bg: var(--red) !important;
+  --bs-btn-hover-border-color: var(--red) !important;
+}
+
+.image-button-container > .btn-primary {
+  font-size: 0.8rem;
+}
+
+.modal-footer > .btn.btn-primary:hover,
+.image-button-container > .btn.btn-primary:hover {
+  --bs-btn-color: var(--white) !important;
+  --bs-btn-bg: var(--red) !important;
+  --bs-btn-border-color: var(--red) !important;
+  opacity: 0.8 !important;
+}
+
+.modal-footer > .btn.outline:hover,
+.image-button-container > .btn.outline:hover {
+  color: var(--white);
+  background-color: var(--red);
+  border: 1px solid var(--red);
+  opacity: 0.8;
+}

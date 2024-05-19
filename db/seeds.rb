@@ -88,7 +88,8 @@ last_day = Date.parse("2024-12-31")
     name: "イベント#{n+1}",
     event_description: "イベント#{n+1}の説明です。",
     event_day: rand(start_day..last_day),
-    public_status: 1
+    public_status: 1,
+    delete_image: false
   )
 
   begin

@@ -260,7 +260,6 @@
 /* レスポンシブ対応（スマホ版） */
 @media screen and (max-width: 991px){
   .summary-container {
-    width: 150%;
     padding-top: 200px;
     padding-bottom: 100px;
     color: var(--theme_color);
@@ -279,22 +278,24 @@
     margin-bottom: 50px;
   }
 
+  .title-container {
+    margin-top: 100px;
+  }
+
   .feature-container {
     display: inline-block;
     margin: 100px auto 50px;
     width: 400px;
   }
 
-  .title-container {
-    margin-top: 100px;
-    width: 150%;
+  .loggedin-title-container {
+    margin-top: 200px;
   }
 
   .event-list-container {
     display: flex;
     flex-direction: column;
     margin: 100px auto;
-    width: 150%;
   }
 
   .card {
@@ -399,7 +400,6 @@
 /* レスポンシブ対応（iPhoneSE） */
 @media screen and (max-width: 399px){
   .summary-container {
-    width: 160%;
     padding-top: 200px;
     padding-bottom: 100px;
     color: var(--theme_color);
@@ -408,13 +408,15 @@
 
   .title-container {
     margin-top: 100px;
-    width: 160%;
+  }
+
+  .loggedin-title-container {
+    margin-top: 200px;
   }
 
   .event-list-container {
     display: flex;
     flex-direction: column;
-    width: 160%;
     margin: 100px auto;
   }
 
@@ -442,4 +444,12 @@
   .trash-button:hover {
     opacity: 0.7;
   }
+}
+
+/* イベント情報がない場合 */
+.not-event-title {
+  height: 500px;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 1.5rem;
 }

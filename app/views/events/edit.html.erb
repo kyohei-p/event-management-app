@@ -6,8 +6,8 @@
   <%= render 'shared/modal' %>
   <%= render 'shared/delete_image' %>
   <div class="form-container">
-    <h1 class="title">イベント作成</h1>
-    <%= form_with model: @event, method: :post do |f| %>
+    <h1 class="title">イベント編集</h1>
+    <%= form_with model: @event, method: :patch do |f| %>
       <div class="mt-4 mb-4">
         <%= f.label "イベント名", class:"label-tag fw-bold" %><br />
         <%= f.text_field :name, placeholder:"例）○○交流会", class:"name-field p-2" %>
@@ -62,7 +62,11 @@
         <%= f.label "イベント画像", class: "label-tag fw-bold" %><br />
         <div class="speech-bubble-area">
           <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
-          <img id="event-image-preview" src="<%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
+          <% if @event.image.attached? %>
+            <img id="event-image-preview" src="<%= url_for(@event.image) %>", class="mt-2 mb-2" /><br />
+          <% else %>
+            <img id="event-image-preview" src="<%= asset_path("events/no_image.png") %>", class="mt-2 mb-2" /><br />
+          <% end %>
         </div>
       </div>
       <div class="image-button-container">
@@ -73,10 +77,10 @@
         <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>
       </div>
       <div class="actions">
-        <%= f.submit "イベント作成", class: "submit-button", data: { turbo: false } %>
+        <%= f.submit "イベント更新", class: "submit-button", data: { turbo: false } %>
       </div>
       <div class="back-button-container mt-3">
-        <%= link_to 'イベント一覧に戻る', root_path, class:"back-button", data: { turbo: false } %>
+        <%= link_to 'イベント管理に戻る', manage_events_path, class:"back-button", data: { turbo: false } %>
       </div>
     <% end %>
   </div>
