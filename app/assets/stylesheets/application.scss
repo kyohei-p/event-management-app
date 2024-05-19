@@ -14,7 +14,7 @@
 /* フラッシュメッセージ */
 .flash-message-container {
   position: absolute;
-  top: 8%;
+  top: 12%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -36,4 +36,14 @@
   background-color:  $red-500;
   color: #ffffff;
   border: solid 1px $red-500;
+}
+
+/* レスポンシブ対応（iPhoneSE） */
+@media screen and (max-width: 399px){
+  .flash-message-container {
+    position: absolute;
+    top: 12%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+  }
 }

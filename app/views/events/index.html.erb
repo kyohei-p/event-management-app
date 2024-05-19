@@ -29,7 +29,11 @@
   </section>
 <% end %>
 
-<div class="title-container <%= logged_in? ? 'loggedin-title-container' : '' %>">
+<div class="breadcrumbs <%= logged_in? ? 'loggedin-breadcrumbs' : '' %>">
+  <%= render_breadcrumbs separator: ' > ' %>
+</div>
+
+<div class="title-container">
   <h1 class="title">イベント一覧</h1>
 </div>
 
