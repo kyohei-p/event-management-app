@@ -2,15 +2,22 @@ class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
   before_action :set_event, only: [:edit, :update]
+  before_action :event_create_breadcrumb, only: [:new, :create]
+  before_action :event_update_breadcrumb, only: [:edit, :update]
 
   def index
     if params[:category_id]
-      category_id = Category.find_by(id: params[:category_id])
-      @events = Event.where(category_id: category_id, public_status: 1).order(updated_at: "DESC").page(params[:page])
+      @category = Category.find_by(id: params[:category_id])
+      @events = Event.where(category_id: @category, public_status: 1).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント一覧', events_path
+      add_breadcrumb "カテゴリ > #{@category.name}", category_events_path(category_id: @category.id)
     elsif params[:event_day]
       @events = Event.where(event_day: params[:event_day], public_status: 1).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント一覧', events_path
+      add_breadcrumb "開催日 > #{params[:event_day]}", date_events_path(event_day: params[:event_day])
     else
       @events = Event.includes(:category).where(public_status: 1).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント一覧', events_path
     end
   end
 
@@ -55,9 +62,9 @@ class EventsController < ApplicationController
 
       if @event.save
         if params[:event][:public_status] == 'open'
-          redirect_to(root_path, notice: 'イベントを更新しました')
+          redirect_to(manage_events_path, notice: 'イベントを更新しました')
         else
-          redirect_to(root_path, notice: '非公開イベントを更新しました')
+          redirect_to(manage_events_path, notice: '非公開イベントを更新しました')
         end
       else
         flash.now[:alert] = 'イベントの更新に失敗しました'
@@ -69,12 +76,17 @@ class EventsController < ApplicationController
 
   def manage_events
     if params[:category_id]
-      category_id = Category.find_by(id: params[:category_id])
-      @manage_events = Event.where(user_id: current_user, category_id: category_id).order(updated_at: "DESC").page(params[:page])
+      @category = Category.find_by(id: params[:category_id])
+      @manage_events = Event.where(user_id: current_user, category_id: @category.id).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント管理', manage_events_path
+      add_breadcrumb "カテゴリ > #{@category.name}", manage_category_events_path(category_id: @category.id)
     elsif params[:event_day]
       @manage_events = Event.where(user_id: current_user, event_day: params[:event_day]).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント管理', manage_events_path
+      add_breadcrumb "開催日 > #{params[:event_day]}", manage_date_events_path(event_day: params[:event_day])
     else
       @manage_events = Event.where(user_id: current_user).order(updated_at: "DESC").page(params[:page])
+      add_breadcrumb 'イベント管理', manage_events_path
     end
   end
 
@@ -82,6 +94,16 @@ class EventsController < ApplicationController
 
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def event_create_breadcrumb
+    add_breadcrumb 'イベント管理', manage_events_path
+    add_breadcrumb 'イベント作成', new_event_path
+  end
+
+  def event_update_breadcrumb
+    add_breadcrumb 'イベント管理', manage_events_path
+    add_breadcrumb 'イベント編集', edit_event_path
   end
 
   def event_params

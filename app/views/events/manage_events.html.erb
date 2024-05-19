@@ -3,7 +3,11 @@
 </div>
 
 <% if logged_in? %>
-  <div class="title-container <%= logged_in? ? 'loggedin-title-container' : '' %>">
+  <div class="loggedin-breadcrumbs">
+    <%= render_breadcrumbs separator: ' > ' %>
+  </div>
+
+  <div class="title-container">
     <h1 class="title">イベント管理</h1>
   </div>
 

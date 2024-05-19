@@ -1,9 +1,14 @@
+<%= render 'shared/modal' %>
+<%= render 'shared/delete_image' %>
+
 <div class="flash-message-container">
   <%= render 'shared/flash_message' %>
 </div>
 
-<%= render 'shared/modal' %>
-<%= render 'shared/delete_image' %>
+<div class="form-breadcrumbs">
+  <%= render_breadcrumbs separator: ' > ' %>
+</div>
+
 <div class="form-container">
   <h1 class="title">ユーザー新規登録</h1>
   <%= form_with model: @user, method: :post do |f| %>
