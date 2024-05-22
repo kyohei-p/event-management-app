@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
       try {
         if(!eventId) { return false; }
 
-        const url = `http://localhost:3000/events/${eventId}`;
+        const url = `<%= ENV['DEVELOPMENT_URL'] %>/events/${eventId}`;
 
         const response = await fetch(url, {
           method: 'DELETE',
