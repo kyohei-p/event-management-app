@@ -38,9 +38,10 @@
                   <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
-                  <button type="button" id="event-trash-button" class="trash-button text-dark btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#eventDeleteModal" data-turbo="false">
+                  <%= button_tag id:"event-trash-icon", class: "trash-icon text-dark btn outline btn-primary", data: { bs_toggle: "modal", bs_target: "#eventDeleteModal", turbo: false  } do %>
                     <i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
+                  <% end %>
+                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                 </div>
               </div>
             </div>
@@ -64,73 +65,60 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  // const eventTrashIcon = document.getElementById('event-trash-button');
-  const eventTrashIcon = document.querySelectorAll(".trash-button");
+  const eventTrashIcon = document.querySelectorAll(".trash-icon");
+  const eventDeleteButton = document.querySelectorAll('.delete-button');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   let eventId = null;
-  console.log("グローバル変数のeventId", eventId)
+  let eventCard = null;
 
+  window.addEventListener('load', () => {
+    scrollTo(0, 0);
+  })
 
-  //削除ボタンをクリックした時
+  //削除アイコンをクリックした時、モーダル表示
+  if (!eventTrashIcon){ return false; }
   eventTrashIcon.forEach(button => {
-    if (!eventTrashIcon){ return false; }
     button.addEventListener('click', () => {
       try {
         eventCard = button.closest('.card');
-        console.log("eventCard", eventCard)
         eventId = eventCard.getAttribute('data-event-id');
-        console.log("モーダルの中のeventId", eventId);
         const eventName = eventCard.getAttribute('data-event-name');
-        console.log("eventName", eventName);
         const modalMessage = document.getElementById("modal-message");
         const fullMessage = `${eventName}を削除しますか？`;
         modalMessage.textContent = fullMessage;
-        console.log(modalMessage.textContent);
       } catch(e) {
-        throw new Error(e);
+        console.error( e.name, e.message );
       }
     })
   });
 
-  // const eventDeleteButton = document.getElementById('event-delete');
-  const eventDeleteButton = document.querySelectorAll('.delete-button');
+  //削除ボタンを押して、非同期でDELETEリクエスト送信
+  if (!eventDeleteButton){ return false; }
+  eventDeleteButton.forEach(button => {
+    button.addEventListener('click', async() => {
+      try {
+        if(!eventId) { return false; }
 
-  // if (!eventDelete){ return false; }
-    eventDeleteButton.forEach(button => {
-  button.addEventListener('click', async() => {
-    try {
-      // const eventCard = document.getElementById('event-card');
-      // const eventId = eventCard.getAttribute('data-event-id');
-      console.log("eventDeleteの中", eventId);
-      // const eventName = eventCard.getAttribute('data-event-name');
-      // console.log(eventName);
+        const url = `http://localhost:3000/events/${eventId}`;
 
-
-      const url = `/events/${eventId}`;
-      console.log(url);
-        //イベントのidをサーバー側へ非同期で送信
-      const response = await fetch(url, (eventId) => {
-        method: 'DELETE'
-        // body: JSON.stringify(eventId)
-      })
-
+        const response = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': csrfToken
+          },
+        });
 
         if(response.ok) {
           console.log("イベント削除成功");
-          // const data = await response.json();
-          // const dataEventName = data.response.event_name;
-          // console.log("イベント名", dataEventName);
-          // window.location.href = 'http://localhost:3000/manage/events';
-          // window.location.reload();
-          // window.location.replace('http://localhost:3000/manage/events');
           eventCard.remove();
         } else {
-          // console.error("イベント削除失敗");
-          const deleteError = response.message;
-          console.log(deleteError);
+          console.log("イベント削除失敗");
         }
-    } catch(e) {
-      console.error( e.name, e.message );
-    }
+      } catch(e) {
+        console.error( e.name, e.message );
+      }
     })
   });
 });
