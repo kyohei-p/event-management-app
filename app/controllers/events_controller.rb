@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
-  before_action :set_event, only: [:edit, :update]
+  before_action :set_event, only: [:edit, :update, :destroy]
   before_action :event_create_breadcrumb, only: [:new, :create]
   before_action :event_update_breadcrumb, only: [:edit, :update]
 
@@ -70,6 +70,21 @@ class EventsController < ApplicationController
         flash.now[:alert] = 'イベントの更新に失敗しました'
         render action: 'edit', status: 400
       end
+    end
+  end
+
+  def show
+    @event = Event.find(params[:id])
+  end
+
+  def destroy
+    if params[:id].present?
+      @event.discard
+      flash[:notice] = 'イベントを削除しました'
+      render json: { status: 'success', event_name: @event.name }, status: 204
+    else
+      flash[:alert] = 'イベントの削除に失敗しました'
+      render json: { status: 'error', message: "イベントを削除できませんでした" }, status: 400
     end
   end
 

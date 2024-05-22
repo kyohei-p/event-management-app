@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   resources :users, except: [:index]
 
   resources :events
+  # resources :events, except: [:show]
+  # get 'events/:id' => 'events#show'
+  # delete 'events/:id' => 'events#destroy'
 
   resources :categories do
     resources :events, only: [:index]

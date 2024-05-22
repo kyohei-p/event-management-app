@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_18_105618) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_20_113136) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,13 +50,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_18_105618) do
     t.string "event_description"
     t.date "event_day"
     t.integer "public_status"
-    t.datetime "discard_at"
     t.bigint "category_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "delete_image", default: false
+    t.datetime "discarded_at"
     t.index ["category_id"], name: "index_events_on_category_id"
+    t.index ["discarded_at"], name: "index_events_on_discarded_at"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 

@@ -7,6 +7,8 @@
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
 
+  <%= render 'shared/event_modal' %>
+
   <div class="title-container">
     <h1 class="title">イベント管理</h1>
   </div>
@@ -14,7 +16,7 @@
   <% if @manage_events.present? %>
     <div class="event-list-container <%= @manage_events.size == 1 ? 'card-one' : '' %>">
       <% @manage_events.each do |event| %>
-        <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card shadow p-3 mb-5 bg-white rounded" id="event-card" data-event-id="<%= event.id %>" data-event-name="<%= event.name %>">
           <div class="card__inner">
             <% if event.image.attached? %>
               <%= image_tag event.image, class:"card__image" %>
@@ -36,9 +38,9 @@
                   <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
-                  <%= link_to "events/#{event.id}", class: 'trash-button text-dark', data: { turbo: false } do %>
+                  <button type="button" id="event-trash-button" class="trash-button text-dark btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#eventDeleteModal" data-turbo="false">
                     <i class="fa fa-trash" aria-hidden="true"></i>
-                  <% end %>
+                  </button>
                 </div>
               </div>
             </div>
@@ -59,3 +61,78 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // const eventTrashIcon = document.getElementById('event-trash-button');
+  const eventTrashIcon = document.querySelectorAll(".trash-button");
+  let eventId = null;
+  console.log("グローバル変数のeventId", eventId)
+
+
+  //削除ボタンをクリックした時
+  eventTrashIcon.forEach(button => {
+    if (!eventTrashIcon){ return false; }
+    button.addEventListener('click', () => {
+      try {
+        eventCard = button.closest('.card');
+        console.log("eventCard", eventCard)
+        eventId = eventCard.getAttribute('data-event-id');
+        console.log("モーダルの中のeventId", eventId);
+        const eventName = eventCard.getAttribute('data-event-name');
+        console.log("eventName", eventName);
+        const modalMessage = document.getElementById("modal-message");
+        const fullMessage = `${eventName}を削除しますか？`;
+        modalMessage.textContent = fullMessage;
+        console.log(modalMessage.textContent);
+      } catch(e) {
+        throw new Error(e);
+      }
+    })
+  });
+
+  // const eventDeleteButton = document.getElementById('event-delete');
+  const eventDeleteButton = document.querySelectorAll('.delete-button');
+
+  // if (!eventDelete){ return false; }
+    eventDeleteButton.forEach(button => {
+  button.addEventListener('click', async() => {
+    try {
+      // const eventCard = document.getElementById('event-card');
+      // const eventId = eventCard.getAttribute('data-event-id');
+      console.log("eventDeleteの中", eventId);
+      // const eventName = eventCard.getAttribute('data-event-name');
+      // console.log(eventName);
+
+
+      const url = `/events/${eventId}`;
+      console.log(url);
+        //イベントのidをサーバー側へ非同期で送信
+      const response = await fetch(url, (eventId) => {
+        method: 'DELETE'
+        // body: JSON.stringify(eventId)
+      })
+
+
+        if(response.ok) {
+          console.log("イベント削除成功");
+          // const data = await response.json();
+          // const dataEventName = data.response.event_name;
+          // console.log("イベント名", dataEventName);
+          // window.location.href = 'http://localhost:3000/manage/events';
+          // window.location.reload();
+          // window.location.replace('http://localhost:3000/manage/events');
+          eventCard.remove();
+        } else {
+          // console.error("イベント削除失敗");
+          const deleteError = response.message;
+          console.log(deleteError);
+        }
+    } catch(e) {
+      console.error( e.name, e.message );
+    }
+    })
+  });
+});
+
+</script>
