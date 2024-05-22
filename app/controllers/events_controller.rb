@@ -78,9 +78,9 @@ class EventsController < ApplicationController
   def destroy
     @event.discard
     if @event.discarded?
-      render json: { status: 'success', message: "イベント削除しました", event_data: @event }, status: 200
+      render json: { status: 'success', message_type: 'notice', message: "イベント削除しました", event_data: @event }, status: 200
     else
-      render json: { status: 'error', message: "イベント削除に失敗しました" }, status: 400
+      render json: { status: 'error', message_type: 'alert', message: "イベント削除に失敗しました" }, status: 400
     end
   end
 
