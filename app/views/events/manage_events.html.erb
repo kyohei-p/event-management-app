@@ -112,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if(response.ok) {
+          const data = await response.json();
           console.log("イベント削除成功");
           eventCard.remove();
         } else {
