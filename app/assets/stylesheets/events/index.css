@@ -245,12 +245,25 @@
 .trash-icon {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
-  margin-top: 10px;
-  margin-left: 50px;
+  margin-bottom: 10px;
+  margin-left: 47px;
 }
 
 .trash-icon:hover {
   opacity: 0.7;
+}
+
+/* 削除アイコン */
+.card__button > .btn-primary {
+  --bs-btn-bg: none !important;
+  --bs-btn-border-color: none !important;
+  --bs-btn-hover-bg: none !important;
+  --bs-btn-hover-border-color: none !important;
+  --bs-btn-active-bg: none !important;
+  --bs-btn-active-border-color: none !important;
+  --bs-btn-disabled-bg: none !important;
+  --bs-btn-disabled-border-color: none !important;
+  padding: 0 !important;
 }
 
 /* レスポンシブ対応（スマホ版） */
@@ -378,6 +391,7 @@
     margin-top: 0;
     margin-left: 25px;
     margin-right: 0;
+    /* padding-top: 0; */
   }
 
   .trash-icon:hover {
@@ -419,6 +433,7 @@
     margin-top: 0;
     margin-left: 25px;
     margin-right: 0;
+    /* padding-top: 0; */
   }
 
   .trash-icon:hover {
