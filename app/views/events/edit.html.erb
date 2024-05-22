@@ -75,7 +75,7 @@
       </div>
       <div class="image-button-container">
         <%= f.file_field :image, class: "event-upload-button", id: "image-upload" %>
-        <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="画像を削除しますか？">
           画像を削除
         </button>
         <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>

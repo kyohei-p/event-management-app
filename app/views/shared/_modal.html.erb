@@ -1,16 +1,24 @@
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">削除確認画面</h1>
+        <h1 class="modal-title fs-5" id="deleteModalLabel">確認画面</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body exampleModal">
-        画像を削除しますか？
+      <div class="modal-body deleteModal">
+        <p id="modal-message"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="image-delete-cancel" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
-        <button type="button" id="image-delete" class="btn outline btn-primary" data-bs-dismiss="modal">削除</button>
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
+        <button type="button" id="delete-action" class="delete-button btn outline btn-primary" data-bs-dismiss="modal">
+          <span>
+            <% if params[:user].present? && params[:user][:id] == current_user.id %>
+              退会
+            <% else %>
+              削除
+            <% end %>
+          </span>
+        </button>
       </div>
     </div>
   </div>

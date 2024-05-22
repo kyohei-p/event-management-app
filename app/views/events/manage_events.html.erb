@@ -7,7 +7,7 @@
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
 
-  <%= render 'shared/event_modal' %>
+  <%= render 'shared/modal' %>
 
   <div class="title-container">
     <h1 class="title">イベント管理</h1>
@@ -16,7 +16,7 @@
   <% if @manage_events.present? %>
     <div class="event-list-container <%= @manage_events.size == 1 ? 'card-one' : '' %>">
       <% @manage_events.each do |event| %>
-        <div class="card shadow p-3 mb-5 bg-white rounded" id="event-card" data-event-id="<%= event.id %>" data-event-name="<%= event.name %>">
+        <div class="card shadow p-3 mb-5 bg-white rounded" id="event-card" data-event-id="<%= event.id %>" data-event-name="<%= event.name %>" data-message="を削除しますか？">
           <div class="card__inner">
             <% if event.image.attached? %>
               <%= image_tag event.image, class:"card__image" %>
@@ -38,7 +38,7 @@
                   <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
-                  <%= button_tag id:"event-trash-icon", class: "trash-icon text-dark btn outline btn-primary", data: { bs_toggle: "modal", bs_target: "#eventDeleteModal", turbo: false  } do %>
+                  <%= button_tag id:"event-trash-icon", class: "trash-icon text-dark btn outline btn-primary", data: { bs_toggle: "modal", bs_target: "#deleteModal", turbo: false } do %>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   <% end %>
                   <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
@@ -66,7 +66,7 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const eventTrashIcon = document.querySelectorAll(".trash-icon");
-  const eventDeleteButton = document.querySelectorAll('.delete-button');
+  const eventDeleteButton = document.querySelectorAll(".delete-button");
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   let eventId = null;
   let eventCard = null;
@@ -80,11 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
   eventTrashIcon.forEach(button => {
     button.addEventListener('click', () => {
       try {
-        eventCard = button.closest('.card');
-        eventId = eventCard.getAttribute('data-event-id');
-        const eventName = eventCard.getAttribute('data-event-name');
+        eventCard = button.closest(".card");
+        eventId = eventCard.getAttribute("data-event-id");
+        const eventName = eventCard.getAttribute("data-event-name");
         const modalMessage = document.getElementById("modal-message");
-        const fullMessage = `${eventName}を削除しますか？`;
+        const dataMessage = eventCard.getAttribute("data-message");
+        const fullMessage = `${eventName}${dataMessage}`;
         modalMessage.textContent = fullMessage;
       } catch(e) {
         console.error( e.name, e.message );
@@ -122,5 +123,4 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   });
 });
-
 </script>
