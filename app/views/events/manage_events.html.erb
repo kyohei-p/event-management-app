@@ -41,7 +41,6 @@
                   <%= button_tag id:"event-trash-icon", class: "trash-icon text-dark btn outline btn-primary", data: { bs_toggle: "modal", bs_target: "#deleteModal", turbo: false } do %>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   <% end %>
-                  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
                 </div>
               </div>
             </div>
@@ -70,8 +69,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
   let eventId = null;
   let eventCard = null;
-      console.log("window.pageYOffsetnow", window.pageYOffset)
-
 
   //削除アイコンをクリックした時、モーダル表示
   if (!eventTrashIcon){ return false; }
@@ -112,11 +109,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = await response.json();
 
         if(response.ok) {
-          console.log("イベント削除成功");
           eventCard.remove();
           displayFlashMessage(data);
         } else {
-          console.log("イベント削除失敗");
           displayFlashMessage(data);
         }
       } catch(e) {
