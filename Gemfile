@@ -41,9 +41,8 @@ gem "bootsnap", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
-
-gem "mini_magick"
 gem 'dotenv-rails'
+gem "mini_magick"
 gem 'sassc-rails'
 gem 'jquery-rails'
 gem 'bootstrap', '~> 5.3.2'
@@ -55,6 +54,7 @@ gem 'breadcrumbs_on_rails'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'
 end
 
 group :development do

@@ -7,6 +7,8 @@
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
 
+  <%= render 'shared/modal' %>
+
   <div class="title-container">
     <h1 class="title">イベント管理</h1>
   </div>
@@ -14,7 +16,7 @@
   <% if @manage_events.present? %>
     <div class="event-list-container <%= @manage_events.size == 1 ? 'card-one' : '' %>">
       <% @manage_events.each do |event| %>
-        <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card shadow p-3 mb-5 bg-white rounded" id="event-card" data-event-id="<%= event.id %>" data-event-name="<%= event.name %>" data-message="を削除しますか？">
           <div class="card__inner">
             <% if event.image.attached? %>
               <%= image_tag event.image, class:"card__image" %>
@@ -36,7 +38,7 @@
                   <%= link_to edit_event_path(event), class: 'edit-button text-dark', data: { turbo: false } do %>
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                   <% end %>
-                  <%= link_to "events/#{event.id}", class: 'trash-button text-dark', data: { turbo: false } do %>
+                  <%= button_tag id:"event-trash-icon", class: "trash-icon text-dark btn outline btn-primary", data: { bs_toggle: "modal", bs_target: "#deleteModal", turbo: false } do %>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   <% end %>
                 </div>
@@ -59,3 +61,81 @@
     </div>
   <% end %>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const eventTrashIcon = document.querySelectorAll(".trash-icon");
+  const eventDeleteButton = document.querySelectorAll(".delete-button");
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  let eventId = null;
+  let eventCard = null;
+
+  //削除アイコンをクリックした時、モーダル表示
+  if (!eventTrashIcon){ return false; }
+  eventTrashIcon.forEach(button => {
+    button.addEventListener('click', () => {
+      try {
+        eventCard = button.closest(".card");
+        eventId = eventCard.getAttribute("data-event-id");
+        const eventName = eventCard.getAttribute("data-event-name");
+        const modalMessage = document.getElementById("modal-message");
+        const dataMessage = eventCard.getAttribute("data-message");
+        const fullMessage = `${eventName}${dataMessage}`;
+        modalMessage.textContent = fullMessage;
+      } catch(e) {
+        console.error( e.name, e.message );
+      }
+    })
+  });
+
+  //削除ボタンを押して、非同期でDELETEリクエスト送信
+  if (!eventDeleteButton){ return false; }
+  eventDeleteButton.forEach(button => {
+    button.addEventListener('click', async() => {
+      try {
+        if(!eventId) { return false; }
+
+        const url = `<%= ENV['DEVELOPMENT_URL'] %>/events/${eventId}`;
+
+        const response = await fetch(url, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-Token': csrfToken
+          },
+        });
+
+        const data = await response.json();
+
+        if(response.ok) {
+          eventCard.remove();
+          displayFlashMessage(data);
+        } else {
+          displayFlashMessage(data);
+        }
+      } catch(e) {
+        console.error( e.name, e.message );
+      }
+    })
+  });
+
+  //フラッシュメッセージを非同期で表示/非表示にする関数
+  function displayFlashMessage(data) {
+    const div = document.createElement('div');
+    div.className = 'flash-message';
+    div.textContent = data.message;
+
+    const flashContainer = document.querySelector('.flash-message-container');
+    flashContainer.appendChild(div);
+    div.classList.add(data.message_type);
+
+    flashContainer.style.position = 'fixed';
+    flashContainer.style.top = '50%';
+    flashContainer.style.left = '50%';
+    flashContainer.style.opacity = 0.9;
+    flashContainer.style.zIndex = 99;
+    $(div).fadeOut(5000);
+  };
+});
+</script>

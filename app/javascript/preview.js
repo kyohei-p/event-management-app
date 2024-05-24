@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const imagePreview = document.getElementById('image-preview') || document.getElementById('event-image-preview');
   const deleteImageField = document.getElementById('delete_image_field');
 
+  if(!imagePreview) { return false; }
   imagePreview.addEventListener('click', () => {
     fileInput.click();
   });

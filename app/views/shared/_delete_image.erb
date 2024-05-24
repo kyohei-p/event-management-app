@@ -1,10 +1,17 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const imageDeleteButton = document.getElementById('image-delete-button');
-  const imageDelete = document.getElementById('image-delete');
+  const imageDelete = document.getElementById('delete-action');
   const deleteImageField = document.getElementById('delete_image_field');
   const imagePreview = document.getElementById('image-preview') || document.getElementById('event-image-preview');
   const fileInput = document.getElementById('image-upload');
+
+  //画像削除モーダルのメッセージ取得
+  imageDeleteButton.addEventListener('click', () => {
+  const modalMessage = document.getElementById("modal-message");
+  const dataMessage = imageDeleteButton.getAttribute("data-message");
+  modalMessage.textContent = dataMessage;
+  });
 
   imageDelete.addEventListener('click', () => {
     deleteImageField.checked = true;

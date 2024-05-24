@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index]
   before_action :require_login, only: [:create, :new, :manage_events]
-  before_action :set_event, only: [:edit, :update]
+  before_action :set_event, only: [:edit, :update, :show, :destroy]
   before_action :event_create_breadcrumb, only: [:new, :create]
   before_action :event_update_breadcrumb, only: [:edit, :update]
 
@@ -49,7 +49,6 @@ class EventsController < ApplicationController
   end
 
   def edit
-    set_event
   end
 
   def update
@@ -73,6 +72,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def show
+  end
+
+  def destroy
+    @event.discard
+    if @event.discarded?
+      render json: { status: 'success', message_type: 'notice', message: "イベント削除しました", event_data: @event }, status: 200
+    else
+      render json: { status: 'error', message_type: 'alert', message: "イベント削除に失敗しました" }, status: 400
+    end
+  end
 
   def manage_events
     if params[:category_id]
