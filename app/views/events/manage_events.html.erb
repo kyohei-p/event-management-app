@@ -130,24 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
     flashContainer.appendChild(div);
     div.classList.add(data.message_type);
 
-    //フラッシュメッセージの表示位置をページの高さとスクロール量に応じて調整
-    let viewPort = window.innerHeight;
-    let documentAllHeight = document.documentElement.scrollHeight;
-    let scrollHeight = window.pageYOffset;
-
-    if(scrollHeight < 500) {
-      //ビューポートの高さとスクロール量の半分の高さ
-      flashContainer.style.top = `${((viewPort + scrollHeight) / 2)}px`;
-    } else if(scrollHeight > 500) {
-      //HTML要素全体の高さとスクロール量から指定のpxを引いた、半分の高さ
-      flashContainer.style.top = `${((documentAllHeight + scrollHeight - 200 ) / 2)}px`;
-    } else {
-      //ビューポートの高さの半分
-      flashContainer.style.top = `${viewPort / 2}px`;
-    }
-
-    flashContainer.style.position = 'absolute';
+    flashContainer.style.position = 'fixed';
+    flashContainer.style.top = '50%';
     flashContainer.style.left = '50%';
+    flashContainer.style.opacity = 0.9;
     flashContainer.style.zIndex = 99;
     $(div).fadeOut(5000);
   };
