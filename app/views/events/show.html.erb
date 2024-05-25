@@ -1,0 +1,54 @@
+<div class="event-detail-container">
+  <div class="breadcrumbs">
+    <%= render_breadcrumbs separator: ' > ' %>
+  </div>
+
+  <div class="title-container">
+    <h1 class="title">イベント詳細</h1>
+  </div>
+
+  <section class="event-summary">
+    <div class="event-summary__name mt-4 mb-3">
+      <h2><%= @event.name %></h2>
+    </div>
+    <%= image_tag @event.image, class: "event-summary__image mt-3 mb-4" %>
+  </section>
+
+  <section class="event-info mt-4 mb-4">
+    <table>
+      <caption align="top" class="fw-bold mb-2">イベントの詳細情報</caption>
+      <tbody>
+        <tr>
+          <th scope="row">主催者</th>
+          <td><span class="fw-bold fs-4"><%= @event.user.name %></span>さん</td>
+        </tr>
+        <tr>
+          <th scope="row">イベントの説明</th>
+          <td><%= @event.event_description %></td>
+        </tr>
+        <tr>
+          <th scope="row">開催日</th>
+          <td>
+            <%= link_to date_events_path(event_day: @event.event_day), class:"event-info__eventday", data: { turbo:false } do %>
+              <span class="event-info__eventday"><%= @event.event_day.strftime("%-m月%-d日") %></span>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">カテゴリ</th>
+          <td>
+            <%= link_to category_events_path(category_id: @event.category.id), class: "event-info__category", data: { turbo:false } do %>
+              <%= @event.category.name %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="event-backbutton">
+    <div class="back-button-container mt-3 mb-4">
+      <%= link_to 'イベント一覧に戻る', events_path, class:"back-button", data: { turbo: false } %>
+    </div>
+  </section>
+</div>

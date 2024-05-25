@@ -19,13 +19,19 @@
         <div class="card shadow p-3 mb-5 bg-white rounded" id="event-card" data-event-id="<%= event.id %>" data-event-name="<%= event.name %>" data-message="を削除しますか？">
           <div class="card__inner">
             <% if event.image.attached? %>
-              <%= image_tag event.image, class:"card__image" %>
+               <%= link_to event_path(event), class: "transition-from-image", data: { turbo:false } do %>
+                <%= image_tag event.image, class:"card__image" %>
+              <% end %>
             <% else %>
-              <%= image_tag 'events/no_image.png', class:"card__image" %>
+              <%= link_to event_path(event), class: "transition-from-image", data: { turbo:false } do %>
+                <%= image_tag 'events/no_image.png', class:"card__image" %>
+              <% end %>
             <% end %>
             <div class="card__textbox">
               <div class="card__title">
-                <%= event.name.truncate(33) %>
+                <%= link_to event_path(event), class: "transition-from-name", data: { turbo:false } do %>
+                  <%= event.name.truncate(33) %>
+                <% end %>
               </div>
               <div class="card__items">
                 <%= link_to manage_category_events_path(category_id: event.category.id), class: "category-label", data: { turbo:false } do %>

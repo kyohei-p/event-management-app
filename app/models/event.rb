@@ -24,4 +24,7 @@ class Event < ApplicationRecord
     errors.add(:category_id, "カテゴリーを選択してください。") if category_id.nil?
   end
 
+  def owned_by?(user)
+    self.user_id == user.id
+  end
 end

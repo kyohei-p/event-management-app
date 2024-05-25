@@ -73,6 +73,9 @@ class EventsController < ApplicationController
   end
 
   def show
+    set_event
+    add_breadcrumb 'イベント一覧', events_path
+    add_breadcrumb 'イベント詳細', event_path(id: params[:id])
   end
 
   def destroy
