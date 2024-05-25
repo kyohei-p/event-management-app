@@ -4,7 +4,7 @@ nav.navbar {
   top: 0%;
   width: 100%;
   z-index: 999;
-  background-color: var(--theme_color);
+  background: linear-gradient(30deg, #ffc100, #f6cd4a 70%, #fce043 100%);
 }
 
 .navbar > .container {
