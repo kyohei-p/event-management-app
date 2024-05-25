@@ -12,4 +12,7 @@
   --brown: #D9D1B4;
   --theme_color: #FF9900;
   --theme_hover_color: #FF9966;
+  --theme_gradient_color: linear-gradient(40deg, var(--theme_color), #fce043);
+  --header_gradient_color: linear-gradient(30deg, #ffc100, #f6cd4a 70%, #fce043 100%);
+  --footer_gradient_color: linear-gradient(-30deg, #ffc100, #f6cd4a 70%, #fce043 100%);
 }

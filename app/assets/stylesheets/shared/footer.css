@@ -2,7 +2,7 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(-30deg, #ffc100, #f6cd4a 70%, #fce043 100%);
+  background: var(--footer_gradient_color);
   z-index: 999;
 }
 

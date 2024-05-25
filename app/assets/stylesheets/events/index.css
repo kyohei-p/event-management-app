@@ -79,27 +79,9 @@
 }
 
 /* ログインへの遷移ボタン */
-.transition-login-button {
-  display: inline-block;
-}
-
-.button-text {
-  display: flex;
+.transition-button-container {
+  display: grid;
   justify-content: center;
-  align-items: center;
-  width: 200px;
-  height: 40px;
-  border: none;
-  border-radius: 4px;
-  background-color: var(--theme_color);
-  color: #ffffff;
-  font-size: 18px;
-}
-
-.button-text:hover {
-  border: 1px solid var(--theme_color);
-  color: var(--theme_color);
-  background-color: var(--white);
 }
 
 /* イベント一覧 */
@@ -200,7 +182,7 @@
   text-wrap: wrap;
   border: none;
   border-radius: 20px;
-  background-color: var(--theme_color);
+  background: var(--theme_gradient_color);
   color: var(--white);
   font-size: 1rem;
   text-align: center;
@@ -208,7 +190,6 @@
 }
 
 .category-label:hover {
-  background-color: var(--theme_hover_color);
   opacity: 0.7;
   cursor: pointer;
 }
@@ -364,7 +345,7 @@
     text-wrap: wrap;
     border: none;
     border-radius: 20px;
-    background-color: var(--theme_color);
+    background: var(--theme_gradient_color);
     color: var(--white);
     font-size: 1rem;
     text-align: center;
@@ -372,7 +353,7 @@
   }
 
   .category-label:hover {
-    background-color: var(--theme_hover_color);
+    opacity: 0.8;
   }
 
   .card__items {
@@ -410,7 +391,6 @@
     margin-top: 0;
     margin-left: 25px;
     margin-right: 0;
-    /* padding-top: 0; */
   }
 
   .trash-icon:hover {
@@ -452,7 +432,6 @@
     margin-top: 0;
     margin-left: 25px;
     margin-right: 0;
-    /* padding-top: 0; */
   }
 
   .trash-icon:hover {
