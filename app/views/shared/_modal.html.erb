@@ -9,7 +9,6 @@
         <p id="modal-message"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
         <button type="button" id="delete-action" class="delete-button btn outline btn-primary" data-bs-dismiss="modal">
           <span>
             <% if params[:user].present? && params[:user][:id] == current_user %>
@@ -19,6 +18,7 @@
             <% end %>
           </span>
         </button>
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">キャンセル</button>
       </div>
     </div>
   </div>
