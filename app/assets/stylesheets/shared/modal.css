@@ -3,9 +3,28 @@
   --bs-modal-footer-border-color: none !important;
 }
 
+.modal-header {
+  justify-content: flex-end !important;
+}
+
+.modal-header > .btn-close {
+  margin: 0 !important;
+  margin-left: 35% !important;
+}
+
+.modal-body {
+  text-align: center;
+}
+
+.modal-footer {
+  justify-content: center !important;
+}
+
 /* 削除ボタン */
 .modal-footer > .btn-primary,
 .image-button-container > .btn-primary {
+  width: 104px;
+  margin-right: 10px;
   --bs-btn-color: var(--white) !important;
   --bs-btn-bg: var(--red) !important;
   --bs-btn-border-color: var(--red) !important;
@@ -35,4 +54,16 @@
   background-color: var(--red);
   border: 1px solid var(--red);
   opacity: 0.8;
+}
+
+/* キャンセルボタン */
+.modal-footer > .btn-secondary {
+  margin-left: 10px;
+}
+
+/* レスポンシブ対応（スマホ版） */
+@media screen and (max-width: 430px){
+  .modal-header > .btn-close {
+    margin-left: 30% !important;
+  }
 }
