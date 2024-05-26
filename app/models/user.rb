@@ -3,6 +3,9 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
+  has_many :events
+  has_many :comments
+
   validates :name, presence: true, length: { maximum: 100 }
 
   before_save { self.email = email.downcase }
