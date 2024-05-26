@@ -1,4 +1,8 @@
 <div class="event-detail-container">
+  <div class="flash-message-container">
+    <%= render 'shared/flash_message' %>
+  </div>
+
   <div class="breadcrumbs">
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
@@ -51,4 +55,122 @@
       <%= link_to 'イベント一覧に戻る', events_path, class:"back-button", data: { turbo: false } %>
     </div>
   </section>
+
+  <section class="comment-area">
+    <h3>フィード</h3>
+    <form action="/comments" method="post" class="comment-form" data-event-id="<%= @event.id %>">
+      <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">
+      <button type="submit" id="comment-submit-button" class="submit-button">
+        送信
+      </button>
+      <div id="error-messages"></div>
+    </form>
+    <% if @comments.present? %>
+      <% @comments.each do |comment| %>
+        <div class="comment-user-info">
+          <div class="user-image">
+            <% if comment.user.image.attached? %>
+              <%= image_tag comment.user.image, class:"header-profile-image" %>
+            <% else %>
+              <%= image_tag 'default_avatar.png', class:"header-profile-image" %>
+            <% end%>
+          </div>
+          <div class="comment-username">
+            <% if comment.user %>
+              <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
+            <% else %>
+              <p class="username">ゲストさん</p>
+            <% end %>
+          </div>
+        </div>
+        <div class="comment-area">
+          <p class="created-comment">コメント：<span><%= comment.content %></span></p>
+        </div>
+      <% end %>
+    <% else %>
+      <p>コメントはまだありません</p>
+    <% end %>
+  </section>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const submitButton = document.getElementById("comment-submit-button");
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  submitButton.addEventListener('click', async(event) => {
+    event.preventDefault();
+
+    commentForm = submitButton.closest(".comment-form");
+    let eventId = commentForm.getAttribute("data-event-id");
+    const contentInput = commentForm.querySelector('input[name="comment[content]"]');
+    const formData = new FormData(commentForm);
+    formData.append('content', contentInput);
+
+    const errorMessages = document.getElementById("error-messages");
+
+    try {
+      const url = `<%= ENV['DEVELOPMENT_URL'] %>/events/${eventId}/comments`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': csrfToken
+        },
+        body: formData
+      })
+
+      const data = await response.json();
+      console.log(data)
+
+      if(response.ok) {
+        contentInput.value = '';
+        errorMessages.innerHTML = '';
+        flashMessage(data);
+      } else {
+        if (data.errors) {
+          validationErrorMessage(data);
+        } else {
+          flashMessage(data);
+        }
+      }
+    } catch(e) {
+      console.error(e.name, e.message);
+    }
+  });
+
+  // フラッシュメッセージを非同期で表示/非表示にする関数
+  function flashMessage(data) {
+    const div = document.createElement('div');
+    div.className = 'flash-message';
+    div.textContent = data.message;
+
+    const flashContainer = document.querySelector('.flash-message-container');
+    flashContainer.innerHTML = '';
+    flashContainer.appendChild(div);
+    div.classList.add(data.message_type);
+
+    flashContainer.style.position = 'fixed';
+    flashContainer.style.top = '50%';
+    flashContainer.style.left = '50%';
+    flashContainer.style.opacity = 0.9;
+    flashContainer.style.zIndex = 99;
+    $(div).fadeOut(5000);
+  };
+
+  //バリデーションのエラーメッセージ関数
+  function validationErrorMessage(data) {
+    const errorMessages = document.getElementById('error-messages');
+    errorMessages.innerHTML = '';
+    data.errors.forEach(error => {
+      const errorMessage = document.createElement('div');
+      errorMessage.className = 'error-message';
+      errorMessage.textContent = error.replace('Content', '');
+      console.log(errorMessage.textContent)
+      errorMessages.appendChild(errorMessage);
+      errorMessages.style.marginBottom = '20px';
+    });
+  };
+
+});
+
+</script>

@@ -4,6 +4,7 @@ ja:
         user: ユーザー
         category: カテゴリー
         event: イベント
+        comment: コメント
     attributes:
       user:
         name: "名前"
@@ -18,6 +19,8 @@ ja:
         event_description: "イベントの説明文"
         event_day: "開催日"
         public_status: "公開状態"
+      comment:
+        conetent: "コメント内容"
     errors:
       models:
         user:
@@ -51,6 +54,11 @@ ja:
               blank: "開催日を選択してください。"
             public_status:
               blank: "公開状態を選択してください。"
+        comment:
+          attributes:
+            content:
+              blank: "コメントを入力してください。"
+              too_long: "コメントは255文字以内で入力してください。"
       messages:
         required: "%{attribute}は必須項目です。"
         record_invalid: "バリデーションに失敗しました: %{errors}"

@@ -76,6 +76,7 @@ class EventsController < ApplicationController
     set_event
     add_breadcrumb 'イベント一覧', events_path
     add_breadcrumb 'イベント詳細', event_path(id: params[:id])
+    @comments = Comment.where(event_id: params[:id]).order(created_at: "DESC").limit(10)
   end
 
   def destroy

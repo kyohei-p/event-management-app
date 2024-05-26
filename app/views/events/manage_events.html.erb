@@ -116,9 +116,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if(response.ok) {
           eventCard.remove();
-          displayFlashMessage(data);
+          flashMessage(data);
         } else {
-          displayFlashMessage(data);
+          flashMessage(data);
         }
       } catch(e) {
         console.error( e.name, e.message );
@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //フラッシュメッセージを非同期で表示/非表示にする関数
-  function displayFlashMessage(data) {
+  function flashMessage(data) {
     const div = document.createElement('div');
     div.className = 'flash-message';
     div.textContent = data.message;
