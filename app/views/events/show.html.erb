@@ -20,7 +20,7 @@
 
   <section class="event-info mt-4 mb-4">
     <table>
-      <caption align="top" class="fw-bold mb-2">イベントの詳細情報</caption>
+      <caption align="top" class="fw-bold fs-3 mb-2">イベントの詳細情報</caption>
       <tbody>
         <tr>
           <th scope="row">主催者</th>
@@ -57,7 +57,7 @@
   </section>
 
   <section class="comment-area">
-    <h3>フィード</h3>
+    <h3 class="fs-3">フィード</h3>
     <form action="/comments" method="post" class="comment-form" data-event-id="<%= @event.id %>">
       <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">
       <button type="submit" id="comment-submit-button" class="submit-button">
@@ -65,31 +65,39 @@
       </button>
       <div id="error-messages"></div>
     </form>
-    <% if @comments.present? %>
-      <% @comments.each do |comment| %>
-        <div class="comment-user-info">
-          <div class="user-image">
-            <% if comment.user.image.attached? %>
-              <%= image_tag comment.user.image, class:"header-profile-image" %>
-            <% else %>
-              <%= image_tag 'default_avatar.png', class:"header-profile-image" %>
-            <% end%>
+    <div id="comment-container">
+      <% if @comments.present? %>
+        <% @comments.each do |comment| %>
+          <div id="comment-list">
+            <div class="comment-user-info">
+              <div class="user-image">
+                <% if comment.user %>
+                  <% if comment.user.image.attached? %>
+                    <%= image_tag comment.user.image, class:"small-profile-image" %>
+                  <% else %>
+                    <%= image_tag 'default_avatar.png', class:"small-profile-image" %>
+                  <% end%>
+                <% else %>
+                  <%= image_tag 'default_avatar.png', class:"small-profile-image" %>
+                <% end %>
+              </div>
+              <div class="comment-username">
+                <% if comment.user %>
+                  <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
+                <% else %>
+                  <p class="username">ゲストさん</p>
+                <% end %>
+              </div>
+            </div>
+            <div class="comment-content">
+              <p class="created-comment">コメント：<span><%= comment.content %></span></p>
+            </div>
           </div>
-          <div class="comment-username">
-            <% if comment.user %>
-              <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
-            <% else %>
-              <p class="username">ゲストさん</p>
-            <% end %>
-          </div>
-        </div>
-        <div class="comment-area">
-          <p class="created-comment">コメント：<span><%= comment.content %></span></p>
-        </div>
+        <% end %>
+      <% else %>
+        <p id="no-comment">コメントはまだありません</p>
       <% end %>
-    <% else %>
-      <p>コメントはまだありません</p>
-    <% end %>
+    </div>
   </section>
 </div>
 
@@ -125,6 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if(response.ok) {
         contentInput.value = '';
         errorMessages.innerHTML = '';
+        newCommentHTML(data);
         flashMessage(data);
       } else {
         if (data.errors) {
@@ -165,12 +174,36 @@ document.addEventListener('DOMContentLoaded', () => {
       const errorMessage = document.createElement('div');
       errorMessage.className = 'error-message';
       errorMessage.textContent = error.replace('Content', '');
-      console.log(errorMessage.textContent)
       errorMessages.appendChild(errorMessage);
       errorMessages.style.marginBottom = '20px';
     });
   };
 
-});
+  //送信されたコメントを追加する関数
+  function newCommentHTML(data) {
+    const noComment = document.getElementById("no-comment");
+    if(noComment) {
+      noComment.remove();
+    }
 
+    const newComment = `
+      <div class="comment-list">
+        <div class="comment-user-info">
+          <div class="user-image">
+            ${data.image_url ? `<img src="${data.image_url}" class="small-profile-image" />` : `<img src="<%= asset_path('default_avatar.png') %>" class="small-profile-image" />` }
+          </div>
+          <div class="comment-username">
+            ${data.user_data ? `<p class="username">${data.user_data.name}さん</p>` : `<p class="username">ゲストさん</p>`}
+          </div>
+        </div>
+        <div class="comment-content">
+          <p class="created-comment">コメント：<span>${data.comment_data.content}</span></p>
+        </div>
+      </div>
+    `
+
+    const commentList = document.getElementById('comment-container');
+    commentList.insertAdjacentHTML('afterbegin', newComment);
+  };
+});
 </script>

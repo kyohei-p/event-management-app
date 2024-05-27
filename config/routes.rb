@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, except: [:index]
   resources :events do
-    resources :comments, only: [:create, :new, :destroy]
+    resources :comments, only: [:index, :create, :new, :destroy]
   end
 
   resources :categories do

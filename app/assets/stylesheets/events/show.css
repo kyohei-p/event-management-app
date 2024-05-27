@@ -19,6 +19,10 @@
   margin: 100px;
 }
 
+caption {
+  color: var(--black) !important;
+}
+
 table{
   width: 100%;
   margin-right: 30px;
@@ -83,10 +87,6 @@ table td{
   opacity: 0.7;
 }
 
-.profile-image {
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-  border: 0.5px solid var(--gray);
-  border-radius: 50%;
+.comment-area {
+  margin: 100px;
 }
