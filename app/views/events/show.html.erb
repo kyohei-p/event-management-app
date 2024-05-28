@@ -56,47 +56,48 @@
     </div>
   </section>
 
-  <section class="comment-area">
-    <h3 class="fs-3">フィード</h3>
-    <form action="/comments" method="post" class="comment-form" data-event-id="<%= @event.id %>">
-      <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">
-      <button type="submit" id="comment-submit-button" class="submit-button">
-        送信
-      </button>
+  <section class="comment-container">
+    <h3 class="comment-title fs-5 p-1">フィード</h3>
+    <div class="comment-inner p-2">
+      <form action="/comments" method="post" class="comment-form mb-2" data-event-id="<%= @event.id %>">
+        <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">
+        <button type="submit" id="comment-submit-button" class="submit-button">
+          送信
+        </button>
+      </form>
       <div id="error-messages"></div>
-    </form>
-    <div id="comment-container">
-      <% if @comments.present? %>
-        <% @comments.each do |comment| %>
-          <div id="comment-list">
-            <div class="comment-user-info">
-              <div class="user-image">
-                <% if comment.user %>
-                  <% if comment.user.image.attached? %>
-                    <%= image_tag comment.user.image, class:"small-profile-image" %>
+      <p class="comment-subtitle fs-6 fw-bold">投稿されたコメント</p>
+      <div id="comment-area" class="mt-1 pt-1">
+        <% if @comments.present? %>
+          <% @comments.each do |comment| %>
+            <div id="comment-list">
+              <div class="comment-user-info mt-2">
+                <div class="user-thumbnail-container">
+                  <% if comment.user %>
+                    <% if comment.user.image.attached? %>
+                      <%= image_tag comment.user.image, class:"user-thumbnail" %>
+                    <% else %>
+                      <%= image_tag 'default_avatar.png', class:"user-thumbnail" %>
+                    <% end%>
                   <% else %>
-                    <%= image_tag 'default_avatar.png', class:"small-profile-image" %>
-                  <% end%>
-                <% else %>
-                  <%= image_tag 'default_avatar.png', class:"small-profile-image" %>
-                <% end %>
+                    <%= image_tag 'default_avatar.png', class:"user-thumbnail" %>
+                  <% end %>
+                </div>
+                <div class="comment-username">
+                  <% if comment.user %>
+                    <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
+                  <% else %>
+                    <p class="username">ゲストさん</p>
+                  <% end %>
+                </div>
               </div>
-              <div class="comment-username">
-                <% if comment.user %>
-                  <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
-                <% else %>
-                  <p class="username">ゲストさん</p>
-                <% end %>
-              </div>
+              <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= comment.content %></span></p>
             </div>
-            <div class="comment-content">
-              <p class="created-comment">コメント：<span><%= comment.content %></span></p>
-            </div>
-          </div>
+          <% end %>
+        <% else %>
+          <p id="no-comment">コメントはまだありません</p>
         <% end %>
-      <% else %>
-        <p id="no-comment">コメントはまだありません</p>
-      <% end %>
+      </div>
     </div>
   </section>
 </div>
@@ -187,22 +188,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const newComment = `
-      <div class="comment-list">
+      <div id="comment-list">
         <div class="comment-user-info">
-          <div class="user-image">
-            ${data.image_url ? `<img src="${data.image_url}" class="small-profile-image" />` : `<img src="<%= asset_path('default_avatar.png') %>" class="small-profile-image" />` }
+          <div class="user-thumbnail-container">
+            ${data.image_url ? `<img src="${data.image_url}" class="user-thumbnail" />` : `<img src="<%= asset_path('default_avatar.png') %>" class="user-thumbnail" />` }
           </div>
           <div class="comment-username">
             ${data.user_data ? `<p class="username">${data.user_data.name}さん</p>` : `<p class="username">ゲストさん</p>`}
           </div>
         </div>
-        <div class="comment-content">
-          <p class="created-comment">コメント：<span>${data.comment_data.content}</span></p>
-        </div>
+        <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;${data.comment_data.content}</span></p>
       </div>
     `
 
-    const commentList = document.getElementById('comment-container');
+    const commentList = document.getElementById('comment-area');
     commentList.insertAdjacentHTML('afterbegin', newComment);
   };
 });

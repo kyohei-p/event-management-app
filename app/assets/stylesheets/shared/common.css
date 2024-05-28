@@ -255,7 +255,7 @@ input[type='file']:hover {
 }
 
 /* プロフィールアイコン */
-.small-profile-image {
+.user-thumbnail {
   width: 40px;
   height: 40px;
   margin-right: 10px;
