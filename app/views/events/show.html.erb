@@ -12,10 +12,10 @@
   </div>
 
   <section class="event-summary">
-    <div class="event-summary__name mt-4 mb-3">
-      <h2><%= @event.name %></h2>
+    <div class="event-summary__container">
+      <h2 class="event-summary__name mt-4 mb-2"><%= @event.name %></h2>
+      <%= image_tag @event.image, class: "event-summary__image mt-2 mb-4" %>
     </div>
-    <%= image_tag @event.image, class: "event-summary__image mt-3 mb-4" %>
   </section>
 
   <section class="event-info mt-4 mb-4">
@@ -57,7 +57,7 @@
   </section>
 
   <section class="comment-container">
-    <h3 class="comment-title fs-5 p-1">フィード</h3>
+    <h3 class="comment-title fs-5 p-2">フィード</h3>
     <div class="comment-inner p-2">
       <form action="/comments" method="post" class="comment-form mb-2" data-event-id="<%= @event.id %>">
         <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">

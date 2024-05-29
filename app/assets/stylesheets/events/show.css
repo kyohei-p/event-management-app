@@ -6,16 +6,23 @@
 
 /* イベントの概要 */
 .event-summary {
-  margin: 50px 100px;
+  margin-left: 140px;
+}
+
+.event-summary__container {
+  display: flex;
+  flex-direction: column;
 }
 
 .event-summary__image {
-  width: 100%;
+  width: 60%;
   border: 1px solid var(--light-gray);
 }
 
 /* イベントの詳細情報 */
 .event-info {
+  display: flex;
+  justify-content: center;
   margin: 100px;
 }
 
@@ -24,7 +31,7 @@ caption {
 }
 
 table{
-  width: 100%;
+  width: 90%;
   margin-right: 30px;
 }
 
@@ -88,6 +95,7 @@ table td{
 }
 
 .comment-container {
+  width: 80%;
   margin: 100px;
   border-radius: 3px;
   margin-bottom: 20px;
