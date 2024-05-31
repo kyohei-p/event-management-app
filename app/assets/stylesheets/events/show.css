@@ -17,7 +17,6 @@
 }
 
 .event-summary__image {
-  /* width: 60%; */
   border: 1px solid var(--light-gray);
 }
 
@@ -34,7 +33,6 @@ caption {
 
 table{
   width: 60%;
-  /* margin-right: 30px; */
 }
 
 /*左上の角を丸くする */
@@ -98,7 +96,7 @@ table td{
 
 .comment-container {
   width: 80%;
-  margin: 100px;
+  margin: 50px 100px;
   border-radius: 3px;
   margin-bottom: 20px;
   background-color: #fff;
@@ -120,6 +118,8 @@ table td{
 
 .comment-field {
   width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #comment-submit-button {
@@ -132,23 +132,21 @@ table td{
   font-size: 18px;
 }
 
-#comment-list {
+.comment-list {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  border-bottom: 1px solid var(--light-gray);
+  padding-top: 10px;
+  border-top: 1px solid var(--light-gray);
+  opacity: 1;
 }
 
-#comment-list:last-child {
+.comment-list:last-child {
   border-bottom: none;
 }
 
-
 .comment-subtitle {
-  padding-bottom: 10px;
   margin: 0;
-  margin-bottom: 0;
-  border-bottom: 1px solid var(--light-gray);
 }
 
 .comment-user-info {
@@ -177,6 +175,51 @@ table td{
 
 .no-comment {
   font-size: 0.8rem;
+}
+
+/* もっとみるボタン */
+
+.more-list-btn-container {
+  position: relative;
+  margin-bottom: 10px;
+  z-index: 10;
+  border-top: 1px solid var(--light-gray);
+  text-align: center;
+}
+
+.comment-list.is-hidden {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+}
+
+.more-list-btn {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.more-list-btn:hover {
+  opacity: 0.8;
+}
+
+.more-list-btn-container.is-btn-hidden,
+.more-list-btn.is-btn-hidden{
+  display:none;
+  border: none;
+}
+
+.more-list-btn {
+  display: inline-block;
+  background-color: #333;
+  color:#fff;
+  border: 1px solid #333;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  height: 32px;
+  line-height: 32px;
+  width: 120px;
 }
 
 

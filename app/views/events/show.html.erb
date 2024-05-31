@@ -67,11 +67,11 @@
       </form>
       <div id="error-messages"></div>
       <p class="comment-subtitle fs-6 fw-bold">投稿されたコメント</p>
-      <div id="comment-area" class="mt-1 pt-1">
+      <div class="comment-area" class="mt-1 pt-1">
         <% if @comments.present? %>
           <% @comments.each do |comment| %>
-            <div id="comment-list">
-              <div class="comment-user-info mt-2">
+            <div class="comment-list">
+              <div class="comment-user-info mt-3">
                 <div class="user-thumbnail-container">
                   <% if comment.user %>
                     <% if comment.user.image.attached? %>
@@ -97,6 +97,9 @@
         <% else %>
           <p id="no-comment">コメントはまだありません</p>
         <% end %>
+        <div class="more-list-btn-container">
+          <button type="button" class="more-list-btn pointer-cursor">もっと見る</button>
+        </div>
       </div>
     </div>
   </section>
@@ -169,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const newComment = `
-      <div id="comment-list">
-        <div class="comment-user-info">
+      <div class="comment-list">
+        <div class="comment-user-info pt-3">
           <div class="user-thumbnail-container">
             ${data.image_url ? `<img src="${data.image_url}" class="user-thumbnail" />` : `<img src="<%= asset_path('default_avatar.png') %>" class="user-thumbnail" />` }
           </div>
@@ -178,12 +181,46 @@ document.addEventListener('DOMContentLoaded', () => {
             ${data.user_data ? `<p class="username">${data.user_data.name}さん</p>` : `<p class="username">ゲストさん</p>`}
           </div>
         </div>
-        <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;${data.comment_data.content}</span></p>
+        <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${data.comment_data.content}</span></p>
       </div>
     `
 
-    const commentList = document.getElementById('comment-area');
+    const commentList = document.querySelector('.comment-area');
     commentList.insertAdjacentHTML('afterbegin', newComment);
   };
+
+  // もっとみるボタン
+  // 表示するリストの数
+  const moreNum = 5;
+
+  const moreListBtn = document.querySelector('.more-list-btn-container');
+  moreListBtn.classList.remove('is-btn-hidden');
+
+  const commentList = Array.from(document.querySelectorAll('.comment-list'));
+
+  // 表示する数以降のリストを隠す
+    if(commentList.length > moreNum) {
+      commentList.slice(moreNum).forEach(list => {
+      list.classList.add('is-hidden');
+    })
+  }
+
+  // 「もっとみる」ボタンをクリックしたら、全てのリストを表示
+  moreListBtn.addEventListener('click', () => {
+    const hiddenList = document.querySelectorAll('.comment-list.is-hidden');
+    hiddenList.forEach(list => {
+      list.classList.remove('is-hidden');
+    });
+
+    moreListBtn.classList.add('is-btn-hidden');
+    if(hiddenList.length == 0) {
+      moreListBtn.style.display = 'none';
+    }
+  });
+
+  // 全てのリストの数が、表示する数以下だった場合に「もっとみる」ボタンを非表示
+  if(commentList.length <= moreNum) {
+    moreListBtn.classList.add('is-btn-hidden');
+  }
 });
 </script>
