@@ -8,15 +8,16 @@
 .event-summary {
   display: flex;
   justify-content: center;
-  /* margin-left: 140px; */
 }
 
 .event-summary__container {
   display: flex;
   flex-direction: column;
+  margin-left: 26%;
 }
 
 .event-summary__image {
+  width: 60%;
   border: 1px solid var(--light-gray);
 }
 
@@ -221,10 +222,3 @@ table td{
   line-height: 32px;
   width: 120px;
 }
-
-
-
-
-
-
-
