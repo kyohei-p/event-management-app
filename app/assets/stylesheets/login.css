@@ -6,7 +6,7 @@
   width: 200px;
   height: 40px;
   color: var(--theme_color);
-  background-color: #ffffff;
+  background: var(--white);
   border: 1px solid var(--theme_color);
   border-radius: 4px;
   font-size: 18px;
@@ -14,7 +14,7 @@
 }
 
 .signup-link-button:hover {
-  color: #ffffff;
-  background-color: var(--theme_color);
+  background: var(--theme_color);
+  color: var(--white);
 }
 

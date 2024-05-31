@@ -2,7 +2,7 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: var(--theme_color);
+  background: var(--footer_gradient_color);
   z-index: 999;
 }
 

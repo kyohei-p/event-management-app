@@ -66,16 +66,13 @@ select {
   height: 40px;
   border: none;
   border-radius: 4px;
-  background-color: var(--theme_color);
+  background: var(--theme_gradient_color);
   color: #ffffff;
   font-size: 18px;
 }
 
 .submit-button:hover {
-  border: 1px solid var(--theme_color);
-  color: var(--theme_color);
-  background-color: #ffffff;
-
+  background: var(--theme_color);
 }
 
 /* 戻るボタン */
@@ -255,4 +252,13 @@ input[type='file']:hover {
   .form-breadcrumbs {
     margin: 100px 0 0 20px;
   }
+}
+
+/* プロフィールアイコン */
+.user-thumbnail {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border: 0.5px solid var(--gray);
+  border-radius: 50%;
 }

@@ -1,0 +1,224 @@
+.event-detail-container {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+}
+
+/* イベントの概要 */
+.event-summary {
+  display: flex;
+  justify-content: center;
+}
+
+.event-summary__container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 26%;
+}
+
+.event-summary__image {
+  width: 60%;
+  border: 1px solid var(--light-gray);
+}
+
+/* イベントの詳細情報 */
+.event-info {
+  display: flex;
+  justify-content: center;
+  margin: 100px;
+}
+
+caption {
+  color: var(--black) !important;
+}
+
+table{
+  width: 60%;
+}
+
+/*左上の角を丸くする */
+table tr:first-child > th:first-child {
+  border-radius: 4px 0 0 0;
+}
+
+/* 左下の角を丸くする */
+table tr:last-child > th:first-child {
+  border-radius: 0 0 0 4px;
+}
+
+/* 右上の角を丸くする */
+table tr:first-child > td:last-child {
+  border-radius: 0 4px 0 0;
+}
+
+/* 右下の角を丸くする */
+table tr:last-child > td:last-child {
+  border-radius: 0 0 4px 0;
+}
+
+table tr {
+  height: 80px;
+  background: var(--white);
+}
+
+table th td {
+  border-bottom: 1px solid var(--light-gray);
+  text-wrap: wrap;
+}
+
+table th {
+  width: 30%;
+  background: linear-gradient(40deg, var(--theme_color) 0%, #fce043 80%);
+  color: var(--white);
+  text-align: center;
+}
+
+table td{
+  height: 100px;
+  max-height: max-content;
+  background: #f7f6f5;
+  color: var(--black);
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.event-info__eventday,
+.event-info__category {
+  color: var(--theme_color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.event-info__eventday:hover,
+.event-info__category:hover {
+  text-decoration: underline;
+  opacity: 0.7;
+}
+
+.comment-container {
+  width: 80%;
+  margin: 50px 100px;
+  border-radius: 3px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+}
+
+.comment-title {
+  background-color: var(--light-gray);
+}
+
+.comment-inner {
+  padding: 10px;
+}
+
+.comment-form {
+  display: flex;
+  align-items: center;
+}
+
+.comment-field {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+#comment-submit-button {
+  width: 100px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  background: var(--theme_gradient_color);
+  color: #ffffff;
+  font-size: 18px;
+}
+
+.comment-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--light-gray);
+  opacity: 1;
+}
+
+.comment-list:last-child {
+  border-bottom: none;
+}
+
+.comment-subtitle {
+  margin: 0;
+}
+
+.comment-user-info {
+  display: flex;
+  align-items: baseline;
+  padding-left: 10px;
+}
+
+.comment-username {
+  margin-left: 5px;
+}
+
+.username {
+  margin-bottom: 0;
+}
+
+.user-thumbnail-container {
+  margin-left: 10px;
+}
+
+.created-comment {
+  margin-left: 70px;
+  padding: 5px;
+  overflow-wrap: break-word;
+}
+
+.no-comment {
+  font-size: 0.8rem;
+}
+
+/* もっとみるボタン */
+
+.more-list-btn-container {
+  position: relative;
+  margin-bottom: 10px;
+  z-index: 10;
+  border-top: 1px solid var(--light-gray);
+  text-align: center;
+}
+
+.comment-list.is-hidden {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+}
+
+.more-list-btn {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.more-list-btn:hover {
+  opacity: 0.8;
+}
+
+.more-list-btn-container.is-btn-hidden,
+.more-list-btn.is-btn-hidden{
+  display:none;
+  border: none;
+}
+
+.more-list-btn {
+  display: inline-block;
+  background-color: #333;
+  color:#fff;
+  border: 1px solid #333;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  height: 32px;
+  line-height: 32px;
+  width: 120px;
+}

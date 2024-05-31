@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  skip_before_action :require_login, only: [:index]
+  skip_before_action :require_login, only: [:index, :show]
   before_action :require_login, only: [:create, :new, :manage_events]
   before_action :set_event, only: [:edit, :update, :show, :destroy]
   before_action :event_create_breadcrumb, only: [:new, :create]
@@ -73,6 +73,10 @@ class EventsController < ApplicationController
   end
 
   def show
+    set_event
+    add_breadcrumb 'イベント一覧', events_path
+    add_breadcrumb 'イベント詳細', event_path(id: params[:id])
+    @comments = Comment.where(event_id: params[:id]).order(created_at: "DESC").limit(10)
   end
 
   def destroy

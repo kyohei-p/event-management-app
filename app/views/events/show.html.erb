@@ -1,0 +1,192 @@
+<div class="event-detail-container">
+  <div class="flash-message-container">
+    <%= render 'shared/flash_message' %>
+  </div>
+
+  <div class="breadcrumbs">
+    <%= render_breadcrumbs separator: ' > ' %>
+  </div>
+
+  <div class="title-container">
+    <h1 class="title">イベント詳細</h1>
+  </div>
+
+  <section class="event-summary">
+    <div class="event-summary__container">
+      <h2 class="event-summary__name mt-4 mb-2"><%= @event.name %></h2>
+      <%= image_tag @event.image, class: "event-summary__image mt-2 mb-4" %>
+    </div>
+  </section>
+
+  <section class="event-info mt-4 mb-4">
+    <table>
+      <caption align="top" class="fw-bold fs-3 mb-2">イベントの詳細情報</caption>
+      <tbody>
+        <tr>
+          <th scope="row">主催者</th>
+          <td><span class="fw-bold fs-4"><%= @event.user.name %></span>さん</td>
+        </tr>
+        <tr>
+          <th scope="row">イベントの説明</th>
+          <td><%= @event.event_description %></td>
+        </tr>
+        <tr>
+          <th scope="row">開催日</th>
+          <td>
+            <%= link_to date_events_path(event_day: @event.event_day), class:"event-info__eventday", data: { turbo:false } do %>
+              <span class="event-info__eventday"><%= @event.event_day.strftime("%-m月%-d日") %></span>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">カテゴリ</th>
+          <td>
+            <%= link_to category_events_path(category_id: @event.category.id), class: "event-info__category", data: { turbo:false } do %>
+              <%= @event.category.name %>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="event-backbutton">
+    <div class="back-button-container mt-3 mb-4">
+      <%= link_to 'イベント一覧に戻る', events_path, class:"back-button", data: { turbo: false } %>
+    </div>
+  </section>
+
+  <section class="comment-container">
+    <h3 class="comment-title fs-5 p-2">フィード</h3>
+    <div class="comment-inner p-2">
+      <form action="/comments" method="post" class="comment-form mb-2" data-event-id="<%= @event.id %>">
+        <input type="text" name="comment[content]" class="comment-field mt-2 mb-2 pt-2 pb-2" placeholder="コメント">
+        <button type="submit" id="comment-submit-button" class="submit-button">
+          送信
+        </button>
+      </form>
+      <div id="error-messages"></div>
+      <p class="comment-subtitle fs-6 fw-bold">投稿されたコメント</p>
+      <div class="comment-area" class="mt-1 pt-1">
+        <% if @comments.present? %>
+          <% @comments.each do |comment| %>
+            <div class="comment-list">
+              <div class="comment-user-info mt-3">
+                <div class="user-thumbnail-container">
+                  <% if comment.user %>
+                    <% if comment.user.image.attached? %>
+                      <%= image_tag comment.user.image, class:"user-thumbnail" %>
+                    <% else %>
+                      <%= image_tag 'default_avatar.png', class:"user-thumbnail" %>
+                    <% end%>
+                  <% else %>
+                    <%= image_tag 'default_avatar.png', class:"user-thumbnail" %>
+                  <% end %>
+                </div>
+                <div class="comment-username">
+                  <% if comment.user %>
+                    <p class="username"><%= comment.user.name.truncate(13) %>さん</p>
+                  <% else %>
+                    <p class="username">ゲストさん</p>
+                  <% end %>
+                </div>
+              </div>
+              <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;<%= comment.content %></span></p>
+            </div>
+          <% end %>
+        <% else %>
+          <p id="no-comment">コメントはまだありません</p>
+        <% end %>
+        <div class="more-list-btn-container">
+          <button type="button" class="more-list-btn pointer-cursor">もっと見る</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const submitButton = document.getElementById("comment-submit-button");
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  submitButton.addEventListener('click', async(event) => {
+    event.preventDefault();
+
+    commentForm = submitButton.closest(".comment-form");
+    let eventId = commentForm.getAttribute("data-event-id");
+    const contentInput = commentForm.querySelector('input[name="comment[content]"]');
+    const formData = new FormData(commentForm);
+    formData.append('content', contentInput);
+
+    const errorMessages = document.getElementById("error-messages");
+
+    try {
+      const url = `<%= ENV['DEVELOPMENT_URL'] %>/events/${eventId}/comments`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'X-CSRF-Token': csrfToken
+        },
+        body: formData
+      })
+
+      const data = await response.json();
+      console.log(data)
+
+      if(response.ok) {
+        contentInput.value = '';
+        errorMessages.innerHTML = '';
+        newCommentHTML(data);
+        window.flashMessage(data);
+      } else {
+        if (data.errors) {
+          validationErrorMessage(data);
+        } else {
+          window.flashMessage(data);
+        }
+      }
+    } catch(e) {
+      console.error(e.name, e.message);
+    }
+  });
+
+  //バリデーションのエラーメッセージ
+  function validationErrorMessage(data) {
+    const errorMessages = document.getElementById('error-messages');
+    errorMessages.innerHTML = '';
+    data.errors.forEach(error => {
+      const errorMessage = document.createElement('div');
+      errorMessage.className = 'error-message';
+      errorMessage.textContent = error.replace('Content', '');
+      errorMessages.appendChild(errorMessage);
+      errorMessages.style.marginBottom = '20px';
+    });
+  };
+
+  //送信されたコメントを追加する関数
+  function newCommentHTML(data) {
+    const noComment = document.getElementById("no-comment");
+    if(noComment) {
+      noComment.remove();
+    }
+
+    const newComment = `
+      <div class="comment-list">
+        <div class="comment-user-info pt-3">
+          <div class="user-thumbnail-container">
+            ${data.image_url ? `<img src="${data.image_url}" class="user-thumbnail" />` : `<img src="<%= asset_path('default_avatar.png') %>" class="user-thumbnail" />` }
+          </div>
+          <div class="comment-username">
+            ${data.user_data ? `<p class="username">${data.user_data.name}さん</p>` : `<p class="username">ゲストさん</p>`}
+          </div>
+        </div>
+        <p class="created-comment"><span><i class="fa fa-comment-o" aria-hidden="true"></i>&nbsp;&nbsp;${data.comment_data.content}</span></p>
+      </div>
+    `
+
+    const commentList = document.querySelector('.comment-area');
+    commentList.insertAdjacentHTML('afterbegin', newComment);
+  };
+});
+</script>
