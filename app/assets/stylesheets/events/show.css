@@ -21,7 +21,7 @@
 }
 
 /* イベントの詳細情報 */
-.event-info {
+.event-info-table {
   display: flex;
   justify-content: center;
   margin: 100px;
@@ -81,15 +81,15 @@ table td{
   text-align: left;
 }
 
-.event-info__eventday,
-.event-info__category {
+.event-info-table__eventday,
+.event-info-table__category {
   color: var(--theme_color);
   text-decoration: none;
   cursor: pointer;
 }
 
-.event-info__eventday:hover,
-.event-info__category:hover {
+.event-info-table__eventday:hover,
+.event-info-table__category:hover {
   text-decoration: underline;
   opacity: 0.7;
 }

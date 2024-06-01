@@ -69,6 +69,7 @@ select {
   background: var(--theme_gradient_color);
   color: #ffffff;
   font-size: 18px;
+  text-decoration: none;
 }
 
 .submit-button:hover {

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :regist_breadcrumb, only: [:new, :create]
+  before_action :set_user, only: [:show, :edit]
 
   def create
     ApplicationRecord.transaction do
@@ -24,10 +25,21 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  def show
+    add_breadcrumb 'マイページ', user_path
+  end
+
+  def edit
+  end
+
   private
 
   def regist_breadcrumb
     add_breadcrumb 'ユーザー新規登録', new_user_path
+  end
+
+  def set_user
+    @user = current_user
   end
 
   def user_params
