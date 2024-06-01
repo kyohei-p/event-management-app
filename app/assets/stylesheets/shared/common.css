@@ -41,6 +41,11 @@ select {
   padding: 5px;
 }
 
+.form-select {
+  border: 1px solid gray !important;
+  border-radius: 0.2rem !important;
+}
+
 /* カレンダー */
 .form-control-sm {
   border: 1px solid light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
