@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   skip_before_action :require_login, only: [:index, :show]
   before_action :require_login, only: [:create, :new, :manage_events]
-  before_action :set_event, only: [:edit, :update, :show, :destroy, :event_category]
+  before_action :set_event, only: [:edit, :update, :show, :destroy]
   before_action :event_create_breadcrumb, only: [:new, :create]
   before_action :event_update_breadcrumb, only: [:edit, :update]
 
@@ -102,15 +102,6 @@ class EventsController < ApplicationController
     else
       @manage_events = Event.where(user_id: current_user).order(updated_at: "DESC").page(params[:page])
       add_breadcrumb 'イベント管理', manage_events_path
-    end
-  end
-
-  def event_category
-    @category = @event.category
-    if @category.present?
-      render json: { status: 'success', message: "イベントのカテゴリーを取得しました", category: @category }, status: 200
-    else
-      render json: { status: 'error', message: "イベントのカテゴリーを取得できませんでした" }, status: 500
     end
   end
 

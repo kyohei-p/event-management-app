@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', async() => {
       if(response.ok) {
         // 取得したカテゴリーのoptionを追加する
         data.categories.forEach(category => {
-        let newOption = new Option(category.name, category.id);
+        const newOption = new Option(category.name, category.id);
         newOption.classList.add('category-option')
         categorySelect.append(newOption)
         });
