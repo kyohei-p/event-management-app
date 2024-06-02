@@ -105,15 +105,6 @@ class EventsController < ApplicationController
     end
   end
 
-  def event_category
-    @category = @event.category
-    if @category.present?
-      render json: { status: 'success', message: "イベントのカテゴリーを取得しました", category: @category }, status: 200
-    else
-      render json: { status: 'error', message: "イベントのカテゴリーを取得できませんでした" }, status: 500
-    end
-  end
-
   private
 
   def set_event
