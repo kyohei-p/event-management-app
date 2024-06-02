@@ -33,7 +33,7 @@
       <div class="mt-4 mb-4">
         <%= f.label "カテゴリー", class:"label-tag fw-bold" %><br />
         <select name="event[category_id]" id="category-select" class="form-select h-auto">
-          <option class="default-value" value=""><%= @category ? @category.name : "選択してください" %></option>
+          <option class="default-value" value="<%= @category ? @category.id : "" %>"><%= @category ? @category.name : "選択してください" %></option>
           <option value="">選択してください</option>
         </select>
         <div id="selected-option"></div>
@@ -98,13 +98,7 @@
 document.addEventListener('DOMContentLoaded', async() => {
   const categorySelect = document.querySelector('#category-select');
 
-  categorySelect.addEventListener('click', async() => {
-    // クリックされた時にサーバーから取得・表示したカテゴリのoptionを削除
-    const defaultValue = document.querySelector('.default-value');
-    if(!defaultValue) { return false; }
-    defaultValue.remove();
-
-    try {
+      try {
       const url = `<%= ENV['DEVELOPMENT_URL'] %>/categories`;
 
       const response = await fetch(url, {
@@ -131,6 +125,13 @@ document.addEventListener('DOMContentLoaded', async() => {
     } catch(e) {
       console.error(e.class, e.message);
     }
+
+  categorySelect.addEventListener('click', async() => {
+    // クリックされた時にサーバーから取得・表示したカテゴリのoptionを削除
+    const defaultValue = document.querySelector('.default-value');
+    if(!defaultValue) { return false; }
+    defaultValue.remove();
+
     // 選択されたカテゴリでoptionの表示内容を変更する
     const selectedOption = document.getElementById('selected-option');
     selectedOption.addEventListener('change', () => {
