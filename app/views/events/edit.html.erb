@@ -32,7 +32,11 @@
       </div>
       <div class="mt-4 mb-4">
         <%= f.label "カテゴリー", class:"label-tag fw-bold" %><br />
-        <%= f.collection_select :category_id, Category.all, :id, :name, include_blank: "選択してください", class:"form-control" %>
+        <select name="event[category_id]" id="category-select" class="form-select h-auto">
+          <option class="default-value" value="<%= @category ? @category.id : "" %>"><%= @category ? @category.name : "選択してください" %></option>
+          <option value="">選択してください</option>
+        </select>
+        <div id="selected-option"></div>
         <% if @event.errors[:category_id].any? %>
           <div class="error-message mt-1">
             <%= safe_join(@event.errors[:category_id]) %>
@@ -89,3 +93,51 @@
     <% end %>
   </div>
 <% end %>
+
+<script>
+document.addEventListener('DOMContentLoaded', async() => {
+  const categorySelect = document.querySelector('#category-select');
+
+      try {
+      const url = `<%= ENV['DEVELOPMENT_URL'] %>/categories`;
+
+      const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if(response.ok) {
+        // 取得したカテゴリーのoptionを追加する
+        data.categories.forEach(category => {
+        let newOption = new Option(category.name, category.id);
+        newOption.classList.add('category-option')
+        categorySelect.append(newOption)
+        });
+      } else {
+        console.error("カテゴリーを取得できませんでした")
+      }
+    } catch(e) {
+      console.error(e.class, e.message);
+    }
+
+  categorySelect.addEventListener('click', async() => {
+    // クリックされた時にサーバーから取得・表示したカテゴリのoptionを削除
+    const defaultValue = document.querySelector('.default-value');
+    if(!defaultValue) { return false; }
+    defaultValue.remove();
+
+    // 選択されたカテゴリでoptionの表示内容を変更する
+    const selectedOption = document.getElementById('selected-option');
+    selectedOption.addEventListener('change', () => {
+      const categoryData = categorySelect.options[categorySelect.selectedIndex].text;
+      selectedOption.textContent = `${categoryData}`;
+    })
+  });
+});
+</script>
