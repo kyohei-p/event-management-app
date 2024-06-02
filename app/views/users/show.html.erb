@@ -11,14 +11,14 @@
       <h1>マイページ</h1>
     </section>
 
-    <section class="user-info-table">
+    <section class="user-info-area">
       <% if @user.image.attached? %>
-        <%= image_tag @user.image %>
+        <%= image_tag @user.image, class:"user-large-thumbnail" %>
       <% else %>
-        <%= image_tag 'default_avatar.png', class:"user-thumbnail" %>
+        <%= image_tag 'default_avatar.png', class:"user-large-thumbnail" %>
       <% end %>
-      <table>
-        <caption align="top" class="fw-bold fs-3 mb-2">ユーザー情報</caption>
+      <table class="user-info-table">
+        <caption align="top" class="fs-4 mb-1">ユーザー情報</caption>
         <tbody>
           <tr>
             <th scope="row">名前</th>
@@ -41,7 +41,7 @@
     </section>
     <section class="mypage-btns">
       <div class="mypage-actions">
-        <%= link_to "ユーザーを編集する", edit_user_path(@user), class: "submit-button mt-2 mb-2 p-2", data: { turbo: false } %>
+        <%= link_to "編集する", edit_user_path(@user), class: "mypage-submit-button mt-2 mb-2 p-2 fs-6", data: { turbo: false } %>
         <button type="button" id="user-unsubscribe-button" class="unsubscribe-button btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="本当に退会しますか？">
           退会する
         </button>

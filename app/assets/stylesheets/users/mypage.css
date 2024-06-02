@@ -9,8 +9,25 @@
   text-align: center;
 }
 
+.user-info-area {
+  display: flex;
+  width: 80%;
+  margin: 0 100px;
+  margin-left: 150px;
+}
+
+.user-large-thumbnail {
+  width: 300px;
+  height: 300px;
+  margin: 125px 50px 125px 120px;
+  border-radius: 50%;
+  border: 0.5px solid var(--light-gray);
+}
+
 .user-info-table {
   margin: 50px auto;
+  margin-left: 50px;
+  width: 500px;
 }
 
 .mypage-btns {
@@ -23,6 +40,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.mypage-submit-button {
+  width: 110px;
+  height: auto;
+  border: none;
+  border-radius: 4px;
+  background: var(--theme_gradient_color);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.mypage-submit-button:hover {
+  background: var(--theme_color);
 }
 
 /* 退会ボタン */
