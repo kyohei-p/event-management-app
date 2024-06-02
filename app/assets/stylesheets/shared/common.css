@@ -68,7 +68,8 @@ select {
 
 .submit-button {
   width: 200px;
-  height: 40px;
+  height: auto;
+  padding: 10px;
   border: none;
   border-radius: 4px;
   background: var(--theme_gradient_color);
