@@ -75,6 +75,7 @@ select {
   background: var(--theme_gradient_color);
   color: #ffffff;
   font-size: 18px;
+  text-decoration: none;
 }
 
 .submit-button:hover {
@@ -267,4 +268,60 @@ input[type='file']:hover {
   margin-right: 10px;
   border: 0.5px solid var(--gray);
   border-radius: 50%;
+}
+
+/* 表（テーブル） */
+caption {
+  color: var(--black) !important;
+}
+
+table{
+  width: 70%;
+}
+
+/*左上の角を丸くする */
+table tr:first-child > th:first-child {
+  border-radius: 4px 0 0 0;
+}
+
+/* 左下の角を丸くする */
+table tr:last-child > th:first-child {
+  border-radius: 0 0 0 4px;
+}
+
+/* 右上の角を丸くする */
+table tr:first-child > td:last-child {
+  border-radius: 0 4px 0 0;
+}
+
+/* 右下の角を丸くする */
+table tr:last-child > td:last-child {
+  border-radius: 0 0 4px 0;
+}
+
+table tr {
+  height: 80px;
+  background: var(--white);
+}
+
+table th td {
+  border-bottom: 1px solid var(--light-gray);
+  text-wrap: wrap;
+}
+
+table th {
+  width: 30%;
+  background: linear-gradient(40deg, var(--theme_color) 0%, #fce043 80%);
+  color: var(--white);
+  text-align: center;
+}
+
+table td{
+  height: 100px;
+  max-height: max-content;
+  background: #f7f6f5;
+  color: var(--black);
+  padding: 10px 20px;
+  text-align: left;
+  overflow-wrap: anywhere;
 }

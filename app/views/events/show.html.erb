@@ -18,7 +18,7 @@
     </div>
   </section>
 
-  <section class="event-info mt-4 mb-4">
+  <section class="event-info-table mt-4 mb-4">
     <table>
       <caption align="top" class="fw-bold fs-3 mb-2">イベントの詳細情報</caption>
       <tbody>
@@ -33,15 +33,15 @@
         <tr>
           <th scope="row">開催日</th>
           <td>
-            <%= link_to date_events_path(event_day: @event.event_day), class:"event-info__eventday", data: { turbo:false } do %>
-              <span class="event-info__eventday"><%= @event.event_day.strftime("%-m月%-d日") %></span>
+            <%= link_to date_events_path(event_day: @event.event_day), class:"event-info-table__eventday", data: { turbo:false } do %>
+              <span class="event-info-table__eventday"><%= @event.event_day.strftime("%-m月%-d日") %></span>
             <% end %>
           </td>
         </tr>
         <tr>
           <th scope="row">カテゴリ</th>
           <td>
-            <%= link_to category_events_path(category_id: @event.category.id), class: "event-info__category", data: { turbo:false } do %>
+            <%= link_to category_events_path(category_id: @event.category.id), class: "event-info-table__category", data: { turbo:false } do %>
               <%= @event.category.name %>
             <% end %>
           </td>
