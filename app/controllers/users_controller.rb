@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :regist_breadcrumb, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit]
+  before_action :update_breadcrumb, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
 
   def create
     ApplicationRecord.transaction do
@@ -32,10 +33,32 @@ class UsersController < ApplicationController
   def edit
   end
 
+  def update
+    ApplicationRecord.transaction do
+      @user.update(user_params)
+
+      if params[:user][:delete_image] == 'true'
+        @user.image.purge
+      end
+
+      if @user.save
+        redirect_to(user_path(current_user), notice: 'ユーザー情報を更新しました')
+      else
+        flash.now[:alert] = 'ユーザー情報の更新に失敗しました'
+        render action: 'edit'
+      end
+    end
+  end
+
   private
 
   def regist_breadcrumb
     add_breadcrumb 'ユーザー新規登録', new_user_path
+  end
+
+  def update_breadcrumb
+    add_breadcrumb 'マイページ', user_path(current_user)
+    add_breadcrumb 'ユーザー情報編集', edit_user_path
   end
 
   def set_user
