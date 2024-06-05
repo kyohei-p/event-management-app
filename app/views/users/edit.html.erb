@@ -50,10 +50,19 @@
     </div>
     <div class="mt-4 mb-4">
       <%= f.label "パスワード", class:"label-tag fw-bold" %><br />
-      <%= f.password_field :password, placeholder:"変更時のみパスワードを入力してください", class:"text-field p-2", value: @user.password %>
+      <%= f.password_field :password, placeholder:"変更時のみ新しいパスワードを入力してください", class:"text-field p-2", autocomplete: "off" %>
       <% if @user.errors[:password].any? %>
         <div class="error-message mt-1">
           <%= raw(@user.errors[:password].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "確認用パスワード", class:"label-tag fw-bold" %><br />
+      <%= f.password_field :password_confirmation, placeholder:"新しいパスワードをもう一度入力してください", class:"text-field p-2", autocomplete: "off" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:password_confirmation].join("<br>")) %>
         </div>
       <% end %>
     </div>
