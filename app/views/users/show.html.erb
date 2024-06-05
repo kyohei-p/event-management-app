@@ -3,6 +3,8 @@
     <%= render 'shared/flash_message' %>
   </div>
 
+  <%= render 'shared/modal' %>
+
   <div class="breadcrumbs">
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
@@ -42,7 +44,7 @@
     <section class="mypage-btns">
       <div class="mypage-actions">
         <%= link_to "編集する", edit_user_path(@user), class: "mypage-submit-button mt-2 mb-2 p-2 fs-6", data: { turbo: false } %>
-        <button type="button" id="user-unsubscribe-button" class="unsubscribe-button btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="本当に退会しますか？">
+        <button type="button" id="user-unsubscribe-button" class="unsubscribe-button btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="本当に退会しますか？" data-id="<%= current_user.id %>">
           退会する
         </button>
       </div>
@@ -50,3 +52,24 @@
     </section>
   <% end %>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const unsubscribeButton = document.getElementById('user-unsubscribe-button');
+  const accountDelete = document.getElementById('delete-action');
+
+  const userId = '<%= current_user.id %>';
+
+  //退会モーダルのメッセージ取得
+  unsubscribeButton.addEventListener('click', () => {
+  const modalMessage = document.getElementById("modal-message");
+  const dataMessage = unsubscribeButton.getAttribute("data-message");
+  modalMessage.textContent = dataMessage;
+  if(userId) {
+    accountDelete.textContent = "退会";
+  } else {
+    accountDelete.textContent = "削除";
+  }
+  });
+});
+</script>
