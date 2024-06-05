@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   skip_before_action :require_login, only: [:new, :create]
   before_action :regist_breadcrumb, only: [:new, :create]
   before_action :update_breadcrumb, only: [:edit, :update]
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def create
     ApplicationRecord.transaction do
@@ -47,6 +47,17 @@ class UsersController < ApplicationController
         flash.now[:alert] = 'ユーザー情報の更新に失敗しました'
         render action: 'edit'
       end
+    end
+  end
+
+  def destroy
+    @user.discard
+    if @user.discarded?
+      flash[:notice] = "退会しました"
+      render json: { status: 'success', user_data: @user }, status: 200
+    else
+      flash.now[:alert] = '退会に失敗しました'
+      render json: { status: 'error', message_type: 'alert', message: "退会に失敗しました" }, status: 400
     end
   end
 

@@ -44,7 +44,7 @@
     <section class="mypage-btns">
       <div class="mypage-actions">
         <%= link_to "編集する", edit_user_path(@user), class: "mypage-submit-button mt-2 mb-2 p-2 fs-6", data: { turbo: false } %>
-        <button type="button" id="user-unsubscribe-button" class="unsubscribe-button btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="本当に退会しますか？" data-id="<%= current_user.id %>">
+        <button type="button" id="user-unsubscribe-button" class="unsubscribe-button btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="本当に退会しますか？">
           退会する
         </button>
       </div>
@@ -57,8 +57,9 @@
 document.addEventListener('DOMContentLoaded', () => {
   const unsubscribeButton = document.getElementById('user-unsubscribe-button');
   const accountDelete = document.getElementById('delete-action');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-  const userId = '<%= current_user.id %>';
+  const userId = <%= current_user.id %>;
 
   //退会モーダルのメッセージ取得
   unsubscribeButton.addEventListener('click', () => {
@@ -71,5 +72,33 @@ document.addEventListener('DOMContentLoaded', () => {
     accountDelete.textContent = "削除";
   }
   });
+
+  //退会ボタンを押して、非同期でDELETEリクエスト送信
+  if (!accountDelete){ return false; }
+  accountDelete.addEventListener("click", async() => {
+    try {
+      if(!userId) { return false; }
+
+      const url = `<%= ENV['DEVELOPMENT_URL'] %>/users/${userId}`;
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+      });
+
+      if(response.ok) {
+        window.location.href = `<%= ENV['DEVELOPMENT_URL'] %>/users/new`;
+      } else {
+        const data = await response.json();
+        window.flashMessage(data);
+      }
+    } catch(e) {
+      console.error( e.name, e.message );
+    }
+  })
 });
 </script>
