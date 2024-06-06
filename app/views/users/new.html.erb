@@ -57,6 +57,15 @@
         </div>
       <% end %>
     </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "確認用パスワード", class:"label-tag fw-bold" %><br />
+      <%= f.password_field :password_confirmation, placeholder:"パスワードをもう一度入力してください", class:"text-field p-2", autocomplete: "off" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:password_confirmation].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
     <div class="image-field mt-4 mb-5" data-turbo="false">
       <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
       <div class="speech-bubble-area">
