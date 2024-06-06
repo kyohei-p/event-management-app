@@ -6,8 +6,10 @@ class User < ApplicationRecord
 
   has_one_attached :image
 
-  has_many :events
-  has_many :comments
+  has_many :events, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  after_discard :discard_related_models
 
   validates :name, presence: true, length: { maximum: 100 }
 
@@ -36,6 +38,11 @@ class User < ApplicationRecord
   validates :self_introduction, length: { maximum: 255 }
 
   private
+
+  def discard_related_models
+    events.discard_all if events.present?
+    comments.discard_all if comments.present?
+  end
 
   def validate_password
     if password.present?
