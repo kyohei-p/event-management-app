@@ -17,8 +17,11 @@ class User < ApplicationRecord
   VALID_PASSWORD_MESSAGE_HANKAKU = "パスワードは半角英数字で入力してください"
   VALID_PASSWORD_MESSAGE_MINLENGTH = "パスワードは8文字以上で入力してください"
   VALID_PASSWORD_MESSAGE_MAXLENGTH = "パスワードは16文字以内で入力してください"
-  validates :password, presence: true, if: -> { new_record? || changes[:crypted_password] }
+
+  validates :password, confirmation: true, presence: true, if: -> { new_record? || changes[:crypted_password] }
   validate :validate_password
+
+  validates :password_confirmation, presence: true, if: -> { new_record? || changes[:crypted_password] }
 
   VALID_PHONE_NUMBER_REGEX = /\A\d{10,11}\z/
   VALID_PHONE_NUMBER_MESSAGE_HAIFUN = "電話番号はハイフン無しで入力してください"
@@ -46,5 +49,4 @@ class User < ApplicationRecord
       errors.add(:phone_number, VALID_PHONE_NUMBER_MESSAGE_LENGTH) unless phone_number =~ VALID_PHONE_NUMBER_REGEX
     end
   end
-
 end

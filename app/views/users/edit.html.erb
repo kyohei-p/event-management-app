@@ -1,0 +1,93 @@
+<%= render 'shared/modal' %>
+<%= render 'shared/delete_image' %>
+
+<div class="flash-message-container">
+  <%= render 'shared/flash_message' %>
+</div>
+
+<div class="form-breadcrumbs">
+  <%= render_breadcrumbs separator: ' > ' %>
+</div>
+
+<div class="form-container">
+  <h1 class="title">ユーザー情報編集</h1>
+  <%= form_with model: @user, method: :patch do |f| %>
+    <div class="mt-4 mb-4">
+      <%= f.label "名前", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :name, placeholder:"例）山田 太郎", class:"name-field p-2" %>
+      <% if @user.errors[:name].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:name].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "自己紹介", class:"label-tag fw-bold" %><br />
+      <%= f.text_area :self_introduction, placeholder:"自己紹介文を入力", rows: 5, class: "text-area w-100 p-2" %>
+      <% if @user.errors[:self_introduction].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:self_introduction].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "メールアドレス", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :email, placeholder:"例）taro.yamada@example.com", class:"text-field p-2" %>
+      <% if @user.errors[:email].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:email].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "電話番号", class:"label-tag fw-bold" %><br />
+      <%= f.text_field :phone_number, placeholder:"例）0120224568", class:"text-field p-2" %>
+      <% if @user.errors[:phone_number].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:phone_number].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "パスワード", class:"label-tag fw-bold" %><br />
+      <%= f.password_field :password, placeholder:"変更時のみ新しいパスワードを入力してください", class:"text-field p-2", autocomplete: "off" %>
+      <% if @user.errors[:password].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:password].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="mt-4 mb-4">
+      <%= f.label "確認用パスワード", class:"label-tag fw-bold" %><br />
+      <%= f.password_field :password_confirmation, placeholder:"新しいパスワードをもう一度入力してください", class:"text-field p-2", autocomplete: "off" %>
+      <% if @user.errors[:password_confirmation].any? %>
+        <div class="error-message mt-1">
+          <%= raw(@user.errors[:password_confirmation].join("<br>")) %>
+        </div>
+      <% end %>
+    </div>
+    <div class="image-field mt-4 mb-5" data-turbo="false">
+      <%= f.label "プロフィール画像", class: "label-tag fw-bold" %><br />
+      <div class="speech-bubble-area">
+        <p class="speech-bubble">画像をクリックして、ファイルを選択できます。</p>
+        <% if @user.image.attached? %>
+          <img id="image-preview" src="<%= url_for(@user.image) %>", class="mt-2 mb-2" /><br />
+        <% else %>
+          <img id="image-preview" src="<%= asset_path("default_avatar.png") %>", class="mt-2 mb-2" /><br />
+        <% end %>      </div>
+    </div>
+    <div class="image-button-container">
+      <%= f.file_field :image, class: "upload-button", id: "image-upload" %>
+      <button type="button" id="image-delete-button" class="btn outline btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal" data-message="画像を削除しますか？">
+        画像を削除
+      </button>
+      <%= f.check_box :delete_image, { class: "form-check-input invisible", id: 'delete_image_field', checked: false }, true, false %>
+    </div>
+    <div class="actions">
+      <%= f.submit "更新", class: "submit-button", data: { turbo: false } %>
+    </div>
+    <div class="back-button-container mt-3">
+      <%= link_to 'マイページに戻る', user_path(current_user), class:"back-button", data: { turbo: false } %>
+    </div>
+  <% end %>
+</div>

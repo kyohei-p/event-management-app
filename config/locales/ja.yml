@@ -10,6 +10,7 @@ ja:
         name: "名前"
         email: "メールアドレス"
         password: "パスワード"
+        password_confirmation: "パスワード(確認)"
         self_introduction: "自己紹介"
         phone_number: 電話番号
       category:
@@ -35,6 +36,9 @@ ja:
               too_long: "255文字以内で入力してください"
             password:
               blank: "パスワードを入力してください。"
+            password_confirmation:
+              confirmation: "%{attribute}と確認用パスワードの入力が一致しません"
+              blank: "パスワードをもう一度入力してください"
             self_introduction:
               too_long: "255文字以内で入力してください"
             phone_number:
