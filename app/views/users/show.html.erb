@@ -3,6 +3,8 @@
     <%= render 'shared/flash_message' %>
   </div>
 
+  <%= render 'shared/modal' %>
+
   <div class="breadcrumbs">
     <%= render_breadcrumbs separator: ' > ' %>
   </div>
@@ -50,3 +52,53 @@
     </section>
   <% end %>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const unsubscribeButton = document.getElementById('user-unsubscribe-button');
+  const accountDelete = document.getElementById('delete-action');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+  const userId = <%= current_user.id %>;
+
+  //退会モーダルのメッセージ取得
+  unsubscribeButton.addEventListener('click', () => {
+  const modalMessage = document.getElementById("modal-message");
+  const dataMessage = unsubscribeButton.getAttribute("data-message");
+  modalMessage.textContent = dataMessage;
+  if(userId) {
+    accountDelete.textContent = "退会";
+  } else {
+    accountDelete.textContent = "削除";
+  }
+  });
+
+  //退会ボタンを押して、非同期でDELETEリクエスト送信
+  if (!accountDelete){ return false; }
+  accountDelete.addEventListener("click", async() => {
+    try {
+      if(!userId) { return false; }
+
+      const url = `<%= ENV['DEVELOPMENT_URL'] %>/users/${userId}`;
+
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'X-CSRF-Token': csrfToken
+        },
+      });
+
+      if(response.ok) {
+        window.location.href = `<%= ENV['DEVELOPMENT_URL'] %>/users/new`;
+      } else {
+        const data = await response.json();
+        window.flashMessage(data);
+      }
+    } catch(e) {
+      console.error( e.name, e.message );
+    }
+  })
+});
+</script>
