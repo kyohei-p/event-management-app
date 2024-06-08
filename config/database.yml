@@ -13,9 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
-  host: localhost
 
 development:
   <<: *default
@@ -56,7 +53,9 @@ test:
 #
 production:
   <<: *default
-  database: event-management-app_production
-  username: event-management-app
+  database: <%= ENV["EVENTMANAGEMENTAPP_DATABASE"] %>
+  username: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_USERNAME"] %>
   password: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_PASSWORD"] %>
   host: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_HOST"] %>
+  url: <%= ENV["JAWSDB_URL"] %>
+  port: 3306
