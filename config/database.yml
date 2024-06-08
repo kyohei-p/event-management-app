@@ -59,3 +59,4 @@ production:
   database: event-management-app_production
   username: event-management-app
   password: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_PASSWORD"] %>
+  host: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_HOST"] %>
