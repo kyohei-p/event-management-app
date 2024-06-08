@@ -8,6 +8,8 @@ RUN gem update --system
 RUN bundle update --bundler
 RUN bundle install
 RUN rm -rf /usr/local/bundle/cache
+RUN curl https://cli-assets.heroku.com/install.sh | sh
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash -apt-get install -y nodejs
 
 COPY . /event-management-app
 

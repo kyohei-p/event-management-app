@@ -1,5 +1,19 @@
 /* 外部のcssファイルを読み込む */
-/* @import "bootstrap.min.css"; */
+@import "bootstrap";
+@import url(shared/common.css);
+@import url(shared/colors.css);
+@import url(shared/error.css);
+@import url(shared/header.css);
+@import url(shared/footer.css);
+@import url(shared/modal.css);
+@import url(shared/more-list-btn.css);
+@import url(shared/reset.css);
+@import url(login.css);
+@import url(events/index.css);
+@import url(events/pagination.css);
+@import url(events/show.css);
+@import url(events/manage_index.css);
+@import url(users/mypage.css);
 /* フラッシュメッセージ */
 .flash-message-container {
   position: absolute;
