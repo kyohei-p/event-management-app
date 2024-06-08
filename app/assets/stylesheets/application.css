@@ -1,20 +1,5 @@
 /* 外部のcssファイルを読み込む */
-@import "bootstrap";
-@import url(shared/common.css);
-@import url(shared/colors.css);
-@import url(shared/error.css);
-@import url(shared/header.css);
-@import url(shared/footer.css);
-@import url(shared/modal.css);
-@import url(shared/more-list-btn.css);
-@import url(shared/reset.css);
-@import url(login.css);
-@import url(events/index.css);
-@import url(events/pagination.css);
-@import url(events/show.css);
-@import url(events/manage_index.css);
-@import url(users/mypage.css);
-
+/* @import "bootstrap.min.css"; */
 /* フラッシュメッセージ */
 .flash-message-container {
   position: absolute;
@@ -31,15 +16,15 @@
 }
 
 .flash-message.notice {
-  background-color: $cyan-300;
+  background-color: #6ddef6;
   color: #ffffff;
-  border: solid 1px $cyan-300;
+  border: solid 1px #6ddef6;
 }
 
 .flash-message.alert {
-  background-color:  $red-500;
+  background-color: #dc3444;
   color: #ffffff;
-  border: solid 1px $red-500;
+  border: solid 1px #dc3444;
 }
 
 /* レスポンシブ対応（iPhoneSE） */

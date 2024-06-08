@@ -31,5 +31,7 @@ module EventManagementApp
     # end
 
     config.i18n.default_locale = :ja
+
+    config.assets.css_compressor = nil
   end
 end
