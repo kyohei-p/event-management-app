@@ -57,5 +57,5 @@ production:
   username: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_USERNAME"] %>
   password: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_PASSWORD"] %>
   host: <%= ENV["EVENTMANAGEMENTAPP_DATABASE_HOST"] %>
-  url: <%= ENV["JAWSDB_URL"] %>
+  url: <%= ENV["DATABASE_URL"] %>
   port: 3306
