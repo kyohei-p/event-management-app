@@ -14,9 +14,13 @@ Rails.application.config.serve_static_assets = true
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 Rails.application.config.assets.precompile +=
 %w(
+  *.js *.css *.png
   bootstrap.min.js
   popper.js
-  *.js *.css *.png
+  application.js
+  flash.js
+  preview.js
+  more_list_btn.js
   smartphone_comp.png
   default_avatar.png
   events/no_image.png
