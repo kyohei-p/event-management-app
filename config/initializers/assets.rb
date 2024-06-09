@@ -17,6 +17,9 @@ Rails.application.config.assets.precompile +=
   *.js *.css *.png
   bootstrap.min.js
   popper.js
+  controllers/application.js
+  controllers/hello_controller.js
+  controllers/index.js
   application.js
   flash.js
   preview.js
