@@ -44,7 +44,7 @@ Rails.application.config.assets.precompile +=
   categories/volunteer.png
   categories/love.png
   categories/yoga.png
-  application.scss
+  application.css
   login.css
   events/index.css
   events/pagination.css
